@@ -41,9 +41,9 @@ func _process(delta):
 		move_and_slide(velocity)
 
 	# mirror enemy
-	if(direction_to_player.x < 0 && scale.y > 0): 
+	if(movable && (direction_to_player.x < 0 && scale.y > 0)): 
 		scale.x *= -1
-	elif(direction_to_player.x > 0 && scale.y < 0): 
+	elif(movable && (direction_to_player.x > 0 && scale.y < 0)): 
 		scale.x *= -1
 	
 	# handle combat if possible

@@ -116,7 +116,7 @@ script = ExtResource( 2 )
 is_hitting = true
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 8 )
+texture = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
