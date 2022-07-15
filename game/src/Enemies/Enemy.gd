@@ -2,6 +2,9 @@ extends KinematicBody2D
 
 class_name Enemy
 
+#only for ranged units
+var projectile_speed = 100
+
 var hp: int = 10
 var effective_fighting_distance: int = 40
 export var is_hitting: bool = false
@@ -14,7 +17,10 @@ var distance: float
 var velocity: Vector2
 var direction_to_player: Vector2
 
-onready var Player: Player = get_node("../../Player")
+onready var player: Player = get_node("../../Player")
+onready var Cavoon = preload("res://src/Projectiles/Cavoon.tscn")
+onready var Scene = get_node("../../../")
+
 var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
@@ -25,8 +31,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# move to player
-	distance = position.distance_to(Player.position)
-	direction_to_player = position.direction_to(Player.position)
+	distance = position.distance_to(player.position)
+	direction_to_player = position.direction_to(player.position)
 	velocity = direction_to_player * speed
 	
 	# stop when too close to player or if cant move (useful for freeze?)

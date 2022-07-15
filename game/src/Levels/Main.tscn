@@ -15,4 +15,5 @@ position = Vector2( 367, 240 )
 position = Vector2( 93, 189 )
 
 [node name="Ranged" parent="Enemies" instance=ExtResource( 1 )]
-position = Vector2( 133, 379 )
+position = Vector2( 159, 333 )
+is_hitting = false
