@@ -1,0 +1,76 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://art/enemies/enemy1/hit/sprite_00.png" type="Texture" id=1]
+[ext_resource path="res://src/Enemies/Mele.gd" type="Script" id=2]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_5.png" type="Texture" id=3]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_7.png" type="Texture" id=4]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_4.png" type="Texture" id=5]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_1.png" type="Texture" id=6]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_2.png" type="Texture" id=7]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_3.png" type="Texture" id=8]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_6.png" type="Texture" id=9]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 9.0
+height = 4.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 9.0
+height = 4.0
+
+[sub_resource type="Animation" id=5]
+resource_name = "run"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 4 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "run"
+
+[sub_resource type="AnimationNodeStateMachine" id=3]
+states/run/node = SubResource( 6 )
+states/run/position = Vector2( 213, 85 )
+start_node = "run"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[node name="Mele" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 8 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( -2, -1 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( -2, -1 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+anims/run = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 3 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 4 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

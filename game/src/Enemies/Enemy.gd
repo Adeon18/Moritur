@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
+class_name Enemy
 
 var hp: int = 10
-var effective_fighting_distance: int = 20
+var effective_fighting_distance: int = 40
 
 
 var speed: int = 50
@@ -14,6 +15,7 @@ var velocity: Vector2
 var direction_to_player: Vector2
 
 onready var Player: Player = get_node("../../Player")
+var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,6 +24,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	Statemachine.travel("run")
 	# move to player
 	distance = position.distance_to(Player.position)
 	direction_to_player = position.direction_to(Player.position)
@@ -30,7 +33,7 @@ func _process(delta):
 	# stop when too close to player or if cant move (useful for freeze?)
 	if(movable && (distance > effective_fighting_distance)):
 		move_and_slide(velocity)
-	
+
 	# mirror enemy
 	if(direction_to_player.x < 0 && scale.y > 0): 
 		scale.x *= -1
