@@ -1,14 +1,65 @@
 extends KinematicBody2D
 
-export var speed: int = 350
-export var friction: float = 0.1
-export var acceleration: float = 0.35
+var default_speed: int = 400
+var friction: float = 0.25
+var acceleration: float = 0.35
+var direction: Vector2 = Vector2()
+
+var is_dashing: bool = false
+var dash_speed: int = 1200
+
+var mouse_position: Vector2 = Vector2()
 
 var _velocity = Vector2()
+var _speed = default_speed
+
+var DashGhost = preload("res://src/Actors/DashGhost.tscn")
+var Weapon
+
+onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
+onready var SpriteNode: Sprite = get_node("Sprite")
+onready var WeaponPosition: Position2D = get_node("WeaponPosition")
+onready var DashDurationTimer: Timer = get_node("DashDuration")
+onready var DashCooldownTimer: Timer = get_node("DashCooldown")
+onready var GhostSpawnCooldownTimer: Timer = get_node("GhostSpawnCooldown")
+onready var Hitbox: Area2D = get_node("Hitbox")
+onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
+
+func _ready():
+	AnimPlayer.play("run")
+
+func _physics_process(delta):
+	mouse_position = get_global_mouse_position()
+	
+	if Weapon: Weapon.look_at(mouse_position)
+	
+	# Basic movement
+	if is_dashing:
+		_speed = dash_speed
+	else:
+		_speed = default_speed
+		direction = get_direction_vector()
+	
+	if mouse_position.x > global_position.x:
+		SpriteNode.flip_h = false
+		if (Weapon): Weapon.position.x = WeaponPosition.position.x
+	elif (mouse_position.x < global_position.x):
+		SpriteNode.flip_h = true
+		if (Weapon): Weapon.position.x = -WeaponPosition.position.x
+	
+	if direction.length() > 0:
+		_velocity = lerp(_velocity, direction * _speed, acceleration)
+	else:
+		_velocity = lerp(_velocity, Vector2.ZERO, friction)
+	
+	_velocity = move_and_slide(_velocity)
+
 
 func get_direction_vector():
+	"""
+	Return the normalized direction vector of the player movement
+	"""
 	var dir = Vector2()
-
 	if Input.is_action_pressed('right'):
 		dir.x += 1
 	if Input.is_action_pressed('left'):
@@ -20,10 +71,58 @@ func get_direction_vector():
 		
 	return dir.normalized()
 
-func _physics_process(delta):
-	var direction = get_direction_vector()
-	if direction.length() > 0:
-		_velocity = lerp(_velocity, direction * speed, acceleration)
-	else:
-		_velocity = lerp(_velocity, Vector2.ZERO, friction)
-	_velocity = move_and_slide(_velocity)
+
+func _input(event):
+	if Input.is_action_just_pressed("slide"):
+		if DashCooldownTimer.is_stopped() and !is_dashing:
+			start_dash()
+
+
+func start_dash():
+	DashDurationTimer.start()
+	GhostSpawnCooldownTimer.start()
+	HitboxCollisionShape.disabled = true
+	is_dashing = true
+	
+	instance_dash_ghost()
+
+
+func instance_dash_ghost():
+	var dghost = DashGhost.instance()
+	get_parent().add_child(dghost)
+	
+	dghost.global_position = global_position
+	dghost.texture = SpriteNode.texture
+	dghost.vframes = SpriteNode.vframes
+	dghost.hframes = SpriteNode.hframes
+	dghost.frame = SpriteNode.frame
+	dghost.flip_h = false if scale.x == 1 else true
+
+
+func reparent(area):
+	var clone = area.duplicate()
+	area.queue_free()
+	call_deferred("add_child", clone)
+
+	clone.call_deferred("disable_pick_up_collision")
+	clone.set_deferred("position", WeaponPosition.position)
+
+	Weapon = clone
+
+
+
+func _on_DashDuration_timeout():
+	DashCooldownTimer.start()
+	GhostSpawnCooldownTimer.stop()
+	HitboxCollisionShape.disabled = false
+	is_dashing = false
+
+
+func _on_GhostSpawnCooldown_timeout():
+	instance_dash_ghost()
+
+
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("Weapons"):
+		reparent(area)
+
