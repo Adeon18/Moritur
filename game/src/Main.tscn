@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Weapons/Sword.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="Sword" parent="." instance=ExtResource( 1 )]
+position = Vector2( 96, 48 )

@@ -1,7 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://art/Player/enemy1/run/sprite_1.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=2]
+[ext_resource path="res://art/Player/enemy1/run/sprite_0.png" type="Texture" id=3]
+[ext_resource path="res://art/Player/enemy1/run/sprite_3.png" type="Texture" id=4]
+[ext_resource path="res://art/Player/enemy1/run/sprite_6.png" type="Texture" id=5]
+[ext_resource path="res://art/Player/enemy1/run/sprite_5.png" type="Texture" id=6]
+[ext_resource path="res://art/Player/enemy1/run/sprite_4.png" type="Texture" id=7]
+[ext_resource path="res://art/Player/enemy1/run/sprite_2.png" type="Texture" id=8]
+[ext_resource path="res://art/Player/enemy1/run/sprite_7.png" type="Texture" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -9,20 +16,70 @@ extents = Vector2( 32, 32 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40, 40 )
 
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "run"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ) ]
+}
+
+[sub_resource type="AnimationNodeStateMachine" id=5]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=6]
+
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 9
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 modulate = Color( 0.882353, 0.415686, 0.6, 1 )
 shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/run = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 5 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 6 )
+
+[node name="WeaponPosition" type="Position2D" parent="."]
+position = Vector2( 10, 8 )
 
 [node name="DashDuration" type="Timer" parent="."]
 wait_time = 0.2
@@ -34,5 +91,6 @@ one_shot = true
 [node name="GhostSpawnCooldown" type="Timer" parent="."]
 wait_time = 0.03
 
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="timeout" from="DashDuration" to="." method="_on_DashDuration_timeout"]
 [connection signal="timeout" from="GhostSpawnCooldown" to="." method="_on_GhostSpawnCooldown_timeout"]

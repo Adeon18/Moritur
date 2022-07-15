@@ -12,14 +12,19 @@ var _velocity = Vector2()
 var _speed = default_speed
 
 var DashGhost = preload("res://src/Actors/DashGhost.tscn")
+var Weapon
 
+onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 onready var SpriteNode: Sprite = get_node("Sprite")
+onready var WeaponPosition: Position2D = get_node("WeaponPosition")
 onready var DashDurationTimer: Timer = get_node("DashDuration")
 onready var DashCooldownTimer: Timer = get_node("DashCooldown")
 onready var GhostSpawnCooldownTimer: Timer = get_node("GhostSpawnCooldown")
 onready var Hitbox: Area2D = get_node("Hitbox")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
 
+func _ready():
+	AnimPlayer.play("run")
 
 func _physics_process(delta):
 
@@ -29,7 +34,14 @@ func _physics_process(delta):
 	else:
 		_speed = default_speed
 		direction = get_direction_vector()
-		
+	
+	if direction.x > 0:
+		SpriteNode.flip_h = false
+		if (Weapon): Weapon.position.x = WeaponPosition.position.x
+	elif (direction.x < 0):
+		SpriteNode.flip_h = true
+		if (Weapon): Weapon.position.x = -WeaponPosition.position.x
+	
 	if direction.length() > 0:
 		_velocity = lerp(_velocity, direction * _speed, acceleration)
 	else:
@@ -79,7 +91,19 @@ func instance_dash_ghost():
 	dghost.vframes = SpriteNode.vframes
 	dghost.hframes = SpriteNode.hframes
 	dghost.frame = SpriteNode.frame
-	dghost.flip_h = SpriteNode.flip_h
+	dghost.flip_h = false if scale.x == 1 else true
+
+
+func reparent(area):
+	var clone = area.duplicate()
+	area.queue_free()
+	call_deferred("add_child", clone)
+
+	clone.call_deferred("disable_pick_up_collision")
+	clone.set_deferred("position", WeaponPosition.position)
+
+	Weapon = clone
+
 
 
 func _on_DashDuration_timeout():
@@ -91,3 +115,9 @@ func _on_DashDuration_timeout():
 
 func _on_GhostSpawnCooldown_timeout():
 	instance_dash_ghost()
+
+
+func _on_Hitbox_area_entered(area):
+	if area.is_in_group("Weapons"):
+		reparent(area)
+
