@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 var default_speed: int = 400
 var friction: float = 0.25
 var acceleration: float = 0.35
