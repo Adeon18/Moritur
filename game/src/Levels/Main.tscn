@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://src/Enemies/Ranged.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Enemies/Mele.tscn" type="PackedScene" id=3]
 
@@ -12,3 +13,6 @@ position = Vector2( 367, 240 )
 
 [node name="Mele" parent="Enemies" instance=ExtResource( 3 )]
 position = Vector2( 93, 189 )
+
+[node name="Ranged" parent="Enemies" instance=ExtResource( 1 )]
+position = Vector2( 133, 379 )
