@@ -4,7 +4,7 @@ class_name Enemy
 
 var hp: int = 10
 var effective_fighting_distance: int = 40
-
+export var is_hitting: bool = false
 
 var speed: int = 50
 var movable: bool = true
@@ -24,7 +24,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	Statemachine.travel("run")
 	# move to player
 	distance = position.distance_to(Player.position)
 	direction_to_player = position.direction_to(Player.position)
@@ -32,6 +31,7 @@ func _process(delta):
 	
 	# stop when too close to player or if cant move (useful for freeze?)
 	if(movable && (distance > effective_fighting_distance)):
+		Statemachine.travel("run")
 		move_and_slide(velocity)
 
 	# mirror enemy
