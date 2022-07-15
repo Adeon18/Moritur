@@ -10,6 +10,7 @@ extents = Vector2( 8, 8 )
 extents = Vector2( 2, 5.5 )
 
 [node name="Sword" type="Area2D" groups=["Weapons"]]
+rotation = 1.5708
 collision_layer = 8
 script = ExtResource( 2 )
 

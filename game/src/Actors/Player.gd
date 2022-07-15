@@ -8,6 +8,8 @@ var direction: Vector2 = Vector2()
 var is_dashing: bool = false
 var dash_speed: int = 1200
 
+var mouse_position: Vector2 = Vector2()
+
 var _velocity = Vector2()
 var _speed = default_speed
 
@@ -27,7 +29,10 @@ func _ready():
 	AnimPlayer.play("run")
 
 func _physics_process(delta):
-
+	mouse_position = get_global_mouse_position()
+	
+	if Weapon: Weapon.look_at(mouse_position)
+	
 	# Basic movement
 	if is_dashing:
 		_speed = dash_speed
@@ -35,10 +40,10 @@ func _physics_process(delta):
 		_speed = default_speed
 		direction = get_direction_vector()
 	
-	if direction.x > 0:
+	if mouse_position.x > global_position.x:
 		SpriteNode.flip_h = false
 		if (Weapon): Weapon.position.x = WeaponPosition.position.x
-	elif (direction.x < 0):
+	elif (mouse_position.x < global_position.x):
 		SpriteNode.flip_h = true
 		if (Weapon): Weapon.position.x = -WeaponPosition.position.x
 	
