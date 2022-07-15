@@ -25,10 +25,14 @@ modulate = Color( 0.882353, 0.415686, 0.6, 1 )
 shape = SubResource( 2 )
 
 [node name="DashDuration" type="Timer" parent="."]
-wait_time = 0.3
+wait_time = 0.2
 one_shot = true
 
 [node name="DashCooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="GhostSpawnCooldown" type="Timer" parent="."]
+wait_time = 0.03
+
 [connection signal="timeout" from="DashDuration" to="." method="_on_DashDuration_timeout"]
+[connection signal="timeout" from="GhostSpawnCooldown" to="." method="_on_GhostSpawnCooldown_timeout"]
