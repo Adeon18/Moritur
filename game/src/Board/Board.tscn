@@ -9,6 +9,8 @@ script = ExtResource( 1 )
 number_of_cells = 50
 
 [node name="Line2D" type="Line2D" parent="."]
+width = 5.0
+default_color = Color( 0.835294, 0.835294, 0.835294, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
