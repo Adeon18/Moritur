@@ -2,13 +2,13 @@ extends KinematicBody2D
 
 class_name Player
 
-var default_speed: int = 400
+var default_speed: int = 200
 var friction: float = 0.25
 var acceleration: float = 0.35
 var direction: Vector2 = Vector2()
 
 var is_dashing: bool = false
-var dash_speed: int = 1200
+var dash_speed: int = 600
 
 var mouse_position: Vector2 = Vector2()
 
@@ -16,13 +16,21 @@ var _velocity = Vector2()
 var _speed = default_speed
 
 var DashGhost = preload("res://src/Actors/DashGhost.tscn")
-var Weapon
+var DefaultWeapon = preload("res://src/Weapons/Sword.tscn")
+var WeaponObject
 
 var weapon_to_be_picked_up
 var is_colliding_with_weapon: bool = false
 
-var projectile_speed: int = 200
+var projectile_speed: int = 300
+var projectile_damage: int = 1
+var projectile_is_freezing: bool = false
+var projectile_is_poizon: bool = false
+var projectile_scale: int = 2
 var shot_delay_time: float = 0.5
+
+
+var StateMashine
 
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 onready var SpriteNode: Sprite = get_node("Sprite")
@@ -31,12 +39,22 @@ onready var DashDurationTimer: Timer = get_node("DashDuration")
 onready var DashCooldownTimer: Timer = get_node("DashCooldown")
 onready var GhostSpawnCooldownTimer: Timer = get_node("GhostSpawnCooldown")
 onready var ShootCooldownTimer: Timer = get_node("ShootCooldownTimer")
+onready var WeaponPickUpCooldownTimer: Timer = get_node("WeaponPickUpCooldown")
 onready var Hitbox: Area2D = get_node("Hitbox")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
 
 func _ready():
-	AnimPlayer.play("run")
+	StateMashine = $AnimationTree.get("parameters/playback")
 	ShootCooldownTimer.wait_time = shot_delay_time
+	
+	var weapon = DefaultWeapon.instance()
+	call_deferred("add_child", weapon)
+	
+	weapon.call_deferred("disable_pick_up_collision")
+	weapon.set_deferred("position", WeaponPosition.position)
+
+	WeaponObject = weapon
+
 
 func _physics_process(delta):
 	mouse_position = get_global_mouse_position()
@@ -49,20 +67,22 @@ func _physics_process(delta):
 		direction = get_direction_vector()
 	
 	if mouse_position.x > global_position.x:
-		SpriteNode.flip_h = false
-		if (Weapon): Weapon.scale = Vector2(1, 1)
-		if (Weapon): Weapon.position.x = WeaponPosition.position.x
-	elif (mouse_position.x < global_position.x):
 		SpriteNode.flip_h = true
-		if (Weapon): Weapon.scale = Vector2(-1, -1)
-		if (Weapon): Weapon.position.x = -WeaponPosition.position.x
+		WeaponObject.scale = Vector2(1, 1)
+		WeaponObject.position.x = WeaponPosition.position.x
+	elif (mouse_position.x < global_position.x):
+		SpriteNode.flip_h = false
+		WeaponObject.scale = Vector2(-1, -1)
+		WeaponObject.position.x = -WeaponPosition.position.x
 
 	handle_weapon_rotation()
 	handle_attack()
 	
 	if direction.length() > 0:
+		StateMashine.travel("run")
 		_velocity = lerp(_velocity, direction * _speed, acceleration)
 	else:
+		StateMashine.travel("idle")
 		_velocity = lerp(_velocity, Vector2.ZERO, friction)
 	
 	_velocity = move_and_slide(_velocity)
@@ -86,14 +106,18 @@ func get_direction_vector():
 
 
 func handle_weapon_rotation():
-	if Weapon:
-		Weapon.look_at(mouse_position)
-		Weapon.rotate(sign(Weapon.position.x) * 1.5708)
+	WeaponObject.look_at(mouse_position)
+	WeaponObject.rotate(sign(WeaponObject.position.x) * 1.5708)
 
 
 func handle_attack():
 	if Input.is_action_pressed("attack") && ShootCooldownTimer.time_left == 0:
-		Weapon.use(global_position.direction_to(mouse_position), projectile_speed)
+		WeaponObject.use(global_position.direction_to(mouse_position),
+						projectile_speed,
+						projectile_damage,
+						projectile_is_freezing,
+						projectile_is_poizon,
+						projectile_scale)
 		ShootCooldownTimer.start()
 
 
@@ -102,8 +126,9 @@ func _input(event):
 		if DashCooldownTimer.is_stopped() and !is_dashing:
 			start_dash()
 	
-	if Input.is_action_pressed("pick_up") and is_colliding_with_weapon:
-		reparent(weapon_to_be_picked_up)
+	if Input.is_action_pressed("pick_up") and WeaponPickUpCooldownTimer.time_left == 0 and is_colliding_with_weapon:
+		pick_up(weapon_to_be_picked_up)
+		WeaponPickUpCooldownTimer.start()
 
 
 func start_dash():
@@ -127,6 +152,21 @@ func instance_dash_ghost():
 	dghost.flip_h = false if scale.x == 1 else true
 
 
+func pick_up(object):
+	unparent()
+	reparent(object)
+
+
+func unparent():
+	var clone = WeaponObject.duplicate()
+	WeaponObject.queue_free()
+
+	get_parent().call_deferred("add_child", clone)
+
+	clone.call_deferred("enable_pick_up_collision")
+	clone.set_deferred("global_position", WeaponPosition.global_position)
+
+
 func reparent(area):
 	var clone = area.duplicate()
 	area.queue_free()
@@ -136,7 +176,7 @@ func reparent(area):
 	clone.call_deferred("disable_pick_up_collision")
 	clone.set_deferred("position", WeaponPosition.position)
 
-	Weapon = clone
+	WeaponObject = clone
 	is_colliding_with_weapon = false
 	weapon_to_be_picked_up = null
 
@@ -157,3 +197,9 @@ func _on_Hitbox_area_entered(area):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
 
+
+
+func _on_Hitbox_area_exited(area):
+	if area.is_in_group("Weapons"):
+		weapon_to_be_picked_up = null
+		is_colliding_with_weapon = false
