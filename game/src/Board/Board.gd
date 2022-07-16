@@ -16,6 +16,8 @@ var directions: Dictionary = {
 
 var directions_array: Array = directions.values()
 
+export var number_of_cells: int = 4
+
 onready var cell = preload("res://src/Board/Cell/Cell.tscn")
 onready var Line = $Line2D
 onready var BoardPlayer = preload("res://src/Board/BoardPlayer/BoardPlayer.tscn")
@@ -39,7 +41,7 @@ func generate_path(starting_pos) -> Dictionary:
 	path[last_pos] = [null, null]
 	Line.add_point(last_pos * (CELL_WIDTH + MARGIN))
 	
-	for i in range(4):
+	for i in range(number_of_cells):
 		var new_pos
 		while true:
 			new_pos = last_pos + directions_array[randi() % directions_array.size()]

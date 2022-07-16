@@ -39,10 +39,14 @@ func _physics_process(delta):
 #				current_state = STATE.TRANSITIONING
 				
 	elif current_state == STATE.TRANSITIONING:
+		if Input.is_action_just_pressed("ui_up"):
+			lerp_speed = 30
+		
 		if (abs(global_position.x - target_position.x) > 0.01) or (abs(global_position.y - target_position.y) > 0.01):
 			global_position = lerp(global_position, target_position, lerp_speed*delta)
 		else:
 			global_position = target_position
+			lerp_speed = 15
 			if steps_to_take == 0:
 				current_state = STATE.IDLE
 			else:
