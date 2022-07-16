@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal finished_moving
+
 var path: Dictionary;
 var starting_pos;
 var current_pos;
@@ -21,11 +23,12 @@ func _ready():
 
 func _physics_process(delta):
 	if current_state == STATE.IDLE:
-		if Input.is_action_just_pressed("ui_up"):
-			steps_to_take = randi() % 12 + 1
-			print("Throwing dice: ", steps_to_take)
-			if steps_to_take > 0:
-				current_state = STATE.TAKING_STEP
+		pass
+#		if Input.is_action_just_pressed("ui_up"):
+#			steps_to_take = randi() % 12 + 1
+#			print("Throwing dice: ", steps_to_take)
+#			if steps_to_take > 0:
+#				current_state = STATE.TAKING_STEP
 #		if Input.is_action_just_pressed("ui_up"):
 #			if path[current_pos][1] != null:
 #				current_pos = path[current_pos][1]
@@ -49,6 +52,7 @@ func _physics_process(delta):
 			lerp_speed = 15
 			if steps_to_take == 0:
 				current_state = STATE.IDLE
+				emit_signal("finished_moving")
 			else:
 				current_state = STATE.TAKING_STEP
 	elif current_state == STATE.TAKING_STEP:
@@ -61,3 +65,9 @@ func _physics_process(delta):
 		else:
 			steps_to_take = 0
 			current_state = STATE.IDLE
+			emit_signal("finished_moving")
+
+func move_player(cells: int):
+	print("cells to walk: ", cells)
+	steps_to_take = cells
+	current_state = STATE.TAKING_STEP
