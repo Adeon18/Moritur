@@ -104,6 +104,7 @@ func take_damage(damage):
 	print("hitt")
 	health -= damage
 
-func _on_Area2D_body_entered(body):
-	if body.is_in_group("projectile"):
-		body.hit(self)
+func _on_Area2D_area_entered(area):
+	if(area.is_in_group("Projectiles")):
+		area.hit(self)
+		print("got hit")
