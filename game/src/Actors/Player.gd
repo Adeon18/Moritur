@@ -2,9 +2,13 @@ extends KinematicBody2D
 
 class_name Player
 
+signal camera_shake_requested
+signal frame_freeze_requested
+
 var weapon_rotation_radius: int = 16
 
 var health: int = 3
+var is_invinsible: bool = false
 
 var default_speed: int = 100
 var friction: float = 0.25
@@ -43,6 +47,7 @@ var shot_delay_time: float = 0.5
 var StateMashine
 
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
+onready var DamageTween: Tween = get_node("DamageTween")
 onready var SpriteNode: Sprite = get_node("Sprite")
 onready var WeaponPosition: Position2D = get_node("WeaponPosition")
 onready var DashDurationTimer: Timer = get_node("DashDuration")
@@ -50,6 +55,7 @@ onready var DashCooldownTimer: Timer = get_node("DashCooldown")
 onready var GhostSpawnCooldownTimer: Timer = get_node("GhostSpawnCooldown")
 onready var ShootCooldownTimer: Timer = get_node("ShootCooldownTimer")
 onready var WeaponPickUpCooldownTimer: Timer = get_node("WeaponPickUpCooldown")
+onready var InvisibilityCooldownTimer: Timer = get_node("InvisibilityCooldown")
 onready var Hitbox: Area2D = get_node("Hitbox")
 onready var WeaponContainer: Node2D = get_node("WeaponPosition")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
@@ -58,6 +64,7 @@ func _ready():
 	StateMashine = $AnimationTree.get("parameters/playback")
 	ShootCooldownTimer.wait_time = shot_delay_time
 	
+	###
 	var weapon = DefaultWeapon.instance()
 	WeaponContainer.call_deferred("add_child", weapon)
 	
@@ -65,6 +72,8 @@ func _ready():
 	weapon.set_deferred("position", Vector2(0, 0))
 
 	WeaponObject = weapon
+	###
+	DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 
 
 func _physics_process(delta):
@@ -88,10 +97,12 @@ func _physics_process(delta):
 	handle_attack()
 	
 	if direction.length() > 0:
-		StateMashine.travel("run")
+		if !is_invinsible:
+			StateMashine.travel("run")
 		_velocity = lerp(_velocity, direction * _speed, acceleration)
 	else:
-		StateMashine.travel("idle")
+		if !is_invinsible:
+			StateMashine.travel("idle")
 		_velocity = lerp(_velocity, Vector2.ZERO, friction)
 	
 	_velocity = move_and_slide(_velocity)
@@ -192,7 +203,6 @@ func reparent(area):
 
 	clone.call_deferred("disable_pick_up_collision")
 	clone.set_deferred("position", Vector2(0, 0))
-	print(WeaponContainer.position)
 
 	WeaponObject = clone
 	is_colliding_with_weapon = false
@@ -200,10 +210,24 @@ func reparent(area):
 
 
 func take_damage(amount):
-	health -= amount
-	# anim
-	if health == 0:
-		print("Fukcing die")
+	if !is_invinsible:
+		health -= amount
+		# animatons
+		emit_signal("camera_shake_requested")
+		emit_signal("frame_freeze_requested")
+		if health == 0:
+			die()
+		else:
+			DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
+			DamageTween.start()
+		is_invinsible = true
+		InvisibilityCooldownTimer.start()
+
+
+func die():
+	HitboxCollisionShape.set_deferred("disabled", true)
+	set_physics_process(false)
+	StateMashine.travel("death")
 
 
 func _on_DashDuration_timeout():
@@ -230,3 +254,18 @@ func _on_Hitbox_area_exited(area):
 	if area.is_in_group("Weapons"):
 		weapon_to_be_picked_up = null
 		is_colliding_with_weapon = false
+
+
+func _on_InvisibilityCooldown_timeout():
+	is_invinsible = false
+
+
+func _on_DamageTween_tween_completed(_object, _key):
+	if (SpriteNode.material.get_shader_param("flash_modifier") == 0.0):
+		if !is_invinsible:
+			DamageTween.stop(SpriteNode.material)
+			return
+		DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
+	else:
+		DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 1.0, 0.0, 0.1)
+	DamageTween.start()
