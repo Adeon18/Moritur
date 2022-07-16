@@ -2,9 +2,12 @@ extends KinematicBody2D
 
 class_name Player
 
+signal camera_shake_requested
+
 var weapon_rotation_radius: int = 16
 
 var health: int = 3
+var is_invinsible: bool = false
 
 var default_speed: int = 100
 var friction: float = 0.25
@@ -50,6 +53,7 @@ onready var DashCooldownTimer: Timer = get_node("DashCooldown")
 onready var GhostSpawnCooldownTimer: Timer = get_node("GhostSpawnCooldown")
 onready var ShootCooldownTimer: Timer = get_node("ShootCooldownTimer")
 onready var WeaponPickUpCooldownTimer: Timer = get_node("WeaponPickUpCooldown")
+onready var InvisibilityCooldownTimer: Timer = get_node("InvisibilityCooldown")
 onready var Hitbox: Area2D = get_node("Hitbox")
 onready var WeaponContainer: Node2D = get_node("WeaponPosition")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
@@ -192,7 +196,6 @@ func reparent(area):
 
 	clone.call_deferred("disable_pick_up_collision")
 	clone.set_deferred("position", Vector2(0, 0))
-	print(WeaponContainer.position)
 
 	WeaponObject = clone
 	is_colliding_with_weapon = false
@@ -200,10 +203,21 @@ func reparent(area):
 
 
 func take_damage(amount):
-	health -= amount
-	# anim
-	if health == 0:
-		print("Fukcing die")
+	if !is_invinsible:
+		health -= amount
+		print("AAAAAAA")
+		# animatons
+		emit_signal("camera_shake_requested")
+		if health == 0:
+			die()
+		is_invinsible = true
+		InvisibilityCooldownTimer.start()
+
+
+func die():
+	HitboxCollisionShape.set_deferred("disabled", true)
+	set_physics_process(false)
+	StateMashine.travel("death")
 
 
 func _on_DashDuration_timeout():
@@ -230,3 +244,7 @@ func _on_Hitbox_area_exited(area):
 	if area.is_in_group("Weapons"):
 		weapon_to_be_picked_up = null
 		is_colliding_with_weapon = false
+
+
+func _on_InvisibilityCooldown_timeout():
+	is_invinsible = false
