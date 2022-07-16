@@ -114,7 +114,7 @@ graph_offset = Vector2( -45, 3 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=6]
 
-[node name="Player" type="KinematicBody2D" groups=["Shakers"]]
+[node name="Player" type="KinematicBody2D" groups=["FrameFreezers", "Shakers"]]
 collision_mask = 9
 script = ExtResource( 2 )
 

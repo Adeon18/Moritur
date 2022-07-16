@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name Player
 
 signal camera_shake_requested
+signal frame_freeze_requested
 
 var weapon_rotation_radius: int = 16
 
@@ -205,9 +206,9 @@ func reparent(area):
 func take_damage(amount):
 	if !is_invinsible:
 		health -= amount
-		print("AAAAAAA")
 		# animatons
 		emit_signal("camera_shake_requested")
+		emit_signal("frame_freeze_requested")
 		if health == 0:
 			die()
 		is_invinsible = true
