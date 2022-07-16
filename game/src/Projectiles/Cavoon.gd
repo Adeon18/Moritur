@@ -6,9 +6,13 @@ var _damage: int
 var _direction: Vector2
 
 var _is_piercing: bool = false
-var _is_freezing: bool = false
-var _is_fire: bool = false
-var _is_poizon: bool = false
+
+var _shenanigans: Dictionary = {
+	"freeze": false,
+	"burn": false,
+	"poizon": false,
+}
+
 var _type = "default"
 
 
@@ -38,9 +42,7 @@ func launch(weapon_name: String,
 			speed: int,
 			damage: int,
 			is_piercing: bool,
-			is_freezing: bool,
-			is_fire: bool,
-			is_poizon: bool,
+			shenanigans: Dictionary,
 			type: String,
 			scale_m: int):
 	
@@ -50,21 +52,17 @@ func launch(weapon_name: String,
 	_damage = damage
 	_direction = direction
 	_is_piercing = is_piercing
-	_is_freezing = is_freezing
-	_is_fire = is_fire
-	_is_poizon = is_poizon
+	_shenanigans = shenanigans
 	_type = type
 	SpriteImg.frame = sprites[weapon_name][_type]
 
 
 func hit(body):
 	body.take_damage(_damage)
-	if _is_freezing:
-		body.freeze()
-	if _is_fire:
-		body.burn()
-	elif _is_poizon:
-		body.poizon()
+	
+	for key in _shenanigans:
+		if _shenanigans[key]:
+			body.call_deferred(key)
 	
 	if !_is_piercing:
 		queue_free()

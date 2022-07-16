@@ -29,9 +29,11 @@ var is_colliding_with_weapon: bool = false
 var projectile_speed: int = 300
 var projectile_damage: int = 1
 
-var is_freezing: bool = false
-var is_poizon: bool = false
-var is_fire: bool = true
+var shenanigans: Dictionary = {
+	"freeze": true,
+	"burn": true,
+	"poizon": true
+}
 
 var projectile_type: String = "poizon"
 var projectile_scale: int = 2
@@ -130,9 +132,7 @@ func handle_attack():
 		WeaponObject.use(global_position.direction_to(mouse_position),
 						projectile_speed,
 						projectile_damage,
-						is_freezing,
-						is_fire,
-						is_poizon,
+						shenanigans,
 						projectile_type,
 						projectile_scale)
 		ShootCooldownTimer.start()
