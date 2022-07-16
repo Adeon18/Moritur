@@ -26,3 +26,7 @@ func shoot():
 	projectile.launch(direction, projectile_speed)
 		
 	
+
+
+func _on_Timer_timeout():
+	update_path()

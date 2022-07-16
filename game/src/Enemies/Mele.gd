@@ -17,3 +17,7 @@ func handle_fight():
 		Statemachine.travel("run")
 		movable = true
 
+
+
+func _on_Timer_timeout():
+	update_path()
