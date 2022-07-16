@@ -125,6 +125,8 @@ parameters/playback = SubResource( 6 )
 [node name="WeaponPosition" type="Position2D" parent="."]
 position = Vector2( 15, 3 )
 
+[node name="WeaponContainer" type="Node2D" parent="."]
+
 [node name="DashDuration" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true

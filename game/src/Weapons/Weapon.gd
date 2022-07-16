@@ -6,6 +6,7 @@ class_name Weapon
 var is_piercing: bool = false
 
 
+var SpriteImg
 var AnimPlayer
 var ShotCooldownTimer
 

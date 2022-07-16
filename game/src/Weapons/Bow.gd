@@ -3,6 +3,7 @@ extends Weapon
 
 
 func _ready():
+	SpriteImg = get_node("Sprite")
 	is_piercing = true
 	AnimPlayer = get_node("AnimationPlayer")
 

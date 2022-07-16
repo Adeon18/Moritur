@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 class_name Player
 
+var weapon_rotation_radius: int = 2
+
 var default_speed: int = 200
 var friction: float = 0.25
 var acceleration: float = 0.35
@@ -41,6 +43,7 @@ onready var GhostSpawnCooldownTimer: Timer = get_node("GhostSpawnCooldown")
 onready var ShootCooldownTimer: Timer = get_node("ShootCooldownTimer")
 onready var WeaponPickUpCooldownTimer: Timer = get_node("WeaponPickUpCooldown")
 onready var Hitbox: Area2D = get_node("Hitbox")
+onready var WeaponContainer: Node2D = get_node("WeaponPosition")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
 
 func _ready():
@@ -48,7 +51,7 @@ func _ready():
 	ShootCooldownTimer.wait_time = shot_delay_time
 	
 	var weapon = DefaultWeapon.instance()
-	call_deferred("add_child", weapon)
+	WeaponContainer.call_deferred("add_child", weapon)
 	
 	weapon.call_deferred("disable_pick_up_collision")
 	weapon.set_deferred("position", WeaponPosition.position)
@@ -68,12 +71,8 @@ func _physics_process(delta):
 	
 	if mouse_position.x > global_position.x:
 		SpriteNode.flip_h = true
-		WeaponObject.scale = Vector2(1, 1)
-		WeaponObject.position.x = WeaponPosition.position.x
 	elif (mouse_position.x < global_position.x):
 		SpriteNode.flip_h = false
-		WeaponObject.scale = Vector2(-1, -1)
-		WeaponObject.position.x = -WeaponPosition.position.x
 
 	handle_weapon_rotation()
 	handle_attack()
@@ -106,8 +105,16 @@ func get_direction_vector():
 
 
 func handle_weapon_rotation():
-	WeaponObject.look_at(mouse_position)
-	WeaponObject.rotate(sign(WeaponObject.position.x) * 1.5708)
+	var mouse_pos = mouse_position
+	var player_pos = global_transform.origin 
+	var distance = player_pos.distance_to(mouse_pos) 
+	var mouse_dir = (mouse_pos-player_pos).normalized()
+	
+	mouse_pos = player_pos + (mouse_dir * weapon_rotation_radius)
+	WeaponContainer.global_transform.origin = mouse_pos
+	
+	WeaponContainer.look_at(mouse_position)
+	
 
 
 func handle_attack():
@@ -171,7 +178,7 @@ func reparent(area):
 	var clone = area.duplicate()
 	area.queue_free()
 
-	call_deferred("add_child", clone)
+	WeaponContainer.call_deferred("add_child", clone)
 
 	clone.call_deferred("disable_pick_up_collision")
 	clone.set_deferred("position", WeaponPosition.position)

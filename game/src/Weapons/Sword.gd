@@ -3,8 +3,9 @@ extends Weapon
 
 
 func _ready():
+	SpriteImg = get_node("Sprite")
 	AnimPlayer = get_node("AnimationPlayer")
-	
+	print(SpriteImg)
 	var anim = AnimPlayer.get_animation("use")
 	anim.track_set_key_value(0, 0, rotation_degrees)
 	anim.track_set_key_value(0, 1, rotation_degrees-90)
