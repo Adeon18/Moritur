@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 class_name Player
 
-var weapon_rotation_radius: int = 7
+var weapon_rotation_radius: int = 16
 
-var default_speed: int = 200
+var default_speed: int = 100
 var friction: float = 0.25
 var acceleration: float = 0.35
 var direction: Vector2 = Vector2()
@@ -53,7 +53,7 @@ func _ready():
 	WeaponContainer.call_deferred("add_child", weapon)
 	
 	weapon.call_deferred("disable_pick_up_collision")
-	weapon.set_deferred("position", WeaponContainer.position)
+	weapon.set_deferred("position", Vector2(0, 0))
 
 	WeaponObject = weapon
 
@@ -181,7 +181,7 @@ func reparent(area):
 	WeaponContainer.call_deferred("add_child", clone)
 
 	clone.call_deferred("disable_pick_up_collision")
-	clone.set_deferred("position", WeaponContainer.position)
+	clone.set_deferred("position", Vector2(0, 0))
 	print(WeaponContainer.position)
 
 	WeaponObject = clone
