@@ -7,5 +7,6 @@
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 region_filter_clip = true
