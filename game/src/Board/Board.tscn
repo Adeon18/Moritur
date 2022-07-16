@@ -6,6 +6,7 @@
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 1 )
+number_of_cells = 100
 
 [node name="Line2D" type="Line2D" parent="."]
 
@@ -18,10 +19,12 @@ one_shot = true
 script = ExtResource( 3 )
 
 [node name="Die1" parent="DieContainer" instance=ExtResource( 2 )]
+visible = false
 position = Vector2( -100, 0 )
 z_index = 1000
 
 [node name="Die2" parent="DieContainer" instance=ExtResource( 2 )]
+visible = false
 position = Vector2( 100, 0 )
 z_index = 1000
 
