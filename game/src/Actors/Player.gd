@@ -111,11 +111,11 @@ func handle_weapon_rotation():
 	var distance = player_pos.distance_to(mouse_pos) 
 	var mouse_dir = (mouse_pos-player_pos).normalized()
 	
-	mouse_pos = player_pos + (mouse_dir * weapon_rotation_radius)
+	if distance > weapon_rotation_radius:
+		mouse_pos = player_pos + (mouse_dir * weapon_rotation_radius)
+		WeaponContainer.look_at(mouse_position)
+	
 	WeaponContainer.global_transform.origin = mouse_pos
-	
-	WeaponContainer.look_at(mouse_position)
-	
 
 
 func handle_attack():
