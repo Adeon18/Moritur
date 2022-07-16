@@ -18,6 +18,9 @@ var _speed = default_speed
 var DashGhost = preload("res://src/Actors/DashGhost.tscn")
 var Weapon
 
+var weapon_to_be_picked_up
+var is_colliding_with_weapon: bool = false
+
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 onready var SpriteNode: Sprite = get_node("Sprite")
 onready var WeaponPosition: Position2D = get_node("WeaponPosition")
@@ -32,9 +35,7 @@ func _ready():
 
 func _physics_process(delta):
 	mouse_position = get_global_mouse_position()
-	
-	if Weapon: Weapon.look_at(mouse_position)
-	
+
 	# Basic movement
 	if is_dashing:
 		_speed = dash_speed
@@ -44,10 +45,14 @@ func _physics_process(delta):
 	
 	if mouse_position.x > global_position.x:
 		SpriteNode.flip_h = false
+		if (Weapon): Weapon.scale = Vector2(1, 1)
 		if (Weapon): Weapon.position.x = WeaponPosition.position.x
 	elif (mouse_position.x < global_position.x):
 		SpriteNode.flip_h = true
+		if (Weapon): Weapon.scale = Vector2(-1, -1)
 		if (Weapon): Weapon.position.x = -WeaponPosition.position.x
+
+	handle_weapon_rotation()
 	
 	if direction.length() > 0:
 		_velocity = lerp(_velocity, direction * _speed, acceleration)
@@ -74,11 +79,22 @@ func get_direction_vector():
 	return dir.normalized()
 
 
+func handle_weapon_rotation():
+	if Weapon:
+		Weapon.look_at(mouse_position)
+		Weapon.rotate(sign(Weapon.position.x) * 1.5708)
+
+
 func _input(event):
 	if Input.is_action_just_pressed("slide"):
 		if DashCooldownTimer.is_stopped() and !is_dashing:
 			start_dash()
-
+	
+	if Input.is_action_pressed("pick_up") and is_colliding_with_weapon:
+		reparent(weapon_to_be_picked_up)
+	
+	if Input.is_action_just_pressed("attack"):
+		Weapon.use()
 
 func start_dash():
 	DashDurationTimer.start()
@@ -104,13 +120,15 @@ func instance_dash_ghost():
 func reparent(area):
 	var clone = area.duplicate()
 	area.queue_free()
+
 	call_deferred("add_child", clone)
 
 	clone.call_deferred("disable_pick_up_collision")
 	clone.set_deferred("position", WeaponPosition.position)
 
 	Weapon = clone
-
+	is_colliding_with_weapon = false
+	weapon_to_be_picked_up = null
 
 
 func _on_DashDuration_timeout():
@@ -126,5 +144,6 @@ func _on_GhostSpawnCooldown_timeout():
 
 func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Weapons"):
-		reparent(area)
+		weapon_to_be_picked_up = area
+		is_colliding_with_weapon = true
 
