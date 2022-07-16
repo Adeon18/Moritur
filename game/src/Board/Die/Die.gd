@@ -9,7 +9,7 @@ var current_die: int = 1
 
 func play_roll_animation():
 	AnimPlayer.play("roll1")
-	RollTimer.wait_time = randf()
+	RollTimer.wait_time = rand_range(0.5, 1.0)
 	RollTimer.start()
 
 func roll():

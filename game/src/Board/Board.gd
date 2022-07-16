@@ -98,21 +98,6 @@ func generate_path(starting_pos) -> Dictionary:
 	var path: Dictionary = {}
 	var last_pos: Vector2 = starting_pos
 	path[last_pos] = [null, null]
-#	Line.add_point(last_pos * (CELL_WIDTH + MARGIN))
-#
-#	for i in range(number_of_cells):
-#		var new_pos
-#		while true:
-#			new_pos = last_pos + directions_array[randi() % directions_array.size()]
-##			new_pos = last_pos + directions["BOTTOM"]
-#			if path.has(new_pos):
-#				continue
-#			else:
-#				break
-#		path[new_pos] = [last_pos, null]
-#		path[last_pos][1] = new_pos
-#		last_pos = new_pos
-#		Line.add_point(last_pos * (CELL_WIDTH + MARGIN))
 	
 	var i = 0
 	while i < number_of_cells-1:
@@ -151,7 +136,8 @@ func spawn_cells(path):
 		add_child(cell_instance)
 
 func _process(delta):
-	Cam.position = Player.position
+	if !can_roll or Input.is_action_just_pressed("focus_on_player"):
+		Cam.position = Player.position
 	DieContainer.position = Cam.position
 	
 	if Input.is_action_just_pressed("ui_accept") and can_roll:
