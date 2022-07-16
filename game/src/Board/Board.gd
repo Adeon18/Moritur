@@ -28,7 +28,6 @@ onready var DieContainer = $DieContainer
 
 var cell_types: Dictionary
 
-
 var die1_finished = true
 var die2_finished = true
 
@@ -37,13 +36,45 @@ var dice_res = 0
 
 var Player
 
-func _ready():
-#	randomize()
+var cells_weight: Dictionary =  {
+	"combat": {
+		"roll_weight": 70
+	},
+	"extra_step": {
+		"roll_weight": 10
+	},
+	"shop": {
+		"roll_weight": 10
+	},
+	"item": {
+		"roll_weight": 10
+	},
+}
 
+var total_weight
+func init_probabilities():
+	total_weight = 0.0
+	for cell_type in cells_weight.values():
+		total_weight += cell_type.roll_weight
+		cell_type.acc_weight = total_weight
+	
+
+func random_cell_instance():
+	var roll: float = rand_range(0.0, total_weight)
+	for cell_type in cells_weight.keys():
+		if cells_weight[cell_type].acc_weight > roll:
+			return cell_types[cell_type].instance()
+#	return cell_types.values()[randi() % cell_types.size()].instance()
+
+
+func _ready():
 	cell_types = {
 		"combat": preload("res://src/Board/Cell/CombatCell.tscn"),
 		"extra_step": preload("res://src/Board/Cell/ExtraStepCell.tscn"),
+		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
+		"item": preload("res://src/Board/Cell/ItemCell.tscn"),
 	}
+	init_probabilities()
 
 	# Setup board
 	var starting_pos = Vector2(0, 0)
@@ -67,21 +98,6 @@ func generate_path(starting_pos) -> Dictionary:
 	var path: Dictionary = {}
 	var last_pos: Vector2 = starting_pos
 	path[last_pos] = [null, null]
-#	Line.add_point(last_pos * (CELL_WIDTH + MARGIN))
-#
-#	for i in range(number_of_cells):
-#		var new_pos
-#		while true:
-#			new_pos = last_pos + directions_array[randi() % directions_array.size()]
-##			new_pos = last_pos + directions["BOTTOM"]
-#			if path.has(new_pos):
-#				continue
-#			else:
-#				break
-#		path[new_pos] = [last_pos, null]
-#		path[last_pos][1] = new_pos
-#		last_pos = new_pos
-#		Line.add_point(last_pos * (CELL_WIDTH + MARGIN))
 	
 	var i = 0
 	while i < number_of_cells-1:
@@ -113,17 +129,15 @@ func generate_path(starting_pos) -> Dictionary:
 
 func spawn_cells(path):
 	for pos in path.keys():
-		var cell_instance = cell.instance()
-#		var cell_instance = random_cell_instance()
+#		var cell_instance = cell.instance()
+		var cell_instance = random_cell_instance()
 		cell_instance.position = pos * (CELL_WIDTH + MARGIN)
 		Line.add_point(cell_instance.position)
 		add_child(cell_instance)
 
-func random_cell_instance():
-	return cell_types.values()[randi() % cell_types.size()].instance()
-
 func _process(delta):
-	Cam.position = Player.position
+	if !can_roll or Input.is_action_just_pressed("focus_on_player"):
+		Cam.position = Player.position
 	DieContainer.position = Cam.position
 	
 	if Input.is_action_just_pressed("ui_accept") and can_roll:

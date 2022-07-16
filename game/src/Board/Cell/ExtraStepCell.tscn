@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Board/Cell/Cell.tscn" type="PackedScene" id=1]
-[ext_resource path="res://art/projectiles/cavoon_.png" type="Texture" id=2]
+[ext_resource path="res://art/Cells/rollback_filled.png" type="Texture" id=2]
 [ext_resource path="res://src/Board/Cell/ExtraStepCell.gd" type="Script" id=3]
 
 [node name="ExtraStepCell" instance=ExtResource( 1 )]

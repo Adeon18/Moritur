@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Board/Board.gd" type="Script" id=1]
 [ext_resource path="res://src/Board/Die/Die.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Board/DieContainer.gd" type="Script" id=3]
+[ext_resource path="res://src/Board/BoardCamera.gd" type="Script" id=4]
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 1 )
 number_of_cells = 50
 
 [node name="Line2D" type="Line2D" parent="."]
+width = 5.0
+default_color = Color( 0.835294, 0.835294, 0.835294, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource( 4 )
 
 [node name="DieWaitTimer" type="Timer" parent="."]
 one_shot = true
