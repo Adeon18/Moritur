@@ -11,3 +11,4 @@ func _ready():
 	anim.track_set_key_value(0, 2, rotation_degrees)
 	anim.track_set_key_value(0, 3, rotation_degrees+90)
 	anim.track_set_key_value(0, 4, rotation_degrees)
+

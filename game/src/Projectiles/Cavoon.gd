@@ -12,6 +12,8 @@ func _ready():
 
 func _physics_process(delta):
 	position += _direction*_speed*delta
+	print(_direction)
+#	print(_direction.x*_direction.x + _direction.y*_direction.y)
 
 func launch(direction: Vector2, speed: int):
 	_direction = direction

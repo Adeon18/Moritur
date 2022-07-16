@@ -21,6 +21,8 @@ var Weapon
 var weapon_to_be_picked_up
 var is_colliding_with_weapon: bool = false
 
+var projectile_speed: int = 200
+
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 onready var SpriteNode: Sprite = get_node("Sprite")
 onready var WeaponPosition: Position2D = get_node("WeaponPosition")
@@ -93,8 +95,8 @@ func _input(event):
 	if Input.is_action_pressed("pick_up") and is_colliding_with_weapon:
 		reparent(weapon_to_be_picked_up)
 	
-	if Input.is_action_just_pressed("attack"):
-		Weapon.use()
+	if Input.is_action_pressed("attack"):
+		Weapon.use(global_position.direction_to(mouse_position), projectile_speed)
 
 func start_dash():
 	DashDurationTimer.start()

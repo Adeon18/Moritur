@@ -2,18 +2,22 @@ extends Area2D
 
 class_name Weapon
 
+var speed: int = 200
 var shot_delay_time: float = 0.5
 
 var AnimPlayer
+
+onready var Cavoon = preload("res://src/Projectiles/Cavoon.tscn")
 
 
 func disable_pick_up_collision():
 	$CollisionShape2D.disabled = true
 
 
-func use():
+func use(direction, speed):
 	AnimPlayer.play("use")
-	create_projectile()
+	create_projectile(direction, speed)
 
-func create_projectile():
+
+func create_projectile(direction, speed):
 	pass
