@@ -6,7 +6,7 @@
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 1 )
-number_of_cells = 100
+number_of_cells = 50
 
 [node name="Line2D" type="Line2D" parent="."]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/torch_2.png-951d6d03b0f6c5ec7cf98dbaf64b4948.stex"
+path="res://.import/torch_2.png-b1571a45cc9976c65980abc7e49137b1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/RF_Catacombs_v1.0/torch_2.png"
-dest_files=[ "res://.import/torch_2.png-951d6d03b0f6c5ec7cf98dbaf64b4948.stex" ]
+source_file="res://art/Catacombs/torch_2.png"
+dest_files=[ "res://.import/torch_2.png-b1571a45cc9976c65980abc7e49137b1.stex" ]
 
 [params]
 
