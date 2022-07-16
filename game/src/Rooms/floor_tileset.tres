@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=54 format=2]
+[gd_resource type="TileSet" load_steps=53 format=2]
 
 [ext_resource path="res://art/Rooms/floor.png" type="Texture" id=1]
 
@@ -187,10 +187,6 @@ vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
 [sub_resource type="NavigationPolygon" id=47]
-vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
-polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
-
-[sub_resource type="NavigationPolygon" id=48]
 vertices = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 
@@ -984,7 +980,6 @@ polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
 51/tile_mode = 0
 51/occluder_offset = Vector2( 0, 0 )
 51/navigation_offset = Vector2( 0, 0 )
-51/navigation = SubResource( 48 )
 51/shape_offset = Vector2( 0, 0 )
 51/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 51/shape_one_way = false

@@ -17,4 +17,6 @@ format = 1
 [node name="WallMap" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
+collision_layer = 9
+collision_mask = 8
 format = 1

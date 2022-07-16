@@ -27,8 +27,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Game"
-run/main_scene="res://src/Levels/Main.tscn"
+run/main_scene="res://src/Rooms/RoomBig.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://src/global_scripts/Global.gd"
 
 [display]
 
@@ -38,6 +42,10 @@ window/size/test_width=1980
 window/size/test_height=1080
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+
+[global]
+
+layers=false
 
 [importer_defaults]
 
@@ -96,6 +104,7 @@ slide={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Projectiles"
+2d_physics/layer_4="Walls"
 
 [physics]
 

@@ -11,7 +11,7 @@ export var is_hitting: bool = false
 
 var speed: int = 50
 var movable: bool = true
-
+var can_hit: bool = true
 
 var distance: float
 var velocity: Vector2
@@ -27,6 +27,7 @@ onready var collision = get_node("./Collision")
 onready var area2d = get_node("./Area2D")
 onready var weapon = get_node("./Sword")
 onready var nav = get_node("../../Navigation2D")
+onready var raycast = get_node("./RayCast2D")
 
 var Statemachine 
 
@@ -42,23 +43,32 @@ func _process(delta):
 	direction_to_player = position.direction_to(player.position)
 	velocity = direction_to_player * speed
 	
+	raycast.set_cast_to(player.global_position - position)
+	
+	if(raycast.is_colliding()): can_hit = false
+	else: can_hit = true
+
+	
 	# stop when too close to player or if cant move (useful for freeze?)
-	if(movable && (distance > effective_fighting_distance)):
+	if(movable && ((distance > effective_fighting_distance) || !can_hit)):
 		Statemachine.travel("run")
 		if(path.size() > 1):
 			var d = position.distance_to(path[0])
-			if (d > 0.1): position = position.linear_interpolate(path[0], speed*delta/d)
+			if (d > 1): position = position.linear_interpolate(path[0], speed*delta/d)
 			else:
 				path.remove(0)
-		#move_and_slide(velocity)
+	
+	
+	# handle combat if possible
+	if((distance <= effective_fighting_distance) && can_hit):
+		handle_fight()
+
 
 	# mirror enemy if needed
 	mirror()
 
 
-	# handle combat if possible
-	if(distance <= effective_fighting_distance):
-		handle_fight()
+	
 		
 func update_path():
 	path = nav.get_simple_path(position, player.position, false)
