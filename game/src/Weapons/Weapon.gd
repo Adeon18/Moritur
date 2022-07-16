@@ -25,14 +25,13 @@ func enable_pick_up_collision():
 func use(direction,
 		speed,
 		damage,
-		is_freezing: bool = false,
-		is_poizon: bool = false,
+		type: String,
 		scale_m: int = 1):
 	AnimPlayer.play("use")
-	create_projectile(direction, speed, damage, is_piercing, is_freezing, is_poizon, scale_m)
+	create_projectile(direction, speed, damage, is_piercing, type, scale_m)
 
 
-func create_projectile(direction, speed, damage, is_piercing, is_freezing, is_poizon, scale_m):
+func create_projectile(direction, speed, damage, is_piercing, type, scale_m):
 	pass
 
 

@@ -7,7 +7,7 @@
 extents = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5.5, 2 )
+extents = Vector2( 8.5, 3 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "use"
@@ -20,10 +20,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1.68179, 0.732043, 0.707, 1.31951 ),
 "update": 0,
-"values": [ 0.0, -90.0, 0.0, 90.0, 0.0 ]
+"values": [ 0.0, -90.0, 90.0, -20.0, 0.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("HitDetector/CollisionShape2D:disabled")
@@ -47,15 +47,15 @@ position = Vector2( 7, 0 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 7, 0 )
-rotation = 1.5708
+position = Vector2( 10, 0 )
+rotation = 0.785398
 texture = ExtResource( 1 )
 
 [node name="HitDetector" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector"]
-position = Vector2( 9.5, 0 )
+position = Vector2( 12, 0 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

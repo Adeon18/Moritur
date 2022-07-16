@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 class_name Player
 
-var weapon_rotation_radius: int = 2
+var weapon_rotation_radius: int = 7
 
 var default_speed: int = 200
 var friction: float = 0.25
@@ -26,8 +26,7 @@ var is_colliding_with_weapon: bool = false
 
 var projectile_speed: int = 300
 var projectile_damage: int = 1
-var projectile_is_freezing: bool = false
-var projectile_is_poizon: bool = false
+var projectile_type: String = "poizon"
 var projectile_scale: int = 2
 var shot_delay_time: float = 0.5
 
@@ -54,7 +53,7 @@ func _ready():
 	WeaponContainer.call_deferred("add_child", weapon)
 	
 	weapon.call_deferred("disable_pick_up_collision")
-	weapon.set_deferred("position", WeaponPosition.position)
+	weapon.set_deferred("position", WeaponContainer.position)
 
 	WeaponObject = weapon
 
@@ -71,8 +70,10 @@ func _physics_process(delta):
 	
 	if mouse_position.x > global_position.x:
 		SpriteNode.flip_h = true
+		WeaponContainer.scale.y = 1
 	elif (mouse_position.x < global_position.x):
 		SpriteNode.flip_h = false
+		WeaponContainer.scale.y = -1
 
 	handle_weapon_rotation()
 	handle_attack()
@@ -122,8 +123,7 @@ func handle_attack():
 		WeaponObject.use(global_position.direction_to(mouse_position),
 						projectile_speed,
 						projectile_damage,
-						projectile_is_freezing,
-						projectile_is_poizon,
+						projectile_type,
 						projectile_scale)
 		ShootCooldownTimer.start()
 
@@ -181,7 +181,8 @@ func reparent(area):
 	WeaponContainer.call_deferred("add_child", clone)
 
 	clone.call_deferred("disable_pick_up_collision")
-	clone.set_deferred("position", WeaponPosition.position)
+	clone.set_deferred("position", WeaponContainer.position)
+	print(WeaponContainer.position)
 
 	WeaponObject = clone
 	is_colliding_with_weapon = false

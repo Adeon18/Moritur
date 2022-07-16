@@ -1,17 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://art/projectiles/cavoon_.png" type="Texture" id=1]
 [ext_resource path="res://src/Projectiles/Cavoon.gd" type="Script" id=2]
+[ext_resource path="res://art/projectiles/projectiles.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 6.08276
+radius = 3.41096
 
 [node name="Cavoon" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.345991, 0.345991 )
-texture = ExtResource( 1 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+hframes = 13
+vframes = 6
+frame = 39
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.879518, 1 )
