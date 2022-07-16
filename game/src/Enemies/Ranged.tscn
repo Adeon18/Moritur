@@ -116,7 +116,7 @@ script = ExtResource( 2 )
 is_hitting = true
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -142,9 +142,9 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 4 )
 
-[node name="Area2D2" type="Area2D" parent="." groups=["EnemyProjectile"]]
+[node name="Sword" type="Area2D" parent="." groups=["EnemyProjectile"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2( 9, 6.5 )
 shape = SubResource( 14 )
 disabled = true

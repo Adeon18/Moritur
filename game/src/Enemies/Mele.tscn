@@ -43,7 +43,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../Area2D2/CollisionShape2D:disabled")
+tracks/1/path = NodePath("../Sword/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -82,7 +82,7 @@ tracks/1/keys = {
 "values": [ true, true, false, false ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("../Area2D2/CollisionShape2D:disabled")
+tracks/2/path = NodePath("../Sword/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -140,7 +140,7 @@ extents = Vector2( 7, 2.5 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 13 )
+texture = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -167,9 +167,9 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 4 )
 
-[node name="Area2D2" type="Area2D" parent="." groups=["EnemyProjectile"]]
+[node name="Sword" type="Area2D" parent="." groups=["EnemyProjectile"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2( 9, 6.5 )
 shape = SubResource( 14 )
 disabled = true

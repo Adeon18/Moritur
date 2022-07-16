@@ -20,6 +20,10 @@ var direction_to_player: Vector2
 onready var player: Player = get_node("../../Player")
 onready var Cavoon = preload("res://src/Projectiles/Cavoon.tscn")
 onready var Scene = get_node("../../../")
+onready var sprite = get_node("./Sprite")
+onready var collision = get_node("./Collision")
+onready var area2d = get_node("./Area2D")
+onready var weapon = get_node("./Sword")
 
 var Statemachine 
 
@@ -40,15 +44,24 @@ func _process(delta):
 		Statemachine.travel("run")
 		move_and_slide(velocity)
 
-	# mirror enemy
-	if(movable && (direction_to_player.x < 0 && scale.y > 0)): 
-		scale.x *= -1
-	elif(movable && (direction_to_player.x > 0 && scale.y < 0)): 
-		scale.x *= -1
-	
+	# mirror enemy if needed
+	mirror()
+
 	# handle combat if possible
 	if(distance <= effective_fighting_distance):
 		handle_fight()
+
+func mirror():
+	if(movable && (direction_to_player.x < 0 && sprite.scale.x > 0)): 
+		sprite.scale.x *= -1
+		collision.scale.x *= -1
+		area2d.scale.x *= -1
+		weapon.scale.x *= -1
+	elif(movable && (direction_to_player.x > 0 && sprite.scale.x < 0)): 
+		sprite.scale.x *= -1
+		collision.scale.x *= -1
+		area2d.scale.x *= -1
+		weapon.scale.x *= -1
 
 func handle_fight():
 	pass
