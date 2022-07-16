@@ -47,6 +47,7 @@ var shot_delay_time: float = 0.5
 var StateMashine
 
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
+onready var DamageTween: Tween = get_node("DamageTween")
 onready var SpriteNode: Sprite = get_node("Sprite")
 onready var WeaponPosition: Position2D = get_node("WeaponPosition")
 onready var DashDurationTimer: Timer = get_node("DashDuration")
@@ -63,6 +64,7 @@ func _ready():
 	StateMashine = $AnimationTree.get("parameters/playback")
 	ShootCooldownTimer.wait_time = shot_delay_time
 	
+	###
 	var weapon = DefaultWeapon.instance()
 	WeaponContainer.call_deferred("add_child", weapon)
 	
@@ -70,6 +72,8 @@ func _ready():
 	weapon.set_deferred("position", Vector2(0, 0))
 
 	WeaponObject = weapon
+	###
+	DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 
 
 func _physics_process(delta):
@@ -93,10 +97,12 @@ func _physics_process(delta):
 	handle_attack()
 	
 	if direction.length() > 0:
-		StateMashine.travel("run")
+		if !is_invinsible:
+			StateMashine.travel("run")
 		_velocity = lerp(_velocity, direction * _speed, acceleration)
 	else:
-		StateMashine.travel("idle")
+		if !is_invinsible:
+			StateMashine.travel("idle")
 		_velocity = lerp(_velocity, Vector2.ZERO, friction)
 	
 	_velocity = move_and_slide(_velocity)
@@ -211,6 +217,9 @@ func take_damage(amount):
 		emit_signal("frame_freeze_requested")
 		if health == 0:
 			die()
+		else:
+			DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
+			DamageTween.start()
 		is_invinsible = true
 		InvisibilityCooldownTimer.start()
 
@@ -249,3 +258,14 @@ func _on_Hitbox_area_exited(area):
 
 func _on_InvisibilityCooldown_timeout():
 	is_invinsible = false
+
+
+func _on_DamageTween_tween_completed(_object, _key):
+	if (SpriteNode.material.get_shader_param("flash_modifier") == 0.0):
+		if !is_invinsible:
+			DamageTween.stop(SpriteNode.material)
+			return
+		DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
+	else:
+		DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 1.0, 0.0, 0.1)
+	DamageTween.start()

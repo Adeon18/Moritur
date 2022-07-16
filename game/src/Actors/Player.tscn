@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://art/Player/idle/main_idle-3.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=2]
@@ -15,6 +15,13 @@
 [ext_resource path="res://art/Player/death/main_death-4.png" type="Texture" id=13]
 [ext_resource path="res://art/Player/death/main_death-3.png" type="Texture" id=14]
 [ext_resource path="res://src/Actors/CustomCamera2D.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/shaders/Damaged.gdshader" type="Shader" id=16]
+
+[sub_resource type="ShaderMaterial" id=15]
+resource_local_to_scene = true
+shader = ExtResource( 16 )
+shader_param/flash_color = Color( 1, 0, 0, 1 )
+shader_param/flash_modifier = 0.0
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 13 )
@@ -35,6 +42,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ ExtResource( 5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:material:shader_param/flash_modifier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -110,7 +129,7 @@ states/run/position = Vector2( 632.818, 70.0383 )
 transitions = [ "idle", "run", SubResource( 10 ), "run", "death", SubResource( 13 ) ]
 start_node = "idle"
 end_node = "death"
-graph_offset = Vector2( -45, 3 )
+graph_offset = Vector2( -45, -73.1832 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=6]
 
@@ -121,7 +140,8 @@ script = ExtResource( 2 )
 [node name="CustomCamera2D" parent="." instance=ExtResource( 15 )]
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 5 )
+material = SubResource( 15 )
+texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 3 )
@@ -151,6 +171,8 @@ position = Vector2( 15, 3 )
 
 [node name="WeaponContainer" type="Node2D" parent="."]
 
+[node name="DamageTween" type="Tween" parent="."]
+
 [node name="DashDuration" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
@@ -169,11 +191,12 @@ wait_time = 0.7
 one_shot = true
 
 [node name="InvisibilityCooldown" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 1.1
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_Hitbox_area_exited"]
+[connection signal="tween_completed" from="DamageTween" to="." method="_on_DamageTween_tween_completed"]
 [connection signal="timeout" from="DashDuration" to="." method="_on_DashDuration_timeout"]
 [connection signal="timeout" from="GhostSpawnCooldown" to="." method="_on_GhostSpawnCooldown_timeout"]
 [connection signal="timeout" from="InvisibilityCooldown" to="." method="_on_InvisibilityCooldown_timeout"]
