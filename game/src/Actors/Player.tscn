@@ -91,6 +91,9 @@ one_shot = true
 [node name="GhostSpawnCooldown" type="Timer" parent="."]
 wait_time = 0.03
 
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="timeout" from="DashDuration" to="." method="_on_DashDuration_timeout"]
 [connection signal="timeout" from="GhostSpawnCooldown" to="." method="_on_GhostSpawnCooldown_timeout"]

@@ -22,6 +22,7 @@ var weapon_to_be_picked_up
 var is_colliding_with_weapon: bool = false
 
 var projectile_speed: int = 200
+var shot_delay_time: float = 0.5
 
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
 onready var SpriteNode: Sprite = get_node("Sprite")
@@ -29,11 +30,13 @@ onready var WeaponPosition: Position2D = get_node("WeaponPosition")
 onready var DashDurationTimer: Timer = get_node("DashDuration")
 onready var DashCooldownTimer: Timer = get_node("DashCooldown")
 onready var GhostSpawnCooldownTimer: Timer = get_node("GhostSpawnCooldown")
+onready var ShootCooldownTimer: Timer = get_node("ShootCooldownTimer")
 onready var Hitbox: Area2D = get_node("Hitbox")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
 
 func _ready():
 	AnimPlayer.play("run")
+	ShootCooldownTimer.wait_time = shot_delay_time
 
 func _physics_process(delta):
 	mouse_position = get_global_mouse_position()
@@ -55,6 +58,7 @@ func _physics_process(delta):
 		if (Weapon): Weapon.position.x = -WeaponPosition.position.x
 
 	handle_weapon_rotation()
+	handle_attack()
 	
 	if direction.length() > 0:
 		_velocity = lerp(_velocity, direction * _speed, acceleration)
@@ -87,6 +91,12 @@ func handle_weapon_rotation():
 		Weapon.rotate(sign(Weapon.position.x) * 1.5708)
 
 
+func handle_attack():
+	if Input.is_action_pressed("attack") && ShootCooldownTimer.time_left == 0:
+		Weapon.use(global_position.direction_to(mouse_position), projectile_speed)
+		ShootCooldownTimer.start()
+
+
 func _input(event):
 	if Input.is_action_just_pressed("slide"):
 		if DashCooldownTimer.is_stopped() and !is_dashing:
@@ -94,9 +104,7 @@ func _input(event):
 	
 	if Input.is_action_pressed("pick_up") and is_colliding_with_weapon:
 		reparent(weapon_to_be_picked_up)
-	
-	if Input.is_action_pressed("attack"):
-		Weapon.use(global_position.direction_to(mouse_position), projectile_speed)
+
 
 func start_dash():
 	DashDurationTimer.start()
