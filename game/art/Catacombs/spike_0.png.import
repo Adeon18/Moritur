@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/candleB_03.png-2097a243349d0f99094d1cf65be79878.stex"
+path="res://.import/spike_0.png-4e612f5683df7d302d1989b2905e9efa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/RF_Catacombs_v1.0/candleB_03.png"
-dest_files=[ "res://.import/candleB_03.png-2097a243349d0f99094d1cf65be79878.stex" ]
+source_file="res://art/Catacombs/spike_0.png"
+dest_files=[ "res://.import/spike_0.png-4e612f5683df7d302d1989b2905e9efa.stex" ]
 
 [params]
 

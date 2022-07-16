@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/candleA_02.png-e080d9513f4f441bd8e57b45ff51a5c1.stex"
+path="res://.import/candleA_02.png-ba1840895027c68709e1bc51c31eca86.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/RF_Catacombs_v1.0/candleA_02.png"
-dest_files=[ "res://.import/candleA_02.png-e080d9513f4f441bd8e57b45ff51a5c1.stex" ]
+source_file="res://art/Catacombs/candleA_02.png"
+dest_files=[ "res://.import/candleA_02.png-ba1840895027c68709e1bc51c31eca86.stex" ]
 
 [params]
 
