@@ -116,7 +116,7 @@ script = ExtResource( 2 )
 is_hitting = true
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 6 )
+texture = ExtResource( 19 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
@@ -149,4 +149,9 @@ position = Vector2( 9, 6.5 )
 shape = SubResource( 14 )
 disabled = true
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

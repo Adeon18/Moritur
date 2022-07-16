@@ -5,7 +5,9 @@
 
 [node name="BaseRoom" type="Node2D"]
 
-[node name="FloorMap" type="TileMap" parent="."]
+[node name="Navigation2D" type="Navigation2D" parent="."]
+
+[node name="FloorMap" type="TileMap" parent="Navigation2D"]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1

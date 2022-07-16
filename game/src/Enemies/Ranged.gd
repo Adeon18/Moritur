@@ -2,7 +2,7 @@ extends Enemy
 
 func _init():
 	speed = 80
-	effective_fighting_distance = 100
+	effective_fighting_distance = 20
 
 func _ready():
 	Statemachine = get_node("AnimationTree").get("parameters/playback")
@@ -26,3 +26,7 @@ func shoot():
 	projectile.launch(direction, projectile_speed)
 		
 	
+
+
+func _on_Timer_timeout():
+	update_path()
