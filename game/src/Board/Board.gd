@@ -5,13 +5,13 @@ const MARGIN = 32
 
 var directions: Dictionary = {
 	"TOP": Vector2(0, -1),
-	"TOP_LEFT": Vector2(-1, -1),
-	"TOP_RIGHT": Vector2(1, -1),
+#	"TOP_LEFT": Vector2(-1, -1),
+#	"TOP_RIGHT": Vector2(1, -1),
 	"LEFT": Vector2(-1, 0),
 	"RIGHT": Vector2(1, 0),
 	"BOTTOM": Vector2(0, 1),
-	"BOTTOM_LEFT": Vector2(-1, 1),
-	"BOTTOM_RIGHT": Vector2(1, 1),
+#	"BOTTOM_LEFT": Vector2(-1, 1),
+#	"BOTTOM_RIGHT": Vector2(1, 1),
 }
 
 var directions_array: Array = directions.values()
@@ -31,6 +31,7 @@ var die1_finished = true
 var die2_finished = true
 
 var can_roll = true
+var dice_res = 0
 
 var Player
 
@@ -92,7 +93,8 @@ func _process(delta):
 		var die_res = roll_die()
 		print(die_res)
 		can_roll = false
-		Player.move_player(die_res)
+		dice_res = die_res
+#		Player.move_player(die_res)
 
 
 func set_die_visible():
@@ -112,6 +114,7 @@ func roll_die():
 
 func _on_DieWaitTimer_timeout():
 	set_die_not_visible()
+	Player.move_player(dice_res)
 
 func _on_DieContainer_both_dice_rolled():
 	$DieWaitTimer.start()
