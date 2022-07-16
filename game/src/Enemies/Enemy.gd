@@ -20,7 +20,7 @@ var direction_to_player: Vector2
 var path = []
 
 onready var player: Player = get_node("../../Player")
-onready var Cavoon = preload("res://src/Projectiles/Cavoon.tscn")
+onready var Cavoon = preload("res://src/Projectiles/EnemyCavoon.tscn")
 onready var Scene = get_node("../../../")
 onready var sprite = get_node("./Sprite")
 onready var collision = get_node("./Collision")
