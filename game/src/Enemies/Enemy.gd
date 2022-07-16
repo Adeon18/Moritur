@@ -29,6 +29,10 @@ onready var weapon = get_node("./Sword")
 onready var nav = get_node("../../Navigation2D")
 onready var raycast = get_node("./RayCast2D")
 
+onready var fire = get_node("./Effects/Fire")
+onready var ice = get_node("./Effects/Ice")
+onready var poison = get_node("./Effects/Poison")
+
 var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
@@ -93,12 +97,15 @@ func handle_fight():
 
 func burn():
 	print("Burn")
+	fire.visible = true
 
 func freeze():
 	print("Freeze")
+	ice.visible = true
 
 func poizon():
-	print("acid")
+	print("poison")
+	poison.visible = true
 
 func take_damage(damage):
 	print("hitt")

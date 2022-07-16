@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://art/enemies/enemy1/hit/sprite_00.png" type="Texture" id=1]
 [ext_resource path="res://src/Enemies/Mele.gd" type="Script" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://art/enemies/enemy1/hit/sprite_08.png" type="Texture" id=17]
 [ext_resource path="res://art/enemies/enemy1/hit/sprite_05.png" type="Texture" id=18]
 [ext_resource path="res://art/enemies/enemy1/run/sprite_0.png" type="Texture" id=19]
+[ext_resource path="res://src/Effects/Fire.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/Effects/Ice.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Effects/Poison.tscn" type="PackedScene" id=22]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.0
@@ -116,7 +119,7 @@ script = ExtResource( 2 )
 is_hitting = true
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 3 )
+texture = ExtResource( 7 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
@@ -156,6 +159,20 @@ autostart = true
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 collision_mask = 8
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="Fire" parent="Effects" instance=ExtResource( 20 )]
+visible = false
+position = Vector2( 4, -8 )
+
+[node name="Poison" parent="Effects" instance=ExtResource( 21 )]
+visible = false
+position = Vector2( -2, -8 )
+
+[node name="Ice" parent="Effects" instance=ExtResource( 22 )]
+visible = false
+position = Vector2( -8, -8 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
