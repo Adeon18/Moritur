@@ -4,7 +4,7 @@ class_name Player
 
 var weapon_rotation_radius: int = 7
 
-var default_speed: int = 200
+var default_speed: int = 100
 var friction: float = 0.25
 var acceleration: float = 0.35
 var direction: Vector2 = Vector2()
