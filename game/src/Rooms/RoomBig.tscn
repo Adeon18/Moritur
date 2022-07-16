@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Rooms/RoomMedium.tscn" type="PackedScene" id=1]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_6.png" type="Texture" id=2]
+[ext_resource path="res://art/enemies/enemy1/run/sprite_4.png" type="Texture" id=2]
+[ext_resource path="res://src/Enemies/Mele.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Weapons/Bow.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -18,5 +20,11 @@ texture = ExtResource( 2 )
 
 [node name="AnimationTree" parent="Enemies/Ranged" index="4"]
 parameters/playback = SubResource( 1 )
+
+[node name="Mele" parent="Enemies" index="1" instance=ExtResource( 3 )]
+position = Vector2( 240, 88 )
+
+[node name="Bow" parent="." index="5" instance=ExtResource( 4 )]
+position = Vector2( 40, 280 )
 
 [editable path="Enemies/Ranged"]

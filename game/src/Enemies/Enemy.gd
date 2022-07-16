@@ -5,7 +5,7 @@ class_name Enemy
 #only for ranged units
 var projectile_speed = 100
 
-var hp: int = 10
+var health: int = 10
 var effective_fighting_distance: int = 40
 export var is_hitting: bool = false
 
@@ -92,12 +92,17 @@ func handle_fight():
 	pass
 
 func burn():
-	pass
-
+	print("Burn")
 
 func freeze():
-	pass
+	print("Freeze")
 
+func poizon():
+	print("acid")
+
+func take_damage(damage):
+	print("hitt")
+	health -= damage
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("projectile"):

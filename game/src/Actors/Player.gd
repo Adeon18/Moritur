@@ -4,6 +4,8 @@ class_name Player
 
 var weapon_rotation_radius: int = 16
 
+var health: int = 3
+
 var default_speed: int = 100
 var friction: float = 0.25
 var acceleration: float = 0.35
@@ -26,6 +28,11 @@ var is_colliding_with_weapon: bool = false
 
 var projectile_speed: int = 300
 var projectile_damage: int = 1
+
+var is_freezing: bool = false
+var is_poizon: bool = false
+var is_fire: bool = false
+
 var projectile_type: String = "poizon"
 var projectile_scale: int = 2
 var shot_delay_time: float = 0.5
@@ -123,6 +130,9 @@ func handle_attack():
 		WeaponObject.use(global_position.direction_to(mouse_position),
 						projectile_speed,
 						projectile_damage,
+						is_freezing,
+						is_fire,
+						is_poizon,
 						projectile_type,
 						projectile_scale)
 		ShootCooldownTimer.start()
@@ -189,6 +199,13 @@ func reparent(area):
 	weapon_to_be_picked_up = null
 
 
+func take_damage(amount):
+	health -= amount
+	# anim
+	if health == 0:
+		print("Fukcing die")
+
+
 func _on_DashDuration_timeout():
 	DashCooldownTimer.start()
 	GhostSpawnCooldownTimer.stop()
@@ -204,7 +221,9 @@ func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Weapons"):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
-
+	
+	if area.is_in_group("EnemyProjectile"):
+		take_damage(1)
 
 
 func _on_Hitbox_area_exited(area):

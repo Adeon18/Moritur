@@ -137,20 +137,22 @@ graph_offset = Vector2( -427.388, -74.8125 )
 extents = Vector2( 7, 2.5 )
 
 [node name="Mele" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 12
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 8 )
+texture = ExtResource( 19 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( -2, 4 )
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 position = Vector2( -2, 4 )
 shape = SubResource( 2 )
 disabled = true
@@ -168,6 +170,7 @@ active = true
 parameters/playback = SubResource( 4 )
 
 [node name="Sword" type="Area2D" parent="." groups=["EnemyProjectile"]]
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2( 9, 6.5 )
