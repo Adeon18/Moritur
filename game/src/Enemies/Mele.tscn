@@ -140,7 +140,7 @@ extents = Vector2( 7, 2.5 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
