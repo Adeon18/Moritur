@@ -1,7 +1,9 @@
-extends Area2D
-
-var is_picked_up: bool = false
+extends Weapon
 
 
-func disable_pick_up_collision():
-	$CollisionShape2D.disabled = true
+
+func _ready():
+	SpriteImg = get_node("Sprite")
+	AnimPlayer = get_node("AnimationPlayer")
+	$HitDetector/CollisionShape2D.disabled = true
+
