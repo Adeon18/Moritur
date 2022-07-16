@@ -31,7 +31,7 @@ var projectile_damage: int = 1
 
 var is_freezing: bool = false
 var is_poizon: bool = false
-var is_fire: bool = false
+var is_fire: bool = true
 
 var projectile_type: String = "poizon"
 var projectile_scale: int = 2
