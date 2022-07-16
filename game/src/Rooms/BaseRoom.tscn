@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/Rooms/floor_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Rooms/wall_tileset.tres" type="TileSet" id=2]
+
+[node name="BaseRoom" type="Node2D"]
+
+[node name="FloorMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+
+[node name="PlayerSpawnPos" type="Position2D" parent="."]
+
+[node name="WallMap" type="TileMap" parent="."]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
