@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Weapon",
+"class": "Bow",
+"language": "GDScript",
+"path": "res://src/Weapons/Bow.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://src/Weapons/Weapon.gd"
 } ]
 _global_script_class_icons={
+"Bow": "",
 "Enemy": "",
 "Player": "",
 "Weapon": ""
@@ -121,6 +127,7 @@ attack={
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Projectiles"
 2d_physics/layer_4="Walls"
+2d_physics/layer_5="EnemyProjectiles"
 
 [physics]
 

@@ -21,3 +21,7 @@ func handle_fight():
 
 func _on_Timer_timeout():
 	update_path()
+
+
+
+

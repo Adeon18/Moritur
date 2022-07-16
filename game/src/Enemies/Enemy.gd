@@ -5,7 +5,7 @@ class_name Enemy
 #only for ranged units
 var projectile_speed = 100
 
-var hp: int = 10
+var health: int = 10
 var effective_fighting_distance: int = 40
 export var is_hitting: bool = false
 
@@ -28,6 +28,10 @@ onready var area2d = get_node("./Area2D")
 onready var weapon = get_node("./Sword")
 onready var nav = get_node("../../Navigation2D")
 onready var raycast = get_node("./RayCast2D")
+
+onready var fire = get_node("./Effects/Fire")
+onready var ice = get_node("./Effects/Ice")
+onready var poison = get_node("./Effects/Poison")
 
 var Statemachine 
 
@@ -92,13 +96,22 @@ func handle_fight():
 	pass
 
 func burn():
-	pass
-
+	print("Burn")
+	fire.visible = true
 
 func freeze():
-	pass
+	print("Freeze")
+	ice.visible = true
 
+func poizon():
+	print("poison")
+	poison.visible = true
 
-func _on_Area2D_body_entered(body):
-	if body.is_in_group("projectile"):
-		body.hit(self)
+func take_damage(damage):
+	print("hitt")
+	health -= damage
+
+func _on_Area2D_area_entered(area):
+	if(area.is_in_group("Projectiles")):
+		area.hit(self)
+		print("got hit")
