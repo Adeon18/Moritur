@@ -23,7 +23,26 @@ var sprites: Dictionary = {
 	"Bow": {
 		"default": 39,
 		"freeze": 40,
-		"poizon": 48
+		"poizon": 48,
+		"burn": 46,
+	},
+	"WeakWand": {
+		"default": 13,
+		"freeze": 14,
+		"poizon": 22,
+		"burn": 19,
+	},
+	"StrongWand": {
+		"default": 13,
+		"freeze": 14,
+		"poizon": 22,
+		"burn": 19,
+	},
+	"MediumWand": {
+		"default": 26,
+		"freeze": 27,
+		"poizon": 35,
+		"burn": 32,
 	}
 }
 
@@ -54,6 +73,7 @@ func launch(weapon_name: String,
 	_is_piercing = is_piercing
 	_shenanigans = shenanigans
 	_type = type
+	print(sprites[weapon_name][_type])
 	SpriteImg.frame = sprites[weapon_name][_type]
 
 

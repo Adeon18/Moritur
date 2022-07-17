@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Weapons/Bow.tscn" type="PackedScene" id=1]
+[ext_resource path="res://art/Weapons/Elementstäbe.png" type="Texture" id=2]
+[ext_resource path="res://src/Weapons/WeakWand.gd" type="Script" id=3]
+
+[node name="WeakWand" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="1"]
+position = Vector2( 9, 0 )
+rotation = 0.0
+texture = ExtResource( 2 )
+hframes = 6
+vframes = 5

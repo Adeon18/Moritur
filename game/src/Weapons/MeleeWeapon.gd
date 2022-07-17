@@ -27,3 +27,4 @@ func use(direction,
 	_damage = damage
 	set_shenanigans(shenanigans)
 	AnimPlayer.play("use")
+

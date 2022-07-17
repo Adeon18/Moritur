@@ -41,7 +41,7 @@ var shenanigans: Dictionary = {
 	"poizon": false
 }
 
-var projectile_type: String = "poizon"
+var projectile_type: String = "default"
 
 
 
@@ -193,11 +193,14 @@ func power_up(object):
 	var key = object.get_type()
 	if key in Constants.EFFECTS:
 		shenanigans[key] = true
+		projectile_type = key
+		WeaponObject.change_style(projectile_type)
 	elif key in ["heal_up", "health_up"]:
 		# heal up code
 		pass
 	else:
 		set_deferred(key, get(key) * Constants.MULTIPLIERS[key])
+	weapon_to_be_picked_up = null
 	object.die()
 
 
