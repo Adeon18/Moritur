@@ -19,20 +19,24 @@ script = ExtResource( 4 )
 [node name="DieWaitTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DieContainer" type="Node2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 50
+follow_viewport_enable = true
+
+[node name="DieContainer" type="Node2D" parent="CanvasLayer"]
 script = ExtResource( 3 )
 
-[node name="Die1" parent="DieContainer" instance=ExtResource( 2 )]
+[node name="Die1" parent="CanvasLayer/DieContainer" instance=ExtResource( 2 )]
 visible = false
 position = Vector2( -100, 0 )
 z_index = 1000
 
-[node name="Die2" parent="DieContainer" instance=ExtResource( 2 )]
+[node name="Die2" parent="CanvasLayer/DieContainer" instance=ExtResource( 2 )]
 visible = false
 position = Vector2( 100, 0 )
 z_index = 1000
 
 [connection signal="timeout" from="DieWaitTimer" to="." method="_on_DieWaitTimer_timeout"]
-[connection signal="both_dice_rolled" from="DieContainer" to="." method="_on_DieContainer_both_dice_rolled"]
-[connection signal="finish_roll" from="DieContainer/Die1" to="DieContainer" method="_on_Die1_finish_roll"]
-[connection signal="finish_roll" from="DieContainer/Die2" to="DieContainer" method="_on_Die2_finish_roll"]
+[connection signal="both_dice_rolled" from="CanvasLayer/DieContainer" to="." method="_on_DieContainer_both_dice_rolled"]
+[connection signal="finish_roll" from="CanvasLayer/DieContainer/Die1" to="CanvasLayer/DieContainer" method="_on_Die1_finish_roll"]
+[connection signal="finish_roll" from="CanvasLayer/DieContainer/Die2" to="CanvasLayer/DieContainer" method="_on_Die2_finish_roll"]
