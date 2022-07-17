@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Weapon",
+"base": "RangedWeapon",
 "class": "Bow",
 "language": "GDScript",
 "path": "res://src/Weapons/Bow.gd"
@@ -63,6 +63,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://src/global_scripts/Global.gd"
+SceneChanger="*res://src/global_scripts/SceneChanger.tscn"
 
 [display]
 
