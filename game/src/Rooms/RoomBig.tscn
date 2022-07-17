@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Rooms/RoomMedium.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/Enemies/Boss.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Enemies/Mele.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Enemies/Ranged.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Weapons/Bow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=5]
 
@@ -21,7 +20,5 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 [node name="Bow" parent="." index="4" instance=ExtResource( 4 )]
 position = Vector2( 40, 280 )
 
-[node name="Mele" parent="Enemies" index="0" instance=ExtResource( 3 )]
-
-[node name="Boss" parent="Enemies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 285, 52 )
+[node name="Ranged" parent="Enemies" index="0" instance=ExtResource( 2 )]
+position = Vector2( 184, 197 )

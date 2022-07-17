@@ -168,7 +168,7 @@ is_hitting = true
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 20 )
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 6, 0 )

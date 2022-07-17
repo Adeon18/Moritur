@@ -19,6 +19,7 @@ func handle_fight():
 
 
 func shoot():
+	print("SHOOT")
 	var projectile = Cavoon.instance()
 	Scene.add_child(projectile)
 	projectile.position = position
