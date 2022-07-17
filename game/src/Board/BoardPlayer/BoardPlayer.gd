@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal finished_moving
+signal step_made
 
 var path: Dictionary;
 var starting_pos;
@@ -54,10 +55,10 @@ func _physics_process(delta):
 			global_position = target_position
 			lerp_speed = 15
 			if steps_to_take == 0:
-				current_state = STATE.IDLE
-				path[current_pos][2].on_step(self)
 				emit_signal("finished_moving")
 				on_finish_moving()
+				current_state = STATE.IDLE
+				path[current_pos][2].on_step(self)
 			else:
 				current_state = STATE.TAKING_STEP
 	elif current_state == STATE.TAKING_STEP:
@@ -71,8 +72,9 @@ func _physics_process(delta):
 			target_position = current_pos * (CELL_WIDTH + MARGIN)
 			current_state = STATE.TRANSITIONING
 			steps_to_take -= 1
+			emit_signal("step_made")
 		else:
-			path[current_pos][2].on_step(self)
+#			path[current_pos][2].on_step(self)
 			steps_to_take = 0
 			current_state = STATE.IDLE
 			emit_signal("finished_moving")
@@ -83,7 +85,6 @@ func on_finish_moving():
 	can_roll = true
 
 func move_player(cells: int):
-	print("cells to walk: ", cells)
 	can_roll = false
 	steps_to_take = cells
 	current_state = STATE.TAKING_STEP

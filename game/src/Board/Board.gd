@@ -25,6 +25,7 @@ onready var Cam = $Camera2D
 onready var Die1 = $DieContainer/Die1
 onready var Die2 = $DieContainer/Die2
 onready var DieContainer = $DieContainer
+onready var StepsCountLabel = $CanvasLayer/StepsCountLabel
 
 var cell_types: Dictionary
 
@@ -68,6 +69,7 @@ func random_cell_instance():
 
 func _ready():
 	cell_types = {
+		"start": preload("res://src/Board/Cell/StartCell.tscn"),
 		"combat": preload("res://src/Board/Cell/CombatCell.tscn"),
 		"random_effect": preload("res://src/Board/Cell/RandomEffectCell.tscn"),
 #		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
@@ -88,6 +90,7 @@ func _ready():
 	player.MARGIN = MARGIN
 	player.position = starting_pos * (MARGIN + CELL_WIDTH)
 	player.connect("finished_moving", self, "_on_BoardPlayer_finished_moving")
+	player.connect("step_made", self, "_on_BoardPlayer_step_made")
 	add_child(player)
 	
 	# Setup camera
@@ -99,7 +102,7 @@ func generate_path(starting_pos) -> Dictionary:
 	path[last_pos] = [null, null]
 	
 	var i = 0
-	while i < number_of_cells-1:
+	while i < number_of_cells:
 		var shuffled_directions = directions_array.duplicate()
 		shuffled_directions.shuffle()
 		
@@ -127,7 +130,12 @@ func generate_path(starting_pos) -> Dictionary:
 
 
 func spawn_cells(path):
-	for pos in path.keys():
+	var starting_cell_instance = cell_types["start"].instance()
+	path[Vector2.ZERO].append(starting_cell_instance)
+	Line.add_point(starting_cell_instance.position)
+	add_child(starting_cell_instance)
+	
+	for pos in path.keys().slice(1, path.size()-1):
 #		var cell_instance = cell.instance()
 		var cell_instance = random_cell_instance()
 		cell_instance.position = pos * (CELL_WIDTH + MARGIN)
@@ -146,7 +154,6 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("ui_accept") and player.can_roll:
 		var die_res = roll_die()
-		print(die_res)
 		player.can_roll = false
 		dice_res = die_res
 
@@ -165,7 +172,6 @@ func roll_die():
 	var die2_val = Die2.roll()
 	return die1_val + die2_val
 
-
 func _on_DieWaitTimer_timeout():
 	set_die_not_visible()
 	player.move_player(dice_res)
@@ -174,4 +180,9 @@ func _on_DieContainer_both_dice_rolled():
 	$DieWaitTimer.start()
 
 func _on_BoardPlayer_finished_moving():
-	player.can_roll = true
+#	player.can_roll = true
+	StepsCountLabel.visible = false
+
+func _on_BoardPlayer_step_made():
+	StepsCountLabel.visible = true
+	StepsCountLabel.text = str(player.steps_to_take+1)
