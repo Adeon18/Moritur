@@ -7,7 +7,7 @@ onready var BossCavoon = preload("res://src/Projectiles/BossCavoon.tscn")
 func _init():
 	speed = 30
 	effective_fighting_distance = 60
-	health = 50
+	health = 200
 
 func _ready():
 	Statemachine = get_node("AnimationTree").get("parameters/playback")

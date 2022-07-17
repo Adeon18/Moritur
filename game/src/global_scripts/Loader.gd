@@ -24,17 +24,7 @@ func save_global():
 	in global.
 	Used is save_all().
 	"""
-	check_for_saves_directory()
-
-	# Initialise an abstract file object and open a save file
-	var save_file = File.new()
-	save_file.open(GLOBAL_SAVE_FILE, File.WRITE)
-	# Store the data in a var
-	var global_data = Global.save()
-	# Store the json line in a file
-	save_file.store_line(to_json(global_data))
-
-	save_file.close()
+	pass
 
 
 func load_global():
@@ -44,18 +34,4 @@ func load_global():
 	Also powerup data is not applied to player.
 	Used by load_all().
 	"""
-	check_for_saves_directory()
-	var save_file = File.new()
-	# Check if file exists - else - skip the load step.
-	if not save_file.file_exists(GLOBAL_SAVE_FILE):
-		return
-
-	save_file.open(GLOBAL_SAVE_FILE, File.READ)
-	while save_file.get_position() < save_file.get_len():
-		var global_data = parse_json(save_file.get_line())
-		# If the name is not global, we return.
-
-		for attr in global_data.keys():
-			Global.set(attr, global_data[attr])
-	
-	save_file.close()
+	pass
