@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://art/Player/idle/main_idle-3.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://sound/pickup/scale-e6-14577 (mp3cut.net).mp3" type="AudioStream" id=18]
 [ext_resource path="res://sound/whoosh/mixkit-arrow-whoosh-1491 (mp3cut.net).wav" type="AudioStream" id=19]
 [ext_resource path="res://sound/particle_sound/mixkit-typewriter-soft-click-1125.mp3" type="AudioStream" id=20]
+[ext_resource path="res://src/UI/HUD.tscn" type="PackedScene" id=21]
 
 [sub_resource type="ShaderMaterial" id=15]
 resource_local_to_scene = true
@@ -155,6 +156,8 @@ graph_offset = Vector2( -45, -73.1832 )
 z_index = 10
 collision_mask = 9
 script = ExtResource( 2 )
+
+[node name="HUD" parent="." instance=ExtResource( 21 )]
 
 [node name="CustomCamera2D" parent="." instance=ExtResource( 15 )]
 
