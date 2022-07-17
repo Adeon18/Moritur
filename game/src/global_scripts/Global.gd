@@ -7,6 +7,7 @@ var burn: bool = false
 var freeze: bool = false
 var poizon: bool = false
 
+var weapon_name = "Sword"
 var projectile_speed: int = 300
 var projectile_damage: int = 1
 var projectile_scale: float = 2.0
