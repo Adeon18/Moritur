@@ -17,6 +17,13 @@ var distance: float
 var velocity: Vector2
 var direction_to_player: Vector2
 
+var burn_time: float = 3
+var freeze_time: float = 1
+var poison_time: float = 5
+
+var _bur_damage: int
+var _poison_damage: int
+
 var path = []
 
 onready var player: Player = get_node("../../Player")
@@ -33,6 +40,10 @@ onready var fire = get_node("./Effects/Fire")
 onready var ice = get_node("./Effects/Ice")
 onready var poison = get_node("./Effects/Poison")
 
+onready var fire_timer = get_node("./Timers/BurnTimer")
+onready var ice_timer = get_node("./Timers/FreezeTimer")
+onready var poison_timer = get_node("./Timers/PoisonTimer")
+
 var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
@@ -40,7 +51,6 @@ func _ready():
 	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# move to player
 	distance = position.distance_to(player.position)
@@ -72,13 +82,10 @@ func _process(delta):
 	mirror()
 
 
-	
-		
 func update_path():
 	path = nav.get_simple_path(position, player.position, false)
 	path.remove(0)
-	#print(path)
-	
+
 
 func mirror():
 	if(movable && (direction_to_player.x < 0 && sprite.scale.x > 0)): 
@@ -95,18 +102,6 @@ func mirror():
 func handle_fight():
 	pass
 
-func burn():
-	print("Burn")
-	fire.visible = true
-
-func freeze():
-	print("Freeze")
-	ice.visible = true
-
-func poizon():
-	print("poison")
-	poison.visible = true
-
 func take_damage(damage):
 	print("hitt")
 	health -= damage
@@ -115,3 +110,39 @@ func _on_Area2D_area_entered(area):
 	if(area.is_in_group("Projectiles")):
 		area.hit(self)
 		print("got hit")
+
+func _on_BurnTimer_timeout():
+	print("OH NO ME BURN")
+	_bur_damage = 0
+	fire.visible = false
+
+func _on_FreezeTimer_timeout():
+	print("OH NO ME FREEZE")
+	ice.visible = false
+
+func _on_PoisonTimer_timeout():
+	print("OH NO ME POISONED")
+	_poison_damage = 0
+	poison.visible = false
+	
+
+
+func burn(damage):
+	print("Burn")
+	fire.visible = true
+	fire_timer.start(burn_time)
+
+func freeze(damage):
+	print("Freeze")
+	ice.visible = true
+	ice_timer.start(freeze_time)
+
+func poizon(damage):
+	print("poison")
+	poison.visible = true
+	poison_timer.start(poison_time)
+
+
+
+func _on_DOTticks_timeout():
+	take_damage(_poison_damage + _bur_damage)
