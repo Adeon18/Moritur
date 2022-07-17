@@ -26,4 +26,3 @@ position = Vector2( 319, 142 )
 
 [node name="Mele" parent="Enemies" index="1" instance=ExtResource( 3 )]
 position = Vector2( 121, 203 )
-is_hitting = false

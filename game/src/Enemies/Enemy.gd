@@ -17,6 +17,13 @@ var distance: float
 var velocity: Vector2
 var direction_to_player: Vector2
 
+var burn_time: int = 3
+var freeze_time: int = 1
+var poison_time: int = 5
+
+var bur_damage: int
+var poison_damage: int
+
 var path = []
 
 onready var player: Player = get_node("../../Player")
@@ -33,6 +40,10 @@ onready var fire = get_node("./Effects/Fire")
 onready var ice = get_node("./Effects/Ice")
 onready var poison = get_node("./Effects/Poison")
 
+onready var fire_timer = get_node("./Timers/BurnTimer")
+onready var ice_timer = get_node("./Timers/IceTimer")
+onready var poison_timer = get_node("./Timers/PoisonTimer")
+
 var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
@@ -40,7 +51,6 @@ func _ready():
 	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# move to player
 	distance = position.distance_to(player.position)
@@ -95,18 +105,6 @@ func mirror():
 func handle_fight():
 	pass
 
-func burn():
-	print("Burn")
-	fire.visible = true
-
-func freeze():
-	print("Freeze")
-	ice.visible = true
-
-func poizon():
-	print("poison")
-	poison.visible = true
-
 func take_damage(damage):
 	print("hitt")
 	health -= damage
@@ -115,3 +113,28 @@ func _on_Area2D_area_entered(area):
 	if(area.is_in_group("Projectiles")):
 		area.hit(self)
 		print("got hit")
+
+func _on_BurnTimer_timeout():
+	print("OH NO ME BURN")
+
+func _on_FreezeTimer_timeout():
+	print("OH NO ME FREEZE")
+
+func _on_PoisonTimer_timeout():
+	print("OH NO ME POISONED")
+
+
+func burn(burn_damage):
+	print("Burn")
+	fire.visible = true
+	fire_timer.start(burn_time)
+
+func freeze(freeze_damage):
+	print("Freeze")
+	ice.visible = true
+	ice_timer.start(freeze_time)
+
+func poizon(poison_damage):
+	print("poison")
+	poison.visible = true
+	poison_timer.start(poison_time)
