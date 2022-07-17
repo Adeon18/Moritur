@@ -4,6 +4,11 @@ signal show_description(description)
 
 var was_stepped_on = false
 var curr_player
+var index
+
+func _ready():
+	if Global.visited_cells[index]:
+		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
 
 func on_step(player):
 	curr_player = player
@@ -11,9 +16,9 @@ func on_step(player):
 	print("you stepped on a cell")
 
 func after_step():
-	if !was_stepped_on:
+	if !Global.visited_cells[index]:
 		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
-		was_stepped_on = true
+		Global.visited_cells[Global.current_index] = true
 
 
 func _on_WaitOnStepTimer_timeout():

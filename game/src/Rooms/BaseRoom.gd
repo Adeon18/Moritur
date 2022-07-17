@@ -3,6 +3,7 @@ extends Node2D
 onready var player_spawn_pos = $PlayerSpawnPos
 onready var spawnpoints = get_node("EnemySpawnPoints")
 onready var player = preload("res://src/Actors/Player.tscn")
+onready var enemies = $Enemies
 
 var total_weight
 func _ready():
@@ -21,7 +22,6 @@ func _ready():
 		get_node("Enemies").add_child(mob)
 		mob.position = point.position
 		mob.is_hitting = false
-	
 	SceneChanger.change_scene("res://src/Board/Board.tscn")
 		
 
@@ -52,3 +52,8 @@ func random_cell_instance():
 	for mob_type in mobs_weights.keys():
 		if mobs_weights[mob_type].acc_weight > roll:
 			return mobs_dict[mob_type].instance()
+
+
+func _process(delta):
+	if enemies.get_child_count() == 0:
+		SceneChanger.change_scene("res://src/Board/Board.tscn")

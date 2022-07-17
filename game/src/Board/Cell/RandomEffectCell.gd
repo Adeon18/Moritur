@@ -57,7 +57,7 @@ func on_step(player):
 	curr_player = player
 	player.can_roll = false
 	print("you stepped on mysterious cell")
-	if was_stepped_on:
+	if Global.visited_cells[index]:
 		player.can_roll = true
 		print("you already stepped on this cell")
 		return
@@ -66,8 +66,8 @@ func on_step(player):
 	WaitOnStepTimer.start()
 
 func after_step():
+	Global.visited_cells[Global.current_index] = true
 	.after_step()
-	print("Bruh")
 	
 func show_description():
 	match effect_name:
@@ -93,3 +93,8 @@ func go_forwards(player):
 func _on_WaitOnStepTimer_timeout():
 	after_step()
 	call_deferred(effects_functions[effect_name], curr_player)
+
+
+func _ready():
+	if Global.visited_cells[index]:
+		$Sprite.modulate = $Sprite.modulate.darkened(0.5)

@@ -29,6 +29,7 @@ onready var StepsCountLabel = $CanvasLayer/StepsCountLabel
 onready var EffectDescriptionLabel = $CanvasLayer/Control/EffectDescriptionLabel
 onready var UIAnimPlayer = $CanvasLayer/AnimationPlayer
 onready var DiceSoundPlayer = get_node("DiceMusicPlayer")
+onready var BossCell = preload("res://src/Board/Cell/BossCell.tscn")
 
 #var cell_types: Dictionary
 
@@ -41,10 +42,10 @@ var player
 
 var cells_weight: Dictionary =  {
 	"combat": {
-		"roll_weight": 100
+		"roll_weight": 2
 	},
 	"random_effect": {
-		"roll_weight": 1
+		"roll_weight": 2
 	},
 #	"shop": {
 #		"roll_weight": 1
@@ -71,6 +72,10 @@ func random_cell_instance():
 
 
 func _ready():
+	if Global.visited_cells.size() == 0:
+		for i in number_of_cells:
+			Global.visited_cells.append(false)
+	
 	seed(Global.random_seed)
 	var starting_pos = Vector2(0, 0)
 	
@@ -140,14 +145,27 @@ func generate_path(starting_pos) -> Dictionary:
 
 func spawn_cells(path):
 	var starting_cell_instance = Global.cell_types["start"].instance()
+	starting_cell_instance.index = 0
 	if !Global.if_generated_path:
 		Global.path[Vector2.ZERO].append(starting_cell_instance)
 	Line.add_point(starting_cell_instance.position)
 	add_child(starting_cell_instance)
 	
+	var i = 0
 	for pos in Global.path.keys().slice(1, path.size()-1):
 #		var cell_instance = cell.instance()
 		var cell_instance
+		
+		if i == path.size()-2:
+			cell_instance = BossCell.instance()
+			cell_instance.position = pos * (CELL_WIDTH + MARGIN)
+			cell_instance.index = i
+			cell_instance.connect("show_description", self, "_on_Cell_show_description")
+			Line.add_point(cell_instance.position)
+			add_child(cell_instance)
+			continue
+	
+		
 		if Global.path[pos].size() != 3:
 			cell_instance = random_cell_instance()
 			cell_instance.position = pos * (CELL_WIDTH + MARGIN)
@@ -159,9 +177,13 @@ func spawn_cells(path):
 		else:
 			print(Global.path[pos])
 			cell_instance = Global.path[pos][2]
+		cell_instance.index = i
 		cell_instance.connect("show_description", self, "_on_Cell_show_description")
 		Line.add_point(cell_instance.position)
 		add_child(cell_instance)
+		i += 1
+	
+	
 
 func _process(delta):
 	if !player.can_roll or Input.is_action_just_pressed("focus_on_player"):

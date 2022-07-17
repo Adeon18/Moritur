@@ -69,9 +69,11 @@ func _physics_process(delta):
 			if !going_backwards:
 				current_pos = path[current_pos][1]
 				current_index += 1
+				Global.current_index = current_index
 			else:
 				current_pos = path[current_pos][0]
 				current_index -= 1
+				Global.current_index = current_index
 			target_position = current_pos * (CELL_WIDTH + MARGIN)
 			current_state = STATE.TRANSITIONING
 			steps_to_take -= 1
