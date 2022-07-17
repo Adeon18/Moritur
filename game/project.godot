@@ -84,6 +84,7 @@ Global="*res://src/global_scripts/Global.gd"
 FrameFreexer="*res://src/Cosmetics/FrameFreexer.gd"
 Constants="*res://src/global_scripts/Constants.gd"
 SceneChanger="*res://src/global_scripts/SceneChanger.tscn"
+Loader="*res://src/global_scripts/Loader.gd"
 
 [display]
 

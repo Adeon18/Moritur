@@ -19,13 +19,19 @@ func _ready():
 	HeartsEmpty.rect_size.x = SIZE * Global.max_health
 	for player in get_tree().get_nodes_in_group("Player"):
 		player.connect("health_changed", self, "_on_Player_health_changed")
+		player.connect("max_health_changed", self, "_on_Player_max_health_changed")
 
 
 func _on_Player_health_changed():
 	HeartsFull.rect_size.x = SIZE * Global.health
 
 
+func _on_Player_max_health_changed():
+	HeartsFull.rect_size.x = SIZE * Global.health
+	HeartsEmpty.rect_size.x = SIZE * Global.max_health
+
+
 func _process(delta):
 	DashDelay.value = (DashDelay.max_value - PlayerRef.DashCooldownTimer.time_left * DashDelay.max_value)
-	ReloadTime.max_value = PlayerRef.shot_delay_time * PlayerRef.WeaponObject.delay_decrease * 100
+	ReloadTime.max_value = Global.shot_delay_time * PlayerRef.WeaponObject.delay_decrease * 100
 	ReloadTime.value = ReloadTime.max_value - PlayerRef.ShootCooldownTimer.time_left * 100

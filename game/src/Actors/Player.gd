@@ -6,6 +6,7 @@ signal camera_shake_requested
 signal frame_freeze_requested
 
 signal health_changed
+signal max_health_changed
 
 var weapon_rotation_radius: int = 16
 
@@ -31,19 +32,13 @@ var WeaponObject
 var weapon_to_be_picked_up
 var is_colliding_with_weapon: bool = false
 
-var projectile_speed: int = 300
-var projectile_damage: int = 1
-var projectile_scale: float = 2.0
-var shot_delay_time: float = 1
+
 
 var shenanigans: Dictionary = {
 	"freeze": false,
 	"burn": false,
 	"poizon": false
 }
-
-var projectile_type: String = "default"
-
 
 
 var StateMashine
@@ -64,7 +59,10 @@ onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionS
 
 func _ready():
 	StateMashine = $AnimationTree.get("parameters/playback")
-	ShootCooldownTimer.wait_time = shot_delay_time
+	
+	shenanigans = {"freeze": Global.freeze, "burn": Global.burn, "poizon": Global.poizon}
+	
+	ShootCooldownTimer.wait_time = Global.shot_delay_time
 	
 	###
 	var weapon = DefaultWeapon.instance()
@@ -143,16 +141,16 @@ func handle_weapon_rotation():
 func handle_attack():
 	if Input.is_action_pressed("attack") && ShootCooldownTimer.time_left == 0:
 		WeaponObject.use(global_position.direction_to(mouse_position),
-						projectile_speed,
-						projectile_damage,
+						Global.projectile_speed,
+						Global.projectile_damage,
 						shenanigans,
-						projectile_type,
-						projectile_scale)
+						Global.projectile_type,
+						Global.projectile_scale)
 		ShootCooldownTimer.start()
 
 
 func _input(event):
-	if Input.is_action_just_pressed("slide"):
+	if Input.is_action_just_pressed("slide") && _velocity != 0:
 		if DashCooldownTimer.is_stopped() and !is_dashing:
 			start_dash()
 	
@@ -188,18 +186,24 @@ func instance_dash_ghost():
 func pick_up(object):
 	unparent()
 	reparent(object)
-	ShootCooldownTimer.wait_time = shot_delay_time * object.delay_decrease
+	ShootCooldownTimer.wait_time = Global.shot_delay_time * object.delay_decrease
 
 
 func power_up(object):
 	var key = object.get_type()
 	if key in Constants.EFFECTS:
 		shenanigans[key] = true
-		projectile_type = key
-		WeaponObject.change_style(projectile_type)
+		Global.projectile_type = key
+		WeaponObject.change_style(Global.projectile_type)
 	elif key in ["heal_up", "health_up"]:
-		# heal up code
-		pass
+		if key == "heal_up":
+			Global.health = Global.max_health
+			emit_signal("health_changed")
+		elif key == "health_up":
+			Global.max_health += 1
+			if (Global.max_health == Global.health+1):
+				Global.health = Global.max_health
+			emit_signal("max_health_changed")
 	else:
 		set_deferred(key, get(key) * Constants.MULTIPLIERS[key])
 	weapon_to_be_picked_up = null
