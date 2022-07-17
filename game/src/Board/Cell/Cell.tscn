@@ -13,3 +13,5 @@ region_filter_clip = true
 
 [node name="WaitOnStepTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="timeout" from="WaitOnStepTimer" to="." method="_on_WaitOnStepTimer_timeout"]

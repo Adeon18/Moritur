@@ -22,7 +22,6 @@ const effects_functions: Dictionary = {
 }
 
 onready var WaitOnStepTimer = $WaitOnStepTimer
-var curr_player
 
 var effect_name = EFFECTS.GO_BACKWARDS
 
@@ -33,12 +32,12 @@ var forwards_step = 0
 func initialize():
 	init_probabilities()
 	random_effect()
-	print(effects_functions[effect_name])
+#	print(effects_functions[effect_name])
 	match effect_name:
 		EFFECTS.GO_BACKWARDS:
-			backwards_step = randi() % 12 + 1
+			backwards_step = randi() % 3 + 1
 		EFFECTS.GO_FORWARDS:
-			forwards_step = randi() % 12 + 1
+			forwards_step = randi() % 3 + 1
 
 var total_weight
 func init_probabilities():
@@ -65,6 +64,9 @@ func on_step(player):
 
 	WaitOnStepTimer.start()
 
+func after_step():
+	.after_step()
+	print("Bruh")
 
 func go_backwards(player):
 	print("player going backwards for ", backwards_step, " cells")
@@ -75,6 +77,5 @@ func go_forwards(player):
 	player.move_player(forwards_step)
 
 func _on_WaitOnStepTimer_timeout():
-	was_stepped_on = true
 	after_step()
 	call_deferred(effects_functions[effect_name], curr_player)

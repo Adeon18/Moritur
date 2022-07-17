@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Board/Board.gd" type="Script" id=1]
 [ext_resource path="res://src/Board/Die/Die.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Board/DieContainer.gd" type="Script" id=3]
 [ext_resource path="res://src/Board/BoardCamera.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFontData" id=2]
+antialiased = false
+font_path = "res://art/fonts/VT323/VT323-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = SubResource( 2 )
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 1 )
@@ -32,17 +40,28 @@ visible = false
 position = Vector2( 100, 0 )
 z_index = 1000
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="BackroundCanvasLayer" type="CanvasLayer" parent="."]
 layer = -10
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="BackroundCanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Background" type="ColorRect" parent="CanvasLayer/Control"]
+[node name="Background" type="ColorRect" parent="BackroundCanvasLayer/Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.407843, 0.380392, 0.32549, 1 )
+color = Color( 0.0705882, 0.0705882, 0.0705882, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StepsCountLabel" type="Label" parent="CanvasLayer"]
+visible = false
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 112.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 1 )
+text = "Bruh"
 
 [connection signal="timeout" from="DieWaitTimer" to="." method="_on_DieWaitTimer_timeout"]
 [connection signal="both_dice_rolled" from="DieContainer" to="." method="_on_DieContainer_both_dice_rolled"]
