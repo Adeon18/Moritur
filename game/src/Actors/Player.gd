@@ -5,9 +5,10 @@ class_name Player
 signal camera_shake_requested
 signal frame_freeze_requested
 
+signal health_changed
+
 var weapon_rotation_radius: int = 16
 
-var health: int = 3
 var is_invinsible: bool = false
 
 var default_speed: int = 100
@@ -232,11 +233,12 @@ func reparent(area):
 
 func take_damage(amount):
 	if !is_invinsible:
-		health -= amount
+		Global.health -= amount
 		# animatons
 		emit_signal("camera_shake_requested")
 		emit_signal("frame_freeze_requested")
-		if health == 0:
+		emit_signal("health_changed")
+		if Global.health == 0:
 			die()
 			DamageTween.interpolate_property(WeaponObject, "modulate:a", 1.0, 0.0, 0.8)
 			DamageTween.start()

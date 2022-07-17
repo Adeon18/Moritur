@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://art/UI/heart_empty.png" type="Texture" id=1]
+[ext_resource path="res://src/UI/HUD.gd" type="Script" id=2]
+[ext_resource path="res://art/UI/heart_filled.png" type="Texture" id=3]
+[ext_resource path="res://art/UI/progress_bar/hp_fg.png" type="Texture" id=4]
+[ext_resource path="res://art/UI/progress_bar/health.png" type="Texture" id=5]
+[ext_resource path="res://art/UI/progress_bar/bg_health.png" type="Texture" id=6]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 100
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HeartsEmpty" type="TextureRect" parent="Control"]
+margin_left = 15.995
+margin_top = 16.0
+margin_right = 35.995
+margin_bottom = 36.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( -0.005, 0 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="HeartsFull" type="TextureRect" parent="Control"]
+margin_left = 15.995
+margin_top = 16.0
+margin_right = 35.995
+margin_bottom = 36.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( -0.005, 0 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="DashDelay" type="TextureProgress" parent="Control"]
+margin_left = 32.0
+margin_top = 80.0
+margin_right = 64.0
+margin_bottom = 112.0
+rect_scale = Vector2( 3, 1 )
+texture_under = ExtResource( 6 )
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+
+[node name="ReloadTime" type="TextureProgress" parent="Control"]
+margin_left = 32.0
+margin_top = 56.0
+margin_right = 64.0
+margin_bottom = 88.0
+rect_scale = Vector2( 3, 1 )
+texture_under = ExtResource( 6 )
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
