@@ -31,7 +31,7 @@ func _physics_process(delta):
 		change_dir(delta, 0)
 	elif(chasing && chaseee):
 		_direction = position.direction_to(player.position)
-	rotation = position.angle_to(player.position) + PI/2
+	rotation = position.angle_to(player.position) + 1.57
 
 
 func change_dir(delta, rad):
@@ -52,7 +52,7 @@ func launch(direction: Vector2, speed: int, type, size_mul):
 	elif(type == "big_straight"):
 		big_straight = true
 		sprite.frame = 33
-		sprite.rotation = direction.angle() + PI/2
+		sprite.rotation = direction.angle() + 1.57
 	elif(type == "chasing"):
 		chasing = true
 		sprite.frame = 31
