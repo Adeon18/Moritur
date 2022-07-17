@@ -149,15 +149,18 @@ func handle_attack():
 						shenanigans,
 						Global.projectile_type,
 						Global.projectile_scale)
+		$ShootPlayer.play()
 		ShootCooldownTimer.start()
 
 
 func _input(event):
 	if Input.is_action_just_pressed("slide") && _velocity != Vector2.ZERO:
 		if DashCooldownTimer.is_stopped() and !is_dashing:
+			$DashSound.play()
 			start_dash()
 	
 	if Input.is_action_pressed("pick_up") and WeaponPickUpCooldownTimer.time_left == 0 and is_colliding_with_weapon:
+		$PickUpSound.play()
 		if weapon_to_be_picked_up.is_in_group("Weapons"):
 			pick_up(weapon_to_be_picked_up)
 		elif weapon_to_be_picked_up.is_in_group("Powerups"):
@@ -249,6 +252,7 @@ func take_damage(amount):
 		emit_signal("camera_shake_requested")
 		emit_signal("frame_freeze_requested")
 		emit_signal("health_changed")
+		$HitPlayer.play()
 		if Global.health == 0:
 			die()
 			DamageTween.interpolate_property(WeaponObject, "modulate:a", 1.0, 0.0, 0.8)
@@ -264,6 +268,11 @@ func die():
 	HitboxCollisionShape.set_deferred("disabled", true)
 	set_physics_process(false)
 	StateMashine.travel("death")
+
+
+func reload_scene():
+	Global.health = Global.max_health
+	get_tree().reload_current_scene()
 
 
 func _on_DashDuration_timeout():

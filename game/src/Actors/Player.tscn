@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://art/Player/idle/main_idle-3.png" type="Texture" id=1]
 [ext_resource path="res://src/Actors/Player.gd" type="Script" id=2]
@@ -16,6 +16,10 @@
 [ext_resource path="res://art/Player/death/main_death-3.png" type="Texture" id=14]
 [ext_resource path="res://src/Actors/CustomCamera2D.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/shaders/Damaged.gdshader" type="Shader" id=16]
+[ext_resource path="res://sound/hit/vibrating-thud-39536 (mp3cut.net).mp3" type="AudioStream" id=17]
+[ext_resource path="res://sound/pickup/scale-e6-14577 (mp3cut.net).mp3" type="AudioStream" id=18]
+[ext_resource path="res://sound/whoosh/mixkit-arrow-whoosh-1491 (mp3cut.net).wav" type="AudioStream" id=19]
+[ext_resource path="res://sound/particle_sound/mixkit-typewriter-soft-click-1125.mp3" type="AudioStream" id=20]
 
 [sub_resource type="ShaderMaterial" id=15]
 resource_local_to_scene = true
@@ -69,6 +73,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ ExtResource( 12 ), ExtResource( 3 ), ExtResource( 14 ), ExtResource( 13 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 11 ), null ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reload_scene"
+} ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -194,6 +212,25 @@ one_shot = true
 [node name="InvisibilityCooldown" type="Timer" parent="."]
 wait_time = 1.1
 one_shot = true
+
+[node name="HitPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+volume_db = -10.0
+
+[node name="PickUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -10.0
+pitch_scale = 0.8
+
+[node name="DashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -10.0
+pitch_scale = 1.27
+
+[node name="ShootPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -10.0
+pitch_scale = 0.3
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="area_exited" from="Hitbox" to="." method="_on_Hitbox_area_exited"]

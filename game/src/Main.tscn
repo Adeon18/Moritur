@@ -67,10 +67,8 @@ position = Vector2( 28, 120 )
 [node name="Bow" parent="." index="17" instance=ExtResource( 3 )]
 position = Vector2( 304, 344 )
 
-[node name="StrongWand" parent="." index="18" groups=["Weapons"] instance=ExtResource( 9 )]
+[node name="StrongWand" parent="." index="18" instance=ExtResource( 9 )]
 position = Vector2( 88, 173 )
-collision_layer = 0
 
-[node name="MediumWand" parent="." index="19" groups=["Weapons"] instance=ExtResource( 8 )]
+[node name="MediumWand" parent="." index="19" instance=ExtResource( 8 )]
 position = Vector2( 31, 191 )
-collision_layer = 0
