@@ -25,6 +25,7 @@ var _burn_damage: int
 var _poison_damage: int
 
 var is_frozen: bool = false
+var is_dead: bool = false
 
 var path = []
 
@@ -111,8 +112,9 @@ func handle_fight():
 
 func take_damage(damage):
 	health -= damage
-	print(health)
-
+	if(health <= 0 && !is_dead):
+		Statemachine.travel("die")
+		is_dead = true
 
 
 func _on_Area2D_area_entered(area):
