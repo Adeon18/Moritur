@@ -97,4 +97,5 @@ func die():
 
 
 func _on_Cavoon_body_entered(body):
-	die()
+	if !_is_piercing:
+		die()
