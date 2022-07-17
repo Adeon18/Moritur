@@ -21,21 +21,21 @@ var PROJECTILE_COLOR: Dictionary = {
 
 var WAND_SPRITES: Dictionary = {
 	"WeakWand": {
-		"default": 9,
-		"poizon": 8,
-		"freeze": 7,
-		"burn": 6,
+		"default": 11,
+		"poizon": 9,
+		"freeze": 10,
+		"burn": 8,
 	},
 	"MediumWand": {
-		"default": 15,
-		"poizon": 14,
-		"freeze": 13,
-		"burn": 12,
+		"default": 7,
+		"poizon": 5,
+		"freeze": 6,
+		"burn": 4,
 	},
 	"StrongWand": {
 		"default": 3,
-		"poizon": 2,
-		"freeze": 1,
+		"poizon": 1,
+		"freeze": 2,
 		"burn": 0,
 	}, 
 	
