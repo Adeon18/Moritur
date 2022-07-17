@@ -26,8 +26,3 @@ func shoot():
 	projectile.launch(direction, projectile_speed)
 		
 
-
-
-
-
-
