@@ -1,1 +1,1 @@
-{"burn":false,"freeze":false,"health":3,"max_health":6,"poizon":false,"projectile_damage":1,"projectile_scale":2.2,"projectile_speed":300,"projectile_type":"burn","shot_delay_time":0.8}
+{"burn":false,"freeze":false,"health":2,"max_health":6,"poizon":false,"projectile_damage":1,"projectile_scale":2.2,"projectile_speed":300,"projectile_type":"freeze","shot_delay_time":0.8}

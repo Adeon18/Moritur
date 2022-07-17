@@ -122,6 +122,7 @@ func handle_fight():
 	pass
 
 func take_damage(damage):
+	$HitPlayer.play()
 	health -= damage
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()

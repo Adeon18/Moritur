@@ -60,7 +60,6 @@ func get_type():
 	return _type
 
 func die():
-	Loader.save_global()
 	$CUM.emitting = true
 	$ItemParticle.emitting = false
 	$AnimationPlayer.play("die")

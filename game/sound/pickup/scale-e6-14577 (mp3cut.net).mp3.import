@@ -11,5 +11,5 @@ dest_files=[ "res://.import/scale-e6-14577 (mp3cut.net).mp3-84ece022d5237ed8c1d5
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

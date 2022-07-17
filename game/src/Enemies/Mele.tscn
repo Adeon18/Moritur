@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://art/enemies/goblin/goblin_combat/goblin_combat-1.png" type="Texture" id=1]
 [ext_resource path="res://src/Enemies/Mele.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://art/enemies/goblin/goblin_running/goblin_running-3.png" type="Texture" id=6]
 [ext_resource path="res://art/enemies/goblin/goblin_idle/goblin_idle-1.png" type="Texture" id=7]
 [ext_resource path="res://art/enemies/goblin/goblin_idle/goblin_idle-2.png" type="Texture" id=8]
+[ext_resource path="res://sound/hit/vibrating-thud-39536 (mp3cut.net).mp3" type="AudioStream" id=9]
 [ext_resource path="res://art/enemies/goblin/goblin_combat/goblin_combat-4.png" type="Texture" id=10]
 [ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-4.png" type="Texture" id=11]
 [ext_resource path="res://art/enemies/goblin/goblin_combat/goblin_combat-3.png" type="Texture" id=12]
@@ -190,7 +191,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 20 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
@@ -270,6 +271,11 @@ wait_time = 2.0
 one_shot = true
 
 [node name="DamageTween" type="Tween" parent="."]
+
+[node name="HitPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -15.0
+pitch_scale = 2.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
