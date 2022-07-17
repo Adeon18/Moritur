@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/Board/Board.gd" type="Script" id=1]
 [ext_resource path="res://src/Board/Die/Die.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Board/DieContainer.gd" type="Script" id=3]
 [ext_resource path="res://src/Board/BoardCamera.gd" type="Script" id=4]
+[ext_resource path="res://src/Music/Music.tscn" type="PackedScene" id=5]
+[ext_resource path="res://sound/dice/Shake And Roll Dice-SoundBible.com-591494296.mp3" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFontData" id=2]
 antialiased = false
@@ -109,6 +111,7 @@ anims/show = SubResource( 6 )
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 margin_top = -50.0
+margin_right = 640.0
 margin_bottom = -50.0
 
 [node name="EffectDescriptionLabel" type="Label" parent="CanvasLayer/Control"]
@@ -122,7 +125,13 @@ text = "Bruh"
 align = 1
 valign = 1
 
+[node name="AudioStreamPlayer" parent="." instance=ExtResource( 5 )]
+
+[node name="DiceMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
 [connection signal="timeout" from="DieWaitTimer" to="." method="_on_DieWaitTimer_timeout"]
 [connection signal="both_dice_rolled" from="DieContainer" to="." method="_on_DieContainer_both_dice_rolled"]
 [connection signal="finish_roll" from="DieContainer/Die1" to="DieContainer" method="_on_Die1_finish_roll"]
 [connection signal="finish_roll" from="DieContainer/Die2" to="DieContainer" method="_on_Die2_finish_roll"]
+[connection signal="finished" from="DiceMusicPlayer" to="." method="_on_DiceMusicPlayer_finished"]

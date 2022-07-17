@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/laser-gun-sound-26392 (mp3cut.net).mp3-c00588e25e8856311a0601225bc8b4fe.mp3str"
+
+[deps]
+
+source_file="res://sound/particle_sound/laser-gun-sound-26392 (mp3cut.net).mp3"
+dest_files=[ "res://.import/laser-gun-sound-26392 (mp3cut.net).mp3-c00588e25e8856311a0601225bc8b4fe.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
