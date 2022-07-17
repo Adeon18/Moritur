@@ -4,9 +4,11 @@ class_name Bow
 
 
 func _ready():
-	SpriteImg = get_node("Sprite")
 	is_piercing = true
-	AnimPlayer = get_node("AnimationPlayer")
+	damage_multiplier = 1
+	size_multiplier = 1
+	delay_decrease = 1
+	speed_multiplier = 1
 
 
 func create_projectile(direction, speed, damage, is_piercing, shenanigans: Dictionary, type, scale_m):
