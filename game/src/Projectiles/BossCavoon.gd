@@ -14,7 +14,7 @@ var chaseee: bool = false
 
 var ang
 onready var sprite = get_node("./Sprite")
-onready var player = get_node("../RoomBig/Player")
+onready var player = get_node("../Player")
 
 func _ready():
 	spiral = false

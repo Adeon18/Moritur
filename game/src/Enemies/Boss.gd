@@ -34,7 +34,7 @@ func _on_AttackTimer_timeout():
 
 func launch_missile(ang, type, size_mult):
 	var projectile = BossCavoon.instance()
-	Scene.add_child(projectile)
+	get_node("../../").add_child(projectile)
 	projectile.position = position
 	var direction = Vector2(cos(ang), sin(ang))
 	projectile.launch(direction, projectile_speed, type, size_mult)
