@@ -84,6 +84,7 @@ func on_finish_moving():
 
 func move_player(cells: int):
 	print("cells to walk: ", cells)
+	can_roll = false
 	steps_to_take = cells
 	current_state = STATE.TAKING_STEP
 
@@ -92,4 +93,3 @@ func go_backwards(cells_num: int):
 	can_roll = false
 	steps_to_take = cells_num
 	current_state = STATE.TAKING_STEP
-	print("player going backwads for ", cells_num, " cells")
