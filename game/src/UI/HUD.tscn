@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://art/UI/heart_empty.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/HUD.gd" type="Script" id=2]
@@ -9,32 +9,162 @@
 [ext_resource path="res://art/UI/dash_bar/dash_bar-3.png" type="Texture" id=7]
 [ext_resource path="res://art/UI/attack_bar/attack_bar-3.png" type="Texture" id=8]
 [ext_resource path="res://art/UI/attack_bar/attack_bar-2.png" type="Texture" id=9]
+[ext_resource path="res://src/UI/UIWindow.tscn" type="PackedScene" id=10]
+[ext_resource path="res://art/fonts/VT323/VT323-Regular.ttf" type="DynamicFontData" id=11]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 15
+font_data = ExtResource( 11 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "hide_window"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/TextureRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Control/TextureRect:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 181, 181 ), Vector2( 181, 170 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show_window"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/TextureRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Control/TextureRect:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 181, 170 ), Vector2( 181, 184 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "st"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/TextureRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Control/TextureRect:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 156, 170 ) ]
+}
 
 [node name="HUD" type="CanvasLayer"]
 layer = 100
 script = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="HeartsEmpty" type="TextureRect" parent="Control"]
-margin_left = 15.995
+margin_left = 16.0
 margin_top = 16.0
-margin_right = 35.995
+margin_right = 36.0
 margin_bottom = 36.0
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 1.2, 1.2 )
 rect_pivot_offset = Vector2( -0.005, 0 )
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 2
 
 [node name="HeartsFull" type="TextureRect" parent="Control"]
-margin_left = 15.995
+margin_left = 16.0
 margin_top = 16.0
-margin_right = 35.995
+margin_right = 36.0
 margin_bottom = 36.0
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 1.2, 1.2 )
 rect_pivot_offset = Vector2( -0.005, 0 )
 texture = ExtResource( 3 )
 expand = true
@@ -42,20 +172,58 @@ stretch_mode = 2
 
 [node name="DashDelay" type="TextureProgress" parent="Control"]
 margin_left = 16.0
-margin_top = 96.0
+margin_top = 72.0
 margin_right = 76.0
-margin_bottom = 106.0
-rect_scale = Vector2( 2, 2 )
+margin_bottom = 82.0
+rect_scale = Vector2( 1.2, 1.5 )
 texture_under = ExtResource( 6 )
 texture_over = ExtResource( 7 )
 texture_progress = ExtResource( 5 )
 
 [node name="ReloadTime" type="TextureProgress" parent="Control"]
 margin_left = 16.0
-margin_top = 64.0
+margin_top = 48.0
 margin_right = 76.0
-margin_bottom = 74.0
-rect_scale = Vector2( 2, 2 )
+margin_bottom = 58.0
+rect_scale = Vector2( 1.2, 1.5 )
 texture_under = ExtResource( 4 )
 texture_over = ExtResource( 8 )
 texture_progress = ExtResource( 9 )
+
+[node name="TextureRect" parent="Control" instance=ExtResource( 10 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -75.0
+margin_top = -104.0
+margin_right = 75.0
+margin_bottom = -44.0
+
+[node name="Title" type="Label" parent="Control/TextureRect"]
+margin_left = 8.0
+margin_top = 7.0
+margin_right = 143.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 1 )
+text = "text"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Desc" type="Label" parent="Control/TextureRect"]
+margin_left = 11.0
+margin_top = 25.0
+margin_right = 140.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 2 )
+text = "Can pierce enemies"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "st"
+anims/hide_window = SubResource( 4 )
+anims/show_window = SubResource( 3 )
+anims/st = SubResource( 5 )

@@ -8,6 +8,9 @@ signal frame_freeze_requested
 signal health_changed
 signal max_health_changed
 
+signal pickable_encountered(title, desc)
+signal no_pickable
+
 var weapon_rotation_radius: int = 16
 
 var is_invinsible: bool = false
@@ -218,6 +221,8 @@ func unparent():
 
 	clone.call_deferred("enable_pick_up_collision")
 	clone.set_deferred("global_position", WeaponPosition.global_position)
+	
+	
 
 
 
@@ -274,6 +279,7 @@ func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Weapons"):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
+		emit_signal("pickable_encountered", Constants.WEAPON_DESCRIPTIONS[area.name].title, Constants.WEAPON_DESCRIPTIONS[area.name].desc)
 	
 	if area.is_in_group("Powerups"):
 		weapon_to_be_picked_up = area
@@ -284,9 +290,10 @@ func _on_Hitbox_area_entered(area):
 
 
 func _on_Hitbox_area_exited(area):
-	if area.is_in_group("Weapons"):
+	if area.is_in_group("Weapons") or area.is_in_group("Powerups"):
 		weapon_to_be_picked_up = null
 		is_colliding_with_weapon = false
+		emit_signal("no_pickable")
 
 
 func _on_InvisibilityCooldown_timeout():

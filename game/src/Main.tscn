@@ -1,6 +1,5 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://src/Weapons/Sword.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Weapons/Bow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Rooms/BaseRoom.tscn" type="PackedScene" id=4]
@@ -62,17 +61,14 @@ tile_data = PoolIntArray( -262153, 0, 0, -262152, 0, 0, -262151, 0, 0, -262150, 
 [node name="Mele" parent="Enemies" index="0" instance=ExtResource( 5 )]
 position = Vector2( 344, 120 )
 
-[node name="Sword" parent="." index="16" instance=ExtResource( 1 )]
-position = Vector2( 80, 280 )
-
-[node name="WeakWand" parent="." index="17" instance=ExtResource( 7 )]
+[node name="WeakWand" parent="." index="16" instance=ExtResource( 7 )]
 position = Vector2( 28, 120 )
 
-[node name="Bow" parent="." index="18" instance=ExtResource( 3 )]
+[node name="Bow" parent="." index="17" instance=ExtResource( 3 )]
 position = Vector2( 304, 344 )
 
-[node name="StrongWand" parent="." index="19" instance=ExtResource( 9 )]
+[node name="StrongWand" parent="." index="18" instance=ExtResource( 9 )]
 position = Vector2( 88, 173 )
 
-[node name="MediumWand" parent="." index="20" instance=ExtResource( 8 )]
+[node name="MediumWand" parent="." index="19" instance=ExtResource( 8 )]
 position = Vector2( 31, 191 )

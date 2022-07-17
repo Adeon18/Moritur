@@ -41,3 +41,25 @@ var WAND_SPRITES: Dictionary = {
 	
 }
 
+var WEAPON_DESCRIPTIONS: Dictionary = {
+	"Bow": {
+		"title": "A Bow",
+		"desc": "Pierces enemies",
+	},
+	"Sword": {
+		"title": "A Sword",
+		"desc": "Bonk",
+	},
+	"WeakWand": {
+		"title": "A Small Wand",
+		"desc": "Quite fast",
+	},
+	"MediumWand": {
+		"title": "Average Wand",
+		"desc": "Pretty average",
+	},
+	"StrongWand": {
+		"title": "A Strong Wand",
+		"desc": "Big Boy",
+	},
+}
