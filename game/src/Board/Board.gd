@@ -22,9 +22,9 @@ onready var cell = preload("res://src/Board/Cell/Cell.tscn")
 onready var Line = $Line2D
 onready var BoardPlayer = preload("res://src/Board/BoardPlayer/BoardPlayer.tscn")
 onready var Cam = $Camera2D
-onready var Die1 = $CanvasLayer/DieContainer/Die1
-onready var Die2 = $CanvasLayer/DieContainer/Die2
-onready var DieContainer = $CanvasLayer/DieContainer
+onready var Die1 = $DieContainer/Die1
+onready var Die2 = $DieContainer/Die2
+onready var DieContainer = $DieContainer
 
 var cell_types: Dictionary
 
@@ -40,7 +40,7 @@ var cells_weight: Dictionary =  {
 		"roll_weight": 1
 	},
 	"random_effect": {
-		"roll_weight": 20
+		"roll_weight": 1
 	},
 #	"shop": {
 #		"roll_weight": 1
@@ -142,7 +142,7 @@ func spawn_cells(path):
 func _process(delta):
 	if !player.can_roll or Input.is_action_just_pressed("focus_on_player"):
 		Cam.position = player.position
-#	DieContainer.position = Cam.position
+	DieContainer.position = Cam.position
 	
 	if Input.is_action_just_pressed("ui_accept") and player.can_roll:
 		var die_res = roll_die()
