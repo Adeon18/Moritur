@@ -66,7 +66,7 @@ func _process(delta):
 	
 	# if enemy is frozen he cant do ANYTHING
 	# if enemy is dead....
-	if(!is_frozen || !is_dead):
+	if(!is_frozen && !is_dead):
 		# move to player
 		distance = position.distance_to(player.position)
 		direction_to_player = position.direction_to(player.position)
@@ -95,6 +95,8 @@ func _process(delta):
 
 		# mirror enemy if needed
 		mirror()
+	elif(!is_dead):
+		Statemachine.travel("idle")
 
 
 func update_path():
@@ -124,7 +126,6 @@ func take_damage(damage):
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)
-	#print(health)
 	if(health <= 0 && !is_dead):
 		Statemachine.travel("die")
 		is_dead = true

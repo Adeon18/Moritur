@@ -7,6 +7,7 @@ onready var BossCavoon = preload("res://src/Projectiles/BossCavoon.tscn")
 func _init():
 	speed = 30
 	effective_fighting_distance = 60
+	health = 500
 
 func _ready():
 	Statemachine = get_node("AnimationTree").get("parameters/playback")
@@ -26,7 +27,6 @@ func _on_AttackTimer_timeout():
 			launch_missile(ang, "kill", 1)
 		if(attack_num == 2):
 			launch_missile(ang, "big_straight", 2)
-	print(attack_num)
 	attack_num += 1
 	if(attack_num>2): attack_num = 0
 

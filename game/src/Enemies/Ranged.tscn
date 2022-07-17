@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://art/enemies/enemy1/hit/sprite_00.png" type="Texture" id=1]
 [ext_resource path="res://src/Enemies/Ranged.gd" type="Script" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://art/enemies/enemy1/die/sprite_0.png" type="Texture" id=28]
 [ext_resource path="res://art/enemies/enemy1/die/sprite_1.png" type="Texture" id=29]
 [ext_resource path="res://src/shaders/Damaged.gdshader" type="Shader" id=30]
+[ext_resource path="res://art/enemies/enemy1/stand/sprite_00.png" type="Texture" id=31]
 
 [sub_resource type="ShaderMaterial" id=19]
 shader = ExtResource( 30 )
@@ -114,6 +115,21 @@ tracks/2/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=21]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 31 ) ]
+}
+
 [sub_resource type="Animation" id=5]
 resource_name = "run"
 length = 0.8
@@ -137,6 +153,9 @@ animation = "die"
 [sub_resource type="AnimationNodeAnimation" id=9]
 animation = "hit"
 
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "idle"
+
 [sub_resource type="AnimationNodeAnimation" id=6]
 animation = "run"
 
@@ -144,19 +163,28 @@ animation = "run"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
 switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
 [sub_resource type="AnimationNodeStateMachine" id=3]
 states/die/node = SubResource( 16 )
 states/die/position = Vector2( 332.862, 199.847 )
 states/hit/node = SubResource( 9 )
 states/hit/position = Vector2( 557, 105 )
+states/idle/node = SubResource( 22 )
+states/idle/position = Vector2( 101.362, 183.347 )
 states/run/node = SubResource( 6 )
 states/run/position = Vector2( 156, 88 )
-transitions = [ "run", "hit", SubResource( 10 ), "hit", "run", SubResource( 11 ), "hit", "die", SubResource( 17 ), "run", "die", SubResource( 18 ) ]
+transitions = [ "run", "hit", SubResource( 10 ), "hit", "run", SubResource( 11 ), "hit", "die", SubResource( 17 ), "run", "die", SubResource( 18 ), "run", "idle", SubResource( 23 ), "idle", "run", SubResource( 24 ), "idle", "die", SubResource( 25 ) ]
 start_node = "run"
 graph_offset = Vector2( -131.138, 23.3475 )
 
@@ -173,7 +201,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 19 )
-texture = ExtResource( 7 )
+texture = ExtResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
@@ -191,6 +219,7 @@ shape = SubResource( 2 )
 root_node = NodePath("../AnimationTree")
 anims/die = SubResource( 15 )
 anims/hit = SubResource( 8 )
+anims/idle = SubResource( 21 )
 anims/run = SubResource( 5 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
