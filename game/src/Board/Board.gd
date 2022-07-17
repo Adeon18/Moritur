@@ -43,7 +43,7 @@ var cells_weight: Dictionary =  {
 		"roll_weight": 1
 	},
 	"random_effect": {
-		"roll_weight": 100
+		"roll_weight": 1
 	},
 #	"shop": {
 #		"roll_weight": 1
