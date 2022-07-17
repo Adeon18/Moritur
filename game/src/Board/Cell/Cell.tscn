@@ -12,6 +12,7 @@ texture = ExtResource( 1 )
 region_filter_clip = true
 
 [node name="WaitOnStepTimer" type="Timer" parent="."]
+wait_time = 1.2
 one_shot = true
 
 [connection signal="timeout" from="WaitOnStepTimer" to="." method="_on_WaitOnStepTimer_timeout"]
