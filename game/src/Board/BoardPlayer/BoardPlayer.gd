@@ -22,6 +22,8 @@ var current_index = 0
 var going_backwards = false
 var can_roll = true
 
+onready var WhooshSound = get_node("Whoosh")
+
 func _ready():
 	current_pos = starting_pos
 
@@ -73,6 +75,7 @@ func _physics_process(delta):
 			current_state = STATE.TRANSITIONING
 			steps_to_take -= 1
 			emit_signal("step_made")
+			WhooshSound.play()
 		else:
 #			path[current_pos][2].on_step(self)
 			steps_to_take = 0

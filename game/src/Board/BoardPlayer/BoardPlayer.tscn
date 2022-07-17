@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Board/BoardPlayer/BoardPlayer.gd" type="Script" id=1]
 [ext_resource path="res://art/Player/idle/main_idle-1.png" type="Texture" id=2]
 [ext_resource path="res://src/shaders/border_shader.gdshader" type="Shader" id=3]
+[ext_resource path="res://sound/whoosh/mixkit-arrow-whoosh-1491.wav" type="AudioStream" id=4]
 
 [sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 3 )
@@ -23,3 +24,6 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Whoosh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )

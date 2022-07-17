@@ -28,6 +28,7 @@ onready var DieContainer = $DieContainer
 onready var StepsCountLabel = $CanvasLayer/StepsCountLabel
 onready var EffectDescriptionLabel = $CanvasLayer/Control/EffectDescriptionLabel
 onready var UIAnimPlayer = $CanvasLayer/AnimationPlayer
+onready var DiceSoundPlayer = get_node("DiceMusicPlayer")
 
 var cell_types: Dictionary
 
@@ -156,6 +157,7 @@ func _process(delta):
 	DieContainer.position = Cam.position
 	
 	if Input.is_action_just_pressed("ui_accept") and player.can_roll:
+		DiceSoundPlayer.play()
 		var die_res = roll_die()
 		player.can_roll = false
 		dice_res = die_res
@@ -178,6 +180,7 @@ func roll_die():
 func _on_DieWaitTimer_timeout():
 	set_die_not_visible()
 	player.move_player(dice_res)
+	DiceSoundPlayer.stop()
 
 func _on_DieContainer_both_dice_rolled():
 	$DieWaitTimer.start()
