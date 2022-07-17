@@ -1,5 +1,8 @@
 extends "res://src/Board/Cell/Cell.gd"
 
+func _ready():
+	pass # Replace with function body.
+
 func on_step(player):
 	print("you stepped on item cell")
 	if Global.visited_cells[index]:
@@ -15,7 +18,8 @@ func on_step(player):
 	Global.board_pos = player.current_pos
 	after_step()
 	
-	SceneChanger.change_scene("res://src/Rooms/ItemRoom.tscn")
+	SceneChanger.change_scene("res://src/Rooms/BossRoom.tscn")
+
 
 func after_step():
 	Global.visited_cells[index] = true

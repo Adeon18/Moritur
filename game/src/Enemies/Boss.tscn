@@ -33,6 +33,7 @@
 [ext_resource path="res://sound/hit/vibrating-thud-39536 (mp3cut.net).mp3" type="AudioStream" id=31]
 
 [sub_resource type="ShaderMaterial" id=20]
+resource_local_to_scene = true
 shader = ExtResource( 30 )
 shader_param/flash_color = Color( 1, 0, 0, 1 )
 shader_param/flash_modifier = null

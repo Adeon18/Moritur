@@ -22,7 +22,6 @@ func _ready():
 		get_node("Enemies").add_child(mob)
 		mob.position = point.position
 		mob.is_hitting = false
-	SceneChanger.change_scene("res://src/Board/Board.tscn")
 		
 
 

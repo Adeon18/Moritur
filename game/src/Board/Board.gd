@@ -51,7 +51,7 @@ var cells_weight: Dictionary =  {
 #		"roll_weight": 1
 #	},
 	"item": {
-		"roll_weight": 1
+		"roll_weight": 2
 	},
 }
 
@@ -182,8 +182,7 @@ func spawn_cells(path):
 		Line.add_point(cell_instance.position)
 		add_child(cell_instance)
 		i += 1
-	
-	
+
 
 func _process(delta):
 	if !player.can_roll or Input.is_action_just_pressed("focus_on_player"):
