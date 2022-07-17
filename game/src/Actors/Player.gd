@@ -8,6 +8,9 @@ signal frame_freeze_requested
 signal health_changed
 signal max_health_changed
 
+signal pickable_encountered(title, desc)
+signal no_pickable
+
 var weapon_rotation_radius: int = 16
 
 var is_invinsible: bool = false
@@ -150,7 +153,7 @@ func handle_attack():
 
 
 func _input(event):
-	if Input.is_action_just_pressed("slide") && _velocity != 0:
+	if Input.is_action_just_pressed("slide") && _velocity != Vector2.ZERO:
 		if DashCooldownTimer.is_stopped() and !is_dashing:
 			start_dash()
 	
@@ -205,7 +208,7 @@ func power_up(object):
 				Global.health = Global.max_health
 			emit_signal("max_health_changed")
 	else:
-		set_deferred(key, get(key) * Constants.MULTIPLIERS[key])
+		Global.set_deferred(key, Global.get(key) * Constants.MULTIPLIERS[key])
 	weapon_to_be_picked_up = null
 	object.die()
 
@@ -218,6 +221,8 @@ func unparent():
 
 	clone.call_deferred("enable_pick_up_collision")
 	clone.set_deferred("global_position", WeaponPosition.global_position)
+	
+	
 
 
 
@@ -228,11 +233,13 @@ func reparent(area):
 	WeaponContainer.call_deferred("add_child", clone)
 
 	clone.call_deferred("disable_pick_up_collision")
+	clone.call_deferred("change_style", Global.projectile_type)
 	clone.set_deferred("position", Vector2(0, 0))
 
 	WeaponObject = clone
 	is_colliding_with_weapon = false
 	weapon_to_be_picked_up = null
+
 
 
 func take_damage(amount):
@@ -274,10 +281,13 @@ func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Weapons"):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
+		area.change_style(Global.projectile_type)
+		emit_signal("pickable_encountered", Constants.WEAPON_DESCRIPTIONS[area.name].title, Constants.WEAPON_DESCRIPTIONS[area.name].desc)
 	
 	if area.is_in_group("Powerups"):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
+		emit_signal("pickable_encountered", Constants.POWERUP_DESCRIPTIONS[area.get_type()].title, Constants.POWERUP_DESCRIPTIONS[area.get_type()].desc)
 	
 	if area.is_in_group("EnemyProjectile"):
 		take_damage(1)
@@ -285,8 +295,14 @@ func _on_Hitbox_area_entered(area):
 
 func _on_Hitbox_area_exited(area):
 	if area.is_in_group("Weapons"):
+		area.change_style("default")
 		weapon_to_be_picked_up = null
 		is_colliding_with_weapon = false
+		emit_signal("no_pickable")
+	elif area.is_in_group("Powerups"):
+		weapon_to_be_picked_up = null
+		is_colliding_with_weapon = false
+		emit_signal("no_pickable")
 
 
 func _on_InvisibilityCooldown_timeout():

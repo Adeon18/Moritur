@@ -19,8 +19,11 @@ func disable_pick_up_collision():
 	$CollisionShape2D.disabled = true
 	$ItemParticle.emitting = false
 	AnimPlayer.play("idle")
-	change_style(_type)
+
 
 
 func change_style(type):
+	SpriteImg = get_node("Sprite")
+	print(_type)
+	print(Constants.WAND_SPRITES[name][type])
 	SpriteImg.frame = Constants.WAND_SPRITES[name][type]
