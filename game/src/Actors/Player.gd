@@ -32,16 +32,17 @@ var is_colliding_with_weapon: bool = false
 
 var projectile_speed: int = 300
 var projectile_damage: int = 1
+var projectile_scale: int = 2
+var shot_delay_time: float = 0.5
 
 var shenanigans: Dictionary = {
-	"freeze": true,
-	"burn": true,
-	"poizon": true
+	"freeze": false,
+	"burn": false,
+	"poizon": false
 }
 
 var projectile_type: String = "poizon"
-var projectile_scale: int = 2
-var shot_delay_time: float = 0.5
+
 
 
 var StateMashine
@@ -187,8 +188,17 @@ func pick_up(object):
 	unparent()
 	reparent(object)
 
+
 func power_up(object):
-	pass
+	var key = object.get_type()
+	if key in Constants.EFFECTS:
+		shenanigans[key] = true
+	elif key in ["heal_up", "health_up"]:
+		# heal up code
+		pass
+	else:
+		set_deferred(key, get(key) * Constants.MULTIPLIERS[key])
+	object.die()
 
 
 func unparent():

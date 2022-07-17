@@ -7,6 +7,7 @@
 extents = Vector2( 8, 8 )
 
 [node name="PowerUp" type="Area2D" groups=["Powerups"]]
+z_index = 5
 collision_layer = 0
 script = ExtResource( 2 )
 
