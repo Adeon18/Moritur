@@ -26,6 +26,8 @@ onready var Die1 = $DieContainer/Die1
 onready var Die2 = $DieContainer/Die2
 onready var DieContainer = $DieContainer
 onready var StepsCountLabel = $CanvasLayer/StepsCountLabel
+onready var EffectDescriptionLabel = $CanvasLayer/Control/EffectDescriptionLabel
+onready var UIAnimPlayer = $CanvasLayer/AnimationPlayer
 
 var cell_types: Dictionary
 
@@ -41,7 +43,7 @@ var cells_weight: Dictionary =  {
 		"roll_weight": 1
 	},
 	"random_effect": {
-		"roll_weight": 1
+		"roll_weight": 100
 	},
 #	"shop": {
 #		"roll_weight": 1
@@ -144,6 +146,7 @@ func spawn_cells(path):
 			cell_instance.initialize()
 		
 		path[pos].append(cell_instance)
+		cell_instance.connect("show_description", self, "_on_Cell_show_description")
 		Line.add_point(cell_instance.position)
 		add_child(cell_instance)
 
@@ -186,3 +189,17 @@ func _on_BoardPlayer_finished_moving():
 func _on_BoardPlayer_step_made():
 	StepsCountLabel.visible = true
 	StepsCountLabel.text = str(player.steps_to_take+1)
+
+func _on_Cell_show_description(description: String):
+	set_effect_description(description)
+
+func set_effect_description(description: String):
+	EffectDescriptionLabel.text = description
+	UIAnimPlayer.play("show")
+	yield(UIAnimPlayer, "animation_finished")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	
+	UIAnimPlayer.play_backwards("show")
+	yield(UIAnimPlayer, "animation_finished")
+	

@@ -62,11 +62,25 @@ func on_step(player):
 		print("you already stepped on this cell")
 		return
 
+	show_description()
 	WaitOnStepTimer.start()
 
 func after_step():
 	.after_step()
 	print("Bruh")
+	
+func show_description():
+	match effect_name:
+		EFFECTS.GO_BACKWARDS:
+			if backwards_step == 1:
+				emit_signal("show_description", "you move %s cell backwards" % [backwards_step])
+			else:
+				emit_signal("show_description", "you move %s cells backwards" % [backwards_step])
+		EFFECTS.GO_FORWARDS:
+			if forwards_step == 1:
+				emit_signal("show_description", "you move %s cell forwards" % [forwards_step])
+			else:
+				emit_signal("show_description", "you move %s cells forwards" % [forwards_step])
 
 func go_backwards(player):
 	print("player going backwards for ", backwards_step, " cells")
