@@ -1,8 +1,8 @@
 extends Enemy
 
 func _init():
-	speed = 20
-	effective_fighting_distance = 100
+	speed = 50
+	effective_fighting_distance = 20
 
 func _ready():
 	Statemachine = get_node("AnimationTree").get("parameters/playback")
