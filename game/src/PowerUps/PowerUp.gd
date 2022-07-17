@@ -25,27 +25,30 @@ var types: Dictionary = {
 		"image": "res://art/PowerUps/health_up.png",
 		"color": Color.red
 	},
-	"pspeed_increase": {
-		"image": null,
-		"color": Color.orangered
+	"projectile_speed": {
+		"image": "res://art/PowerUps/encrease_speed.png",
+		"color": Color.darkred
 	},
-	"size_multiplier": {
-		"image": null,
-		"color": Color.orangered
+	"projectile_scale": {
+		"image":"res://art/PowerUps/projectile_size.png" ,
+		"color": Color.darkred
 	},
-	"delay_multilier": {
-		"image": null,
-		"color": Color.orangered
+	"shot_delay_time": {
+		"image": "res://art/PowerUps/cd_reduction.png",
+		"color": Color.lightcoral
 	},
-	"damage_increase": {
-		"image": null,
-		"color": Color.orangered
+	"projectile_damage": {
+		"image": "res://art/PowerUps/encrease_dmg.png",
+		"color": Color.darkred
 	},
 }
 
 
 func _ready():
 	$Sprite.texture = load(types[_type].image)
+	$ItemParticle.material.set_shader_param("color", types[_type].color)
+	print($ItemParticle.material.get_shader_param("color"))
+	$CUM.material.set_shader_param("color", types[_type].color)
 
 
 func set_type(type):

@@ -1,10 +1,43 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Projectiles/Cavoon.gd" type="Script" id=2]
 [ext_resource path="res://art/projectiles/projectiles.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.41096
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec4 color: hint_color = vec4(1, 1, 0, 1);
+
+void fragment() {
+  COLOR = vec4(color.rgb, COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+resource_local_to_scene = true
+shader = SubResource( 5 )
+shader_param/color = Color( 1, 1, 0, 1 )
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.0147059, 0.392157, 1 )
+colors = PoolColorArray( 0.929412, 0.878431, 0.0392157, 0, 0.828969, 0.877832, 0.0785249, 1, 0.916895, 0.868288, 0.0497846, 1, 0.894118, 0.905882, 0.0588235, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 2.0
+color_ramp = SubResource( 3 )
 
 [node name="Cavoon" type="Area2D" groups=["Projectiles"]]
 collision_layer = 4
@@ -21,3 +54,15 @@ frame = 39
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.879518, 1 )
 shape = SubResource( 1 )
+
+[node name="Hit" type="Particles2D" parent="."]
+show_behind_parent = true
+material = SubResource( 6 )
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 4 )
+
+[connection signal="body_entered" from="." to="." method="_on_Cavoon_body_entered"]

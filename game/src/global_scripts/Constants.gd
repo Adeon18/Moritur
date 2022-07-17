@@ -11,6 +11,14 @@ var MULTIPLIERS: Dictionary = {
 var EFFECTS = ["burn", "freeze", "poizon"]
 
 
+var PROJECTILE_COLOR: Dictionary = {
+	"burn": Color.orangered,
+	"freeze": Color.skyblue,
+	"poizon": Color.green,
+	"default": Color.whitesmoke
+}
+
+
 var WAND_SPRITES: Dictionary = {
 	"WeakWand": {
 		"default": 9,

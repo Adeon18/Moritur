@@ -84,4 +84,18 @@ func hit(body):
 			body.call_deferred(key, _damage)
 	
 	if !_is_piercing:
-		queue_free()
+		die()
+
+
+func die():
+	$Hit.material.set_shader_param("color", Constants.PROJECTILE_COLOR[_type])
+	$Hit.emitting = true
+	set_physics_process(false)
+	$Sprite.visible = false
+	yield(get_tree().create_timer(1), "timeout")
+	queue_free()
+
+
+func _on_Cavoon_body_entered(body):
+	if !_is_piercing:
+		die()

@@ -1,11 +1,12 @@
 [gd_scene load_steps=7 format=2]
 
+
 [ext_resource path="res://src/Rooms/RoomMedium.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Enemies/Ranged.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Rooms/floor_tileset.tres" type="TileSet" id=3]
 [ext_resource path="res://src/Weapons/Bow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Rooms/wall_tileset.tres" type="TileSet" id=6]
 [ext_resource path="res://src/Rooms/floor_tileset.tres" type="TileSet" id=7]
-
 
 [node name="RoomBig" instance=ExtResource( 1 )]
 
@@ -28,7 +29,7 @@ format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 6, 1, 0, 7, 1, 0, 8, 1, 0, 9, 1, 0, 10, 1, 0, 11, 1, 0, 12, 1, 0, 13, 1, 0, 14, 1, 0, 15, 1, 0, 16, 1, 0, 17, 1, 0, 18, 1, 0, 19, 1, 0, 20, 1, 0, 21, 1, 0, 22, 1, 0, 23, 1, 0, 24, 1, 0, 25, 1, 0, 26, 1, 0, 27, 1, 0, 28, 2, 0, 65536, 6, 0, 65564, 5, 0, 131072, 6, 0, 131100, 5, 0, 196608, 6, 0, 196636, 5, 0, 262144, 6, 0, 262172, 5, 0, 327680, 6, 0, 327708, 5, 0, 393216, 6, 0, 393229, 3, 0, 393244, 5, 0, 458752, 6, 0, 458765, 4, 0, 458780, 5, 0, 524288, 6, 0, 524301, 4, 0, 524316, 5, 0, 589824, 6, 0, 589837, 4, 0, 589852, 5, 0, 655360, 6, 0, 655373, 4, 0, 655388, 5, 0, 720896, 6, 0, 720909, 4, 0, 720924, 5, 0, 851959, 0, 0, 786432, 6, 0, 786445, 4, 0, 786460, 5, 0, 851968, 6, 0, 851981, 10, 0, 851996, 5, 0, 917504, 6, 0, 917532, 5, 0, 983040, 6, 0, 983068, 5, 0, 1048576, 6, 0, 1048604, 5, 0, 1114112, 6, 0, 1114140, 5, 0, 1179648, 7, 0, 1179649, 8, 0, 1179650, 8, 0, 1179651, 8, 0, 1179652, 8, 0, 1179653, 8, 0, 1179654, 8, 0, 1179655, 8, 0, 1179656, 8, 0, 1179657, 8, 0, 1179658, 8, 0, 1179659, 8, 0, 1179660, 8, 0, 1179661, 8, 0, 1179662, 8, 0, 1179663, 8, 0, 1179664, 8, 0, 1179665, 8, 0, 1179666, 8, 0, 1179667, 8, 0, 1179668, 8, 0, 1179669, 8, 0, 1179670, 8, 0, 1179671, 8, 0, 1179672, 8, 0, 1179673, 8, 0, 1179674, 8, 0, 1179675, 8, 0, 1179676, 9, 0 )
 
 [node name="Bow" parent="." index="4" instance=ExtResource( 4 )]
-position = Vector2( 40, 280 )
+position = Vector2( 128, 40 )
 
 [node name="Boss" parent="Enemies" index="0" instance=ExtResource( 6 )]
 position = Vector2( 99, 205 )

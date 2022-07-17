@@ -4,7 +4,7 @@ extends Weapon
 class_name MeleeWeapon
 
 
-var _damage
+var damage
 
 
 var shenanigans: Dictionary = {
@@ -20,11 +20,11 @@ func set_shenanigans(_shenanigans):
 
 func use(direction,
 		speed,
-		damage,
+		_damage,
 		shenanigans,
 		type: String,
 		scale_m: float = 1.0):
-	_damage = damage
+	damage = _damage
 	set_shenanigans(shenanigans)
 	AnimPlayer.play("use")
 
