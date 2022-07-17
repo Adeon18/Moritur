@@ -190,6 +190,15 @@ collision_mask = 12
 script = ExtResource( 2 )
 is_hitting = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 50
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource( 29 )]
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 6.0
+margin_bottom = 5.0
+
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 20 )
 texture = ExtResource( 25 )
@@ -276,15 +285,6 @@ wait_time = 2.0
 autostart = true
 
 [node name="DamageTween" type="Tween" parent="."]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 3
-
-[node name="Control" parent="CanvasLayer" instance=ExtResource( 29 )]
-margin_left = 6.0
-margin_top = 5.0
-margin_right = 6.0
-margin_bottom = 5.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

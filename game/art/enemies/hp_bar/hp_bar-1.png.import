@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bg_health.png-9e55c1d8cc3d13e4a30d1c83005ead6f.stex"
+path="res://.import/hp_bar-1.png-88a57ca768217e645899a2449b88af65.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/enemies/textures/bg_health.png"
-dest_files=[ "res://.import/bg_health.png-9e55c1d8cc3d13e4a30d1c83005ead6f.stex" ]
+source_file="res://art/enemies/hp_bar/hp_bar-1.png"
+dest_files=[ "res://.import/hp_bar-1.png-88a57ca768217e645899a2449b88af65.stex" ]
 
 [params]
 

@@ -248,6 +248,7 @@ visible = false
 position = Vector2( 6, -7 )
 
 [node name="Timers" type="Node2D" parent="."]
+position = Vector2( -2, 21 )
 
 [node name="BurnTimer" type="Timer" parent="Timers"]
 wait_time = 2.0
