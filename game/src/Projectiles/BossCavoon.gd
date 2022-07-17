@@ -31,7 +31,6 @@ func _physics_process(delta):
 		change_dir(delta, 0)
 	elif(chasing && chaseee):
 		_direction = position.direction_to(player.position)
-		print(position.angle_to(player.position))
 	rotation = position.angle_to(player.position) + PI/2
 
 
