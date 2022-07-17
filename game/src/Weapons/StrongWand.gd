@@ -10,7 +10,7 @@ func init_data():
 	SpriteImg.frame = Constants.WAND_SPRITES[name][_type]
 	is_piercing = false
 	damage_multiplier = 2
-	size_multiplier = 1.5
+	size_multiplier = 1.51
 	delay_decrease = 3
 	speed_multiplier = 0.5
 
