@@ -67,6 +67,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 27 ) ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "hit"
@@ -267,18 +281,19 @@ collision_mask = 8
 collide_with_areas = true
 
 [node name="Effects" type="Node2D" parent="."]
+position = Vector2( 0, -12 )
+
+[node name="Poison" parent="Effects" instance=ExtResource( 22 )]
+visible = false
+position = Vector2( -10, -7 )
 
 [node name="Fire" parent="Effects" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 4, -8 )
+position = Vector2( -2, -7 )
 
-[node name="Poison" parent="Effects" instance=ExtResource( 21 )]
+[node name="Ice" parent="Effects" instance=ExtResource( 21 )]
 visible = false
-position = Vector2( -2, -8 )
-
-[node name="Ice" parent="Effects" instance=ExtResource( 22 )]
-visible = false
-position = Vector2( -8, -8 )
+position = Vector2( 6, -7 )
 
 [node name="Timers" type="Node2D" parent="."]
 

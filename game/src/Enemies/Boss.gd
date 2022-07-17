@@ -23,12 +23,14 @@ func _on_AttackTimer_timeout():
 		ang += 30
 		if(attack_num == 0):
 			launch_missile(ang, "spiral", 1)
-		if(attack_num == 1):
+		elif(attack_num == 2):
 			launch_missile(ang, "kill", 1)
-		if(attack_num == 2):
+		elif(attack_num == 3):
 			launch_missile(ang, "big_straight", 2)
+		elif(attack_num == 1):
+			launch_missile(ang, "chasing", 1)
 	attack_num += 1
-	if(attack_num>2): attack_num = 0
+	if(attack_num>3): attack_num = 0
 
 func launch_missile(ang, type, size_mult):
 	var projectile = BossCavoon.instance()

@@ -8,10 +8,13 @@ var spiral: bool = false
 var size_scale: int = false
 var kill_mode: bool = false
 var big_straight: bool = false
+var chasing: bool = false
+var chaseee: bool = false
+
 
 var ang
 onready var sprite = get_node("./Sprite")
-
+onready var player = get_node("../RoomBig/Player")
 
 func _ready():
 	spiral = false
@@ -26,7 +29,10 @@ func _physics_process(delta):
 		change_dir(delta, 0.8)
 	elif(big_straight):
 		change_dir(delta, 0)
-	
+	elif(chasing && chaseee):
+		_direction = position.direction_to(player.position)
+
+
 func change_dir(delta, rad):
 	ang = _direction.angle()
 	ang += rad*delta
@@ -46,6 +52,9 @@ func launch(direction: Vector2, speed: int, type, size_mul):
 		big_straight = true
 		sprite.frame = 33
 		sprite.rotation = direction.angle() + 1.57
+	elif(type == "chasing"):
+		chasing = true
+		sprite.frame = 31
 	_direction = direction
 	_speed = speed
 
@@ -58,3 +67,12 @@ func _on_Cavoon_body_entered(body):
 
 func _on_Timer_timeout():
 	queue_free()
+
+
+func _on_ChasingTimer_timeout():
+	chaseee = true
+
+
+func _on_ChasingLifetime_timeout():
+	if(chasing):
+		queue_free()
