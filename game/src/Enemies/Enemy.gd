@@ -27,6 +27,8 @@ var _poison_damage: int
 var is_frozen: bool = false
 var is_dead: bool = false
 
+var is_flashing: bool = false
+
 var path = []
 
 onready var player: Player = get_node("../../Player")
@@ -47,6 +49,10 @@ onready var fire_timer = get_node("./Timers/BurnTimer")
 onready var ice_timer = get_node("./Timers/FreezeTimer")
 onready var poison_timer = get_node("./Timers/PoisonTimer")
 
+onready var flash_timer = get_node("./Timers/FlashTimer")
+
+onready var damage_tween = get_node("./DamageTween")
+
 var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
@@ -57,7 +63,8 @@ func _ready():
 func _process(delta):
 	
 	# if enemy is frozen he cant do ANYTHING
-	if(!is_frozen):
+	# if enemy is dead....
+	if(!is_frozen && !is_dead):
 		# move to player
 		distance = position.distance_to(player.position)
 		direction_to_player = position.direction_to(player.position)
@@ -112,6 +119,10 @@ func handle_fight():
 
 func take_damage(damage):
 	health -= damage
+	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
+	damage_tween.start()
+	flash_timer.start(1)
+	print(health)
 	if(health <= 0 && !is_dead):
 		Statemachine.travel("die")
 		is_dead = true
@@ -120,39 +131,33 @@ func take_damage(damage):
 func _on_Area2D_area_entered(area):
 	if(area.is_in_group("Projectiles")):
 		area.hit(self)
-		print("got hit")
+
 
 func _on_BurnTimer_timeout():
-	print("OH NO ME BURN")
 	_burn_damage = 0
 	fire.visible = false
 
 func _on_FreezeTimer_timeout():
-	print("OH NO ME FREEZE")
 	ice.visible = false
 	is_frozen = false
 
 func _on_PoisonTimer_timeout():
-	print("OH NO ME POISONED")
 	_poison_damage = 0
 	poison.visible = false
 	
 
 
 func burn(damage):
-	print("Burn")
 	fire.visible = true
 	fire_timer.start(burn_time)
 	_burn_damage = damage/2
 
 func freeze(damage):
-	print("Freeze")
 	ice.visible = true
 	ice_timer.start(freeze_time)
 	is_frozen = true
 
 func poizon(damage):
-	print("poison")
 	poison.visible = true
 	poison_timer.start(poison_time)
 	_poison_damage = damage/4
@@ -166,3 +171,16 @@ func _on_DOTticks_timeout():
 
 func _on_Timer_timeout():
 	update_path()
+
+func _on_FlashTimer_timeout():
+	is_flashing = false
+
+func _on_DamageTween_tween_completed(object, key):
+	if (sprite.material.get_shader_param("flash_modifier") == 0.0):
+		if !is_flashing:
+			damage_tween.stop(sprite.material)
+			return
+		damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 0.3, 0.3)
+	else:
+		damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.3, 0.0, 0.3)
+	damage_tween.start()

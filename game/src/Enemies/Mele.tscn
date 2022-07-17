@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://art/enemies/enemy1/hit/sprite_00.png" type="Texture" id=1]
 [ext_resource path="res://src/Enemies/Mele.gd" type="Script" id=2]
@@ -29,6 +29,12 @@
 [ext_resource path="res://art/enemies/enemy1/die/sprite_3.png" type="Texture" id=27]
 [ext_resource path="res://art/enemies/enemy1/die/sprite_0.png" type="Texture" id=28]
 [ext_resource path="res://art/enemies/enemy1/die/sprite_1.png" type="Texture" id=29]
+[ext_resource path="res://src/shaders/Damaged.gdshader" type="Shader" id=30]
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = ExtResource( 30 )
+shader_param/flash_color = Color( 1, 0, 0, 1 )
+shader_param/flash_modifier = null
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.0
@@ -164,7 +170,8 @@ collision_mask = 12
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 11 )
+material = SubResource( 20 )
+texture = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
@@ -237,9 +244,16 @@ one_shot = true
 wait_time = 0.5
 autostart = true
 
+[node name="FlashTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="DamageTween" type="Tween" parent="."]
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timers/BurnTimer" to="." method="_on_BurnTimer_timeout"]
 [connection signal="timeout" from="Timers/FreezeTimer" to="." method="_on_FreezeTimer_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="Timers/DOTticks" to="." method="_on_DOTticks_timeout"]
+[connection signal="timeout" from="Timers/FlashTimer" to="." method="_on_FlashTimer_timeout"]
