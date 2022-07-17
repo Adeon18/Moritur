@@ -284,6 +284,7 @@ func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Powerups"):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
+		emit_signal("pickable_encountered", Constants.POWERUP_DESCRIPTIONS[area.get_type()].title, Constants.POWERUP_DESCRIPTIONS[area.get_type()].desc)
 	
 	if area.is_in_group("EnemyProjectile"):
 		take_damage(1)

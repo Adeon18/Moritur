@@ -211,6 +211,16 @@ align = 1
 valign = 1
 autowrap = true
 
+[node name="Title2" type="Label" parent="Control/TextureRect"]
+margin_left = 8.0
+margin_top = -20.0
+margin_right = 143.0
+custom_fonts/font = SubResource( 1 )
+text = "\"E\""
+align = 1
+valign = 1
+autowrap = true
+
 [node name="Desc" type="Label" parent="Control/TextureRect"]
 margin_left = 11.0
 margin_top = 25.0

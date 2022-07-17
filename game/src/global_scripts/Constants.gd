@@ -63,3 +63,42 @@ var WEAPON_DESCRIPTIONS: Dictionary = {
 		"desc": "Big Boy",
 	},
 }
+
+var POWERUP_DESCRIPTIONS: Dictionary = {
+	"burn": {
+		"title": "Fier",
+		"desc": "Meke 'em burn!",
+	},
+	"freeze": {
+		"title": "Freeze",
+		"desc": "Freeze enemies",
+	},
+	"poizon": {
+		"title": "Poizon",
+		"desc": "Just don't drink it..",
+	},
+	"heal_up": {
+		"title": "Heal up!",
+		"desc": "Heal yourself",
+	},
+	"health_up": {
+		"title": "+ max health",
+		"desc": "Increase max health",
+	},
+	"projectile_speed": {
+		"title": "Projectle Speed",
+		"desc": "Wand go brr",
+	},
+	"projectile_scale": {
+		"title": "Bigger spells",
+		"desc": "Bigger projectiles",
+	},
+	"shot_delay_time": {
+		"title": "Decrease Delay",
+		"desc": "Shoot faster",
+	},
+	"projectile_damage": {
+		"title": "Damage",
+		"desc": "Hit harder",
+	},
+}
