@@ -20,3 +20,5 @@ cell_size = Vector2( 16, 16 )
 collision_layer = 9
 collision_mask = 8
 format = 1
+
+[node name="Enemies" type="Node2D" parent="."]
