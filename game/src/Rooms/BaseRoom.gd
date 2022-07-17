@@ -22,7 +22,7 @@ func _ready():
 		mob.position = point.position
 		mob.is_hitting = false
 	
-	SceneChanger.change_scene("res://src/Board/Board.tscn")
+#	SceneChanger.change_scene("res://src/Board/Board.tscn")
 		
 
 

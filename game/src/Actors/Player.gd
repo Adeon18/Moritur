@@ -29,7 +29,7 @@ var _velocity = Vector2()
 var _speed = default_speed
 
 var DashGhost = preload("res://src/Actors/DashGhost.tscn")
-var DefaultWeapon = preload("res://src/Weapons/Sword.tscn")
+var DefaultWeapon = load("res://src/Weapons/{name}.tscn".format({"name": Global.weapon_name}))
 var WeaponObject
 
 var weapon_to_be_picked_up
@@ -162,6 +162,7 @@ func _input(event):
 	if Input.is_action_pressed("pick_up") and WeaponPickUpCooldownTimer.time_left == 0 and is_colliding_with_weapon:
 		$PickUpSound.play()
 		if weapon_to_be_picked_up.is_in_group("Weapons"):
+			Global.weapon_name = weapon_to_be_picked_up.name
 			pick_up(weapon_to_be_picked_up)
 		elif weapon_to_be_picked_up.is_in_group("Powerups"):
 			power_up(weapon_to_be_picked_up)
