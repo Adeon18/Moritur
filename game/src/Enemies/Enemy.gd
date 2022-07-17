@@ -53,6 +53,8 @@ onready var flash_timer = get_node("./Timers/FlashTimer")
 
 onready var damage_tween = get_node("./DamageTween")
 
+
+var attack_timer
 var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
@@ -93,6 +95,8 @@ func _process(delta):
 
 		# mirror enemy if needed
 		mirror()
+	elif(!is_dead):
+		Statemachine.travel("idle")
 
 
 func update_path():
@@ -122,7 +126,6 @@ func take_damage(damage):
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)
-	#print(health)
 	if(health <= 0 && !is_dead):
 		Statemachine.travel("die")
 		is_dead = true

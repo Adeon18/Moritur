@@ -16,3 +16,13 @@ func _physics_process(delta):
 func launch(direction: Vector2, speed: int):
 	_direction = direction
 	_speed = speed
+
+
+func _on_Cavoon_area_entered(area):
+	pass
+
+
+func _on_Cavoon_body_entered(body):
+	if(body.get_collision_layer() == 9 || body.get_collision_layer() == 1):
+		queue_free()
+
