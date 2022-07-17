@@ -25,7 +25,8 @@ var can_roll = true
 onready var WhooshSound = get_node("Whoosh")
 
 func _ready():
-	current_pos = starting_pos
+	current_pos = Global.board_pos
+	position = current_pos * (CELL_WIDTH + MARGIN)
 
 func _physics_process(delta):
 	if current_state == STATE.IDLE:
