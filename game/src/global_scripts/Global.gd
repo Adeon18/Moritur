@@ -15,6 +15,8 @@ var projectile_type: String = "default"
 
 
 var board_pos = Vector2(0, 0)
+var current_index = 0
+var visited_cells: Array = []
 
 var path: Dictionary = {}
 var if_generated_path: bool = false
