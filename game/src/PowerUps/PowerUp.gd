@@ -46,6 +46,8 @@ var types: Dictionary = {
 
 func _ready():
 	$Sprite.texture = load(types[_type].image)
+	$ItemParticle.material.set_shader_param("color", types[_type].color)
+	$CUM.material.set_shader_param("color", types[_type].color)
 
 
 func set_type(type):

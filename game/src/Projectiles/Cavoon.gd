@@ -88,6 +88,11 @@ func hit(body):
 
 
 func die():
+	$Hit.material.set_shader_param("color", Constants.PROJECTILE_COLOR[_type])
+	$Hit.emitting = true
+	set_physics_process(false)
+	$Sprite.visible = false
+	yield(get_tree().create_timer(1), "timeout")
 	queue_free()
 
 
