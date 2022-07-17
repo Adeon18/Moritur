@@ -14,6 +14,7 @@ func on_step(player):
 	curr_player = player
 #	curr_player.can_roll = false
 	print("you stepped on a cell")
+	
 
 func after_step():
 	if !Global.visited_cells[index]:
