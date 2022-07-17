@@ -58,6 +58,7 @@ config/icon="res://icon.png"
 
 Global="*res://src/global_scripts/Global.gd"
 FrameFreexer="*res://src/Cosmetics/FrameFreexer.gd"
+Constants="*res://src/global_scripts/Constants.gd"
 
 [display]
 
