@@ -14,7 +14,7 @@ var chaseee: bool = false
 
 var ang
 onready var sprite = get_node("./Sprite")
-onready var player = get_node("../RoomBig/Player")
+onready var player = get_node("../Player")
 
 func _ready():
 	spiral = false
@@ -31,6 +31,7 @@ func _physics_process(delta):
 		change_dir(delta, 0)
 	elif(chasing && chaseee):
 		_direction = position.direction_to(player.position)
+	rotation = position.angle_to(player.position) + 1.57
 
 
 func change_dir(delta, rad):

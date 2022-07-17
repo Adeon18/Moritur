@@ -20,7 +20,7 @@ func handle_fight():
 
 func shoot():
 	var projectile = Cavoon.instance()
-	Scene.add_child(projectile)
+	get_node("../../").add_child(projectile)
 	projectile.position = position
 	var direction = position.direction_to(player.position)
 	projectile.launch(direction, projectile_speed)

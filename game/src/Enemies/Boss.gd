@@ -2,16 +2,18 @@ extends Enemy
 
 var attack_num: int = 0
 
-
+onready var HealthBar = get_node("./CanvasLayer/Control")
 onready var BossCavoon = preload("res://src/Projectiles/BossCavoon.tscn")
 func _init():
 	speed = 30
 	effective_fighting_distance = 60
-	health = 500
+	health = 50
 
 func _ready():
 	Statemachine = get_node("AnimationTree").get("parameters/playback")
 	attack_timer = get_node("./Timers/AttackTimer")
+	HealthBar.update_max_health(health)
+	HealthBar.update_health(health, health)
 
 func handle_fight():
 	pass
@@ -34,7 +36,13 @@ func _on_AttackTimer_timeout():
 
 func launch_missile(ang, type, size_mult):
 	var projectile = BossCavoon.instance()
-	Scene.add_child(projectile)
+	get_node("../../").add_child(projectile)
 	projectile.position = position
 	var direction = Vector2(cos(ang), sin(ang))
 	projectile.launch(direction, projectile_speed, type, size_mult)
+
+
+func take_damage(damage):
+	.take_damage(damage)
+	HealthBar.update_health(health, damage)
+	
