@@ -13,9 +13,27 @@ var projectile_scale: float = 2.0
 var shot_delay_time: float = 1
 var projectile_type: String = "default"
 
+
+var board_pos = Vector2(0, 0)
+
+var path: Dictionary = {}
+var if_generated_path: bool = false
+var cell_types: Dictionary = {
+			"start": preload("res://src/Board/Cell/StartCell.tscn"),
+			"combat": preload("res://src/Board/Cell/CombatCell.tscn"),
+			"random_effect": preload("res://src/Board/Cell/RandomEffectCell.tscn"),
+	#		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
+			"item": preload("res://src/Board/Cell/ItemCell.tscn"),
+}
+
+var random_seed
+
 func _ready():
 	Loader.load_global()
 	randomize()
+	random_seed = randi()
+	seed(random_seed)
+
 
 
 func save():

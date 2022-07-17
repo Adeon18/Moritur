@@ -1,6 +1,8 @@
 extends Node2D
 
+onready var player_spawn_pos = $PlayerSpawnPos
 onready var spawnpoints = get_node("EnemySpawnPoints")
+onready var player = preload("res://src/Actors/Player.tscn")
 
 var total_weight
 func _ready():
@@ -9,12 +11,18 @@ func _ready():
 		"ranged": preload("res://src/Enemies/Ranged.tscn"),
 		"boss": preload("res://src/Enemies/Boss.tscn")
 	}
-	init_probabilities()	
+	var player_instance = player.instance()
+	add_child(player_instance)
+	player_instance.position = player_spawn_pos.position
+	
+	init_probabilities()
 	for point in spawnpoints.get_children():
 		var mob = random_cell_instance()
 		get_node("Enemies").add_child(mob)
 		mob.position = point.position
 		mob.is_hitting = false
+	
+	SceneChanger.change_scene("res://src/Board/Board.tscn")
 		
 
 

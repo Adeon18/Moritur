@@ -111,8 +111,7 @@ anims/show = SubResource( 6 )
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 margin_top = -50.0
-margin_right = 640.0
-margin_bottom = -50.0
+margin_right = 2560.0
 
 [node name="EffectDescriptionLabel" type="Label" parent="CanvasLayer/Control"]
 anchor_left = 0.5
