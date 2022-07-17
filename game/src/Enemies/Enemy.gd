@@ -122,7 +122,7 @@ func take_damage(damage):
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)
-	print(health)
+	#print(health)
 	if(health <= 0 && !is_dead):
 		Statemachine.travel("die")
 		is_dead = true
