@@ -26,7 +26,6 @@ func use(direction,
 		shenanigans,
 		type,
 		scale_m*size_multiplier)
-	print(scale_m*size_multiplier)
 
 
 

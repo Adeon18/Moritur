@@ -81,6 +81,8 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://src/global_scripts/Global.gd"
+FrameFreexer="*res://src/Cosmetics/FrameFreexer.gd"
+Constants="*res://src/global_scripts/Constants.gd"
 SceneChanger="*res://src/global_scripts/SceneChanger.tscn"
 
 [display]
@@ -91,6 +93,10 @@ window/size/test_width=1980
 window/size/test_height=1080
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+
+[global]
+
+layers=false
 
 [importer_defaults]
 
@@ -143,6 +149,16 @@ slide={
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
+pick_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 drag={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":3,"pressed":false,"doubleclick":false,"script":null)
@@ -170,6 +186,8 @@ focus_on_player={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Projectiles"
+2d_physics/layer_4="Walls"
+2d_physics/layer_5="EnemyProjectiles"
 
 [physics]
 

@@ -39,9 +39,6 @@ extents = Vector2( 8.5, 3 )
 [node name="Sword" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="Sprite" parent="." index="1"]
-position = Vector2( 10, 7 )
-
 [node name="AnimationPlayer" parent="." index="2"]
 anims/use = SubResource( 3 )
 

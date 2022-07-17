@@ -84,4 +84,12 @@ func hit(body):
 			body.call_deferred(key, _damage)
 	
 	if !_is_piercing:
-		queue_free()
+		die()
+
+
+func die():
+	queue_free()
+
+
+func _on_Cavoon_body_entered(body):
+	die()

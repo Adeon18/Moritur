@@ -23,6 +23,6 @@ func _on_Cavoon_area_entered(area):
 
 
 func _on_Cavoon_body_entered(body):
-	if(body.get_collision_layer() == 9 || body.get_collision_layer() == 1):
-		queue_free()
+#	if(body.get_collision_layer() == 9 || body.get_collision_layer() == 1):
+	queue_free()
 
