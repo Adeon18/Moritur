@@ -36,7 +36,7 @@ tracks/1/keys = {
 }
 
 [node name="Bow" type="Area2D" groups=["Weapons"]]
-collision_layer = 8
+collision_layer = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

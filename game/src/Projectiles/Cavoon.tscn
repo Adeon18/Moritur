@@ -6,7 +6,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 3.41096
 
-[node name="Cavoon" type="Area2D" groups=["EnemyProjectile"]]
+[node name="Cavoon" type="Area2D" groups=["Projectiles"]]
+collision_layer = 4
+collision_mask = 10
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
