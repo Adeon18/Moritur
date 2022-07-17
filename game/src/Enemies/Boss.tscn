@@ -1,0 +1,256 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://src/Enemies/Boss.gd" type="Script" id=2]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-7.png" type="Texture" id=3]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-8.png" type="Texture" id=4]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-2.png" type="Texture" id=5]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-1.png" type="Texture" id=6]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-6.png" type="Texture" id=7]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-9.png" type="Texture" id=8]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-3.png" type="Texture" id=9]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-4.png" type="Texture" id=16]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-5.png" type="Texture" id=17]
+[ext_resource path="res://art/enemies/boss/boss_running_mirrored/boss_running-10.png" type="Texture" id=18]
+[ext_resource path="res://src/Effects/Fire.tscn" type="PackedScene" id=20]
+[ext_resource path="res://src/Effects/Ice.tscn" type="PackedScene" id=21]
+[ext_resource path="res://src/Effects/Poison.tscn" type="PackedScene" id=22]
+[ext_resource path="res://src/shaders/Damaged.gdshader" type="Shader" id=30]
+[ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-1.png" type="Texture" id=31]
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = ExtResource( 30 )
+shader_param/flash_color = Color( 1, 0, 0, 1 )
+shader_param/flash_modifier = null
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 17.0
+height = 8.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 17.0
+height = 8.0
+
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sword/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 31 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "die"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 16 ), ExtResource( 17 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "hit"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 18 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "run"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 18 ) ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "die"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "hit"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachine" id=3]
+states/die/node = SubResource( 17 )
+states/die/position = Vector2( 370.188, 207.25 )
+states/hit/node = SubResource( 9 )
+states/hit/position = Vector2( 557, 105 )
+states/run/node = SubResource( 6 )
+states/run/position = Vector2( 156, 88 )
+transitions = [ "run", "hit", SubResource( 10 ), "hit", "run", SubResource( 11 ), "hit", "die", SubResource( 18 ), "run", "die", SubResource( 19 ) ]
+start_node = "run"
+graph_offset = Vector2( -38.25, 39.375 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=4]
+
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 7, 2.5 )
+
+[node name="Boss" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource( 2 )
+is_hitting = true
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 20 )
+texture = ExtResource( 31 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 6, 0 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 6, 0 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+anims/RESET = SubResource( 21 )
+anims/die = SubResource( 16 )
+anims/hit = SubResource( 22 )
+anims/run = SubResource( 5 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 3 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 4 )
+
+[node name="Sword" type="Area2D" parent="." groups=["EnemyProjectile"]]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
+position = Vector2( 9, 6.5 )
+shape = SubResource( 14 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+collision_mask = 8
+
+[node name="Effects" type="Node2D" parent="."]
+position = Vector2( 2, -14 )
+
+[node name="Poison" parent="Effects" instance=ExtResource( 22 )]
+visible = false
+position = Vector2( -10, -7 )
+
+[node name="Fire" parent="Effects" instance=ExtResource( 20 )]
+visible = false
+position = Vector2( -2, -7 )
+
+[node name="Ice" parent="Effects" instance=ExtResource( 21 )]
+visible = false
+position = Vector2( 6, -7 )
+
+[node name="Timers" type="Node2D" parent="."]
+
+[node name="BurnTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="FreezeTimer" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="PoisonTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
+
+[node name="DOTticks" type="Timer" parent="Timers"]
+wait_time = 0.5
+autostart = true
+
+[node name="FlashTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+autostart = true
+
+[node name="DamageTween" type="Tween" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timers/BurnTimer" to="." method="_on_BurnTimer_timeout"]
+[connection signal="timeout" from="Timers/FreezeTimer" to="." method="_on_FreezeTimer_timeout"]
+[connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
+[connection signal="timeout" from="Timers/DOTticks" to="." method="_on_DOTticks_timeout"]
+[connection signal="timeout" from="Timers/FlashTimer" to="." method="_on_FlashTimer_timeout"]
+[connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="tween_completed" from="DamageTween" to="." method="_on_DamageTween_tween_completed"]

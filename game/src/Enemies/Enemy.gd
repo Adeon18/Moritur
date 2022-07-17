@@ -53,6 +53,8 @@ onready var flash_timer = get_node("./Timers/FlashTimer")
 
 onready var damage_tween = get_node("./DamageTween")
 
+
+var attack_timer
 var Statemachine 
 
 # Called when the node enters the scene tree for the first time.
@@ -64,7 +66,7 @@ func _process(delta):
 	
 	# if enemy is frozen he cant do ANYTHING
 	# if enemy is dead....
-	if(!is_frozen && !is_dead):
+	if(!is_frozen || !is_dead):
 		# move to player
 		distance = position.distance_to(player.position)
 		direction_to_player = position.direction_to(player.position)
