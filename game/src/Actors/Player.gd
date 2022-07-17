@@ -6,6 +6,7 @@ signal camera_shake_requested
 signal frame_freeze_requested
 
 signal health_changed
+signal max_health_changed
 
 var weapon_rotation_radius: int = 16
 
@@ -198,8 +199,14 @@ func power_up(object):
 		projectile_type = key
 		WeaponObject.change_style(projectile_type)
 	elif key in ["heal_up", "health_up"]:
-		# heal up code
-		pass
+		if key == "heal_up":
+			Global.health = Global.max_health
+			emit_signal("health_changed")
+		elif key == "health_up":
+			Global.max_health += 1
+			if (Global.max_health == Global.health+1):
+				Global.health = Global.max_health
+			emit_signal("max_health_changed")
 	else:
 		set_deferred(key, get(key) * Constants.MULTIPLIERS[key])
 	weapon_to_be_picked_up = null

@@ -19,10 +19,16 @@ func _ready():
 	HeartsEmpty.rect_size.x = SIZE * Global.max_health
 	for player in get_tree().get_nodes_in_group("Player"):
 		player.connect("health_changed", self, "_on_Player_health_changed")
+		player.connect("max_health_changed", self, "_on_Player_max_health_changed")
 
 
 func _on_Player_health_changed():
 	HeartsFull.rect_size.x = SIZE * Global.health
+
+
+func _on_Player_max_health_changed():
+	HeartsFull.rect_size.x = SIZE * Global.health
+	HeartsEmpty.rect_size.x = SIZE * Global.max_health
 
 
 func _process(delta):
