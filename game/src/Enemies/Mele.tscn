@@ -1,45 +1,67 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=36 format=2]
 
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_00.png" type="Texture" id=1]
+[ext_resource path="res://art/enemies/goblin/goblin_combat/goblin_combat-1.png" type="Texture" id=1]
 [ext_resource path="res://src/Enemies/Mele.gd" type="Script" id=2]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_5.png" type="Texture" id=3]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_7.png" type="Texture" id=4]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_4.png" type="Texture" id=5]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_1.png" type="Texture" id=6]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_2.png" type="Texture" id=7]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_3.png" type="Texture" id=8]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_6.png" type="Texture" id=9]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_01.png" type="Texture" id=10]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_09.png" type="Texture" id=11]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_02.png" type="Texture" id=12]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_04.png" type="Texture" id=13]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_06.png" type="Texture" id=14]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_07.png" type="Texture" id=15]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_03.png" type="Texture" id=16]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_08.png" type="Texture" id=17]
-[ext_resource path="res://art/enemies/enemy1/hit/sprite_05.png" type="Texture" id=18]
-[ext_resource path="res://art/enemies/enemy1/run/sprite_0.png" type="Texture" id=19]
+[ext_resource path="res://art/enemies/goblin/goblin_running/goblin_running-4.png" type="Texture" id=3]
+[ext_resource path="res://art/enemies/goblin/goblin_running/goblin_running-1.png" type="Texture" id=4]
+[ext_resource path="res://art/enemies/goblin/goblin_running/goblin_running-2.png" type="Texture" id=5]
+[ext_resource path="res://art/enemies/goblin/goblin_running/goblin_running-3.png" type="Texture" id=6]
+[ext_resource path="res://art/enemies/goblin/goblin_combat/goblin_combat-4.png" type="Texture" id=10]
+[ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-4.png" type="Texture" id=11]
+[ext_resource path="res://art/enemies/goblin/goblin_combat/goblin_combat-3.png" type="Texture" id=12]
+[ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-2.png" type="Texture" id=13]
+[ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-3.png" type="Texture" id=14]
+[ext_resource path="res://art/enemies/goblin/goblin_combat/goblin_combat-2.png" type="Texture" id=15]
 [ext_resource path="res://src/Effects/Fire.tscn" type="PackedScene" id=20]
 [ext_resource path="res://src/Effects/Ice.tscn" type="PackedScene" id=21]
 [ext_resource path="res://src/Effects/Poison.tscn" type="PackedScene" id=22]
-[ext_resource path="res://art/enemies/enemy1/die/sprite_2.png" type="Texture" id=23]
-[ext_resource path="res://art/enemies/enemy1/die/sprite_6.png" type="Texture" id=24]
-[ext_resource path="res://art/enemies/enemy1/die/sprite_5.png" type="Texture" id=25]
-[ext_resource path="res://art/enemies/enemy1/die/sprite_4.png" type="Texture" id=26]
-[ext_resource path="res://art/enemies/enemy1/die/sprite_3.png" type="Texture" id=27]
-[ext_resource path="res://art/enemies/enemy1/die/sprite_0.png" type="Texture" id=28]
-[ext_resource path="res://art/enemies/enemy1/die/sprite_1.png" type="Texture" id=29]
+[ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-5.png" type="Texture" id=24]
+[ext_resource path="res://src/shaders/Damaged.gdshader" type="Shader" id=30]
+[ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-1.png" type="Texture" id=31]
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = ExtResource( 30 )
+shader_param/flash_color = Color( 1, 0, 0, 1 )
+shader_param/flash_modifier = null
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 9.0
-height = 4.0
+height = 16.0
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 9.0
-height = 4.0
+height = 16.0
+
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Sword/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Sprite:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 31 ) ]
+}
 
 [sub_resource type="Animation" id=16]
 resource_name = "die"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:texture")
 tracks/0/interp = 1
@@ -47,10 +69,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 28 ), ExtResource( 29 ), ExtResource( 23 ), ExtResource( 27 ), ExtResource( 26 ), ExtResource( 25 ), ExtResource( 24 ) ]
+"values": [ ExtResource( 31 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 24 ) ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath("..")
@@ -59,7 +81,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.8 ),
+"times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -69,6 +91,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=8]
 resource_name = "hit"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:texture")
 tracks/0/interp = 1
@@ -76,10 +99,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 1 ), ExtResource( 10 ), ExtResource( 12 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 18 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 11 ) ]
+"values": [ ExtResource( 1 ), ExtResource( 15 ), ExtResource( 12 ), ExtResource( 10 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("..:is_hitting")
@@ -88,7 +111,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.7, 0.8, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false, false ]
@@ -100,15 +123,15 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.6, 0.7, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, true, false, false, true, true ]
+"values": [ true, true, false, true, true ]
 }
 
 [sub_resource type="Animation" id=5]
 resource_name = "run"
-length = 0.8
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("../Sprite:texture")
@@ -117,10 +140,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ ExtResource( 19 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 9 ), ExtResource( 4 ) ]
+"values": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 3 ) ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=17]
@@ -158,13 +181,13 @@ graph_offset = Vector2( -38.25, 39.375 )
 extents = Vector2( 7, 2.5 )
 
 [node name="Mele" type="KinematicBody2D"]
-position = Vector2( 2, -4 )
 collision_layer = 2
 collision_mask = 12
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 11 )
+material = SubResource( 20 )
+texture = ExtResource( 31 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
@@ -180,6 +203,7 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationTree")
+anims/RESET = SubResource( 21 )
 anims/die = SubResource( 16 )
 anims/hit = SubResource( 8 )
 anims/run = SubResource( 5 )
@@ -196,7 +220,6 @@ collision_layer = 16
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2( 9, 6.5 )
 shape = SubResource( 14 )
-disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
@@ -207,18 +230,19 @@ enabled = true
 collision_mask = 8
 
 [node name="Effects" type="Node2D" parent="."]
+position = Vector2( 2, -9 )
+
+[node name="Poison" parent="Effects" instance=ExtResource( 22 )]
+visible = false
+position = Vector2( -10, -7 )
 
 [node name="Fire" parent="Effects" instance=ExtResource( 20 )]
 visible = false
-position = Vector2( 4, -8 )
+position = Vector2( -2, -7 )
 
-[node name="Poison" parent="Effects" instance=ExtResource( 21 )]
+[node name="Ice" parent="Effects" instance=ExtResource( 21 )]
 visible = false
-position = Vector2( -2, -8 )
-
-[node name="Ice" parent="Effects" instance=ExtResource( 22 )]
-visible = false
-position = Vector2( -8, -8 )
+position = Vector2( 6, -7 )
 
 [node name="Timers" type="Node2D" parent="."]
 
@@ -237,9 +261,17 @@ one_shot = true
 wait_time = 0.5
 autostart = true
 
+[node name="FlashTimer" type="Timer" parent="Timers"]
+wait_time = 2.0
+one_shot = true
+
+[node name="DamageTween" type="Tween" parent="."]
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timers/BurnTimer" to="." method="_on_BurnTimer_timeout"]
 [connection signal="timeout" from="Timers/FreezeTimer" to="." method="_on_FreezeTimer_timeout"]
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="Timers/DOTticks" to="." method="_on_DOTticks_timeout"]
+[connection signal="timeout" from="Timers/FlashTimer" to="." method="_on_FlashTimer_timeout"]
+[connection signal="tween_completed" from="DamageTween" to="." method="_on_DamageTween_tween_completed"]
