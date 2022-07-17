@@ -1,11 +1,13 @@
 extends Node2D
 
+signal show_description(description)
+
 var was_stepped_on = false
 var curr_player
 
 func on_step(player):
 	curr_player = player
-	curr_player.can_roll = false
+#	curr_player.can_roll = false
 	print("you stepped on a cell")
 
 func after_step():
