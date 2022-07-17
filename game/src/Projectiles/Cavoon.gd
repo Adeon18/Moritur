@@ -62,7 +62,7 @@ func hit(body):
 	
 	for key in _shenanigans:
 		if _shenanigans[key]:
-			body.call_deferred(key)
+			body.call_deferred(key, _damage)
 	
 	if !_is_piercing:
 		queue_free()

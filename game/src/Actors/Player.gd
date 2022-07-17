@@ -155,7 +155,10 @@ func _input(event):
 			start_dash()
 	
 	if Input.is_action_pressed("pick_up") and WeaponPickUpCooldownTimer.time_left == 0 and is_colliding_with_weapon:
-		pick_up(weapon_to_be_picked_up)
+		if weapon_to_be_picked_up.is_in_group("Weapons"):
+			pick_up(weapon_to_be_picked_up)
+		elif weapon_to_be_picked_up.is_in_group("Powerups"):
+			power_up(weapon_to_be_picked_up)
 		WeaponPickUpCooldownTimer.start()
 
 
@@ -183,6 +186,9 @@ func instance_dash_ghost():
 func pick_up(object):
 	unparent()
 	reparent(object)
+
+func power_up(object):
+	pass
 
 
 func unparent():
@@ -245,6 +251,10 @@ func _on_GhostSpawnCooldown_timeout():
 
 func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Weapons"):
+		weapon_to_be_picked_up = area
+		is_colliding_with_weapon = true
+	
+	if area.is_in_group("Powerups"):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
 	
