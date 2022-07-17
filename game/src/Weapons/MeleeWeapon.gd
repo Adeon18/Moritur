@@ -23,7 +23,7 @@ func use(direction,
 		damage,
 		shenanigans,
 		type: String,
-		scale_m: int = 1):
+		scale_m: float = 1.0):
 	_damage = damage
 	set_shenanigans(shenanigans)
 	AnimPlayer.play("use")

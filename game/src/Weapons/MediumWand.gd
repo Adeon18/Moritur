@@ -1,6 +1,6 @@
 extends RangedWeapon
 
-class_name WeakWand
+class_name MediumWand
 
 
 func _ready():
@@ -9,10 +9,10 @@ func _ready():
 func init_data():
 	SpriteImg.frame = Constants.WAND_SPRITES[name][_type]
 	is_piercing = false
-	damage_multiplier = 0.3
-	size_multiplier = 0.4
-	delay_decrease = 0.5
-	speed_multiplier = 2
+	damage_multiplier = 1
+	size_multiplier = 0.8
+	delay_decrease = 0.8
+	speed_multiplier = 1.5
 
 
 func disable_pick_up_collision():

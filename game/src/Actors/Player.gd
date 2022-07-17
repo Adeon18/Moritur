@@ -32,8 +32,8 @@ var is_colliding_with_weapon: bool = false
 
 var projectile_speed: int = 300
 var projectile_damage: int = 1
-var projectile_scale: int = 2
-var shot_delay_time: float = 0.5
+var projectile_scale: float = 2.0
+var shot_delay_time: float = 1
 
 var shenanigans: Dictionary = {
 	"freeze": false,
@@ -187,6 +187,7 @@ func instance_dash_ghost():
 func pick_up(object):
 	unparent()
 	reparent(object)
+	ShootCooldownTimer.wait_time = shot_delay_time * object.delay_decrease
 
 
 func power_up(object):
@@ -212,6 +213,7 @@ func unparent():
 
 	clone.call_deferred("enable_pick_up_collision")
 	clone.set_deferred("global_position", WeaponPosition.global_position)
+
 
 
 func reparent(area):

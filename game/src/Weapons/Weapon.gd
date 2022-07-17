@@ -4,6 +4,7 @@ class_name Weapon
 
 
 var ShotCooldownTimer
+var delay_decrease: = 1.0
 
 onready var SpriteImg: Sprite = get_node("Sprite")
 onready var AnimPlayer: AnimationPlayer = get_node("AnimationPlayer")
@@ -14,6 +15,7 @@ func disable_pick_up_collision():
 	$CollisionShape2D.disabled = true
 	$ItemParticle.emitting = false
 	AnimPlayer.play("idle")
+	AnimPlayer.playback_speed = delay_decrease
 
 
 func enable_pick_up_collision():
@@ -28,7 +30,7 @@ func use(direction,
 		damage,
 		shenanigans,
 		type: String,
-		scale_m: int = 1):
+		scale_m: float = 1.0):
 	pass
 
 

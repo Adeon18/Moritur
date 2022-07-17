@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Weapons/Sword.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://src/Enemies/Mele.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/PowerUps/PowerUp.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Weapons/WeakWand.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Weapons/MediumWand.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Weapons/StrongWand.tscn" type="PackedScene" id=9]
 
 [node name="BaseRoom" instance=ExtResource( 4 )]
 
@@ -32,8 +34,14 @@ position = Vector2( 344, 120 )
 [node name="Sword" parent="." index="8" instance=ExtResource( 1 )]
 position = Vector2( 80, 280 )
 
-[node name="Bow" parent="." index="9" instance=ExtResource( 3 )]
+[node name="WeakWand" parent="." index="9" instance=ExtResource( 7 )]
+position = Vector2( 28, 120 )
+
+[node name="Bow" parent="." index="10" instance=ExtResource( 3 )]
 position = Vector2( 304, 344 )
 
-[node name="WeakWand" parent="Bow" index="4" groups=["Weapons"] instance=ExtResource( 7 )]
-position = Vector2( 120, -40 )
+[node name="StrongWand" parent="." index="11" instance=ExtResource( 9 )]
+position = Vector2( 88, 173 )
+
+[node name="MediumWand" parent="." index="12" instance=ExtResource( 8 )]
+position = Vector2( 31, 191 )

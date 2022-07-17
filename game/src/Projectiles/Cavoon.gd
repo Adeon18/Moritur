@@ -63,7 +63,7 @@ func launch(weapon_name: String,
 			is_piercing: bool,
 			shenanigans: Dictionary,
 			type: String,
-			scale_m: int):
+			scale_m: float):
 	
 	scale *= scale_m
 	rotation_degrees = rad2deg(direction.angle()) + 90
@@ -73,7 +73,6 @@ func launch(weapon_name: String,
 	_is_piercing = is_piercing
 	_shenanigans = shenanigans
 	_type = type
-	print(sprites[weapon_name][_type])
 	SpriteImg.frame = sprites[weapon_name][_type]
 
 

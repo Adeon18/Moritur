@@ -4,7 +4,7 @@ extends Node
 var MULTIPLIERS: Dictionary = {
 	"projectile_speed": 1.25,
 	"projectile_scale": 1.05,
-	"shot_delay_time": 0.5,
+	"shot_delay_time": 0.8,
 	"projectile_damage": 1.5
 }
 
@@ -24,7 +24,7 @@ var WAND_SPRITES: Dictionary = {
 		"freeze": 13,
 		"burn": 12,
 	},
-	"StronfWand": {
+	"StrongWand": {
 		"default": 3,
 		"poizon": 2,
 		"freeze": 1,
