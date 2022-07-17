@@ -18,7 +18,3 @@ func handle_fight():
 		movable = true
 
 
-
-func _on_Timer_timeout():
-	update_path()
-
