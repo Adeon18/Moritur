@@ -11,7 +11,7 @@ number_of_cells = 50
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 5.0
-default_color = Color( 0.835294, 0.835294, 0.835294, 1 )
+default_color = Color( 0.968627, 1, 0.584314, 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource( 4 )
@@ -31,6 +31,18 @@ z_index = 1000
 visible = false
 position = Vector2( 100, 0 )
 z_index = 1000
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Background" type="ColorRect" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.407843, 0.380392, 0.32549, 1 )
 
 [connection signal="timeout" from="DieWaitTimer" to="." method="_on_DieWaitTimer_timeout"]
 [connection signal="both_dice_rolled" from="DieContainer" to="." method="_on_DieContainer_both_dice_rolled"]
