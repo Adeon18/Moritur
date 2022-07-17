@@ -31,23 +31,22 @@ var cell_types: Dictionary
 var die1_finished = true
 var die2_finished = true
 
-var can_roll = true
 var dice_res = 0
 
-var Player
+var player
 
 var cells_weight: Dictionary =  {
 	"combat": {
-		"roll_weight": 70
+		"roll_weight": 1
 	},
-	"extra_step": {
-		"roll_weight": 10
+	"random_effect": {
+		"roll_weight": 20
 	},
-	"shop": {
-		"roll_weight": 10
-	},
+#	"shop": {
+#		"roll_weight": 1
+#	},
 	"item": {
-		"roll_weight": 10
+		"roll_weight": 1
 	},
 }
 
@@ -70,8 +69,8 @@ func random_cell_instance():
 func _ready():
 	cell_types = {
 		"combat": preload("res://src/Board/Cell/CombatCell.tscn"),
-		"extra_step": preload("res://src/Board/Cell/ExtraStepCell.tscn"),
-		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
+		"random_effect": preload("res://src/Board/Cell/RandomEffectCell.tscn"),
+#		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
 		"item": preload("res://src/Board/Cell/ItemCell.tscn"),
 	}
 	init_probabilities()
@@ -82,14 +81,14 @@ func _ready():
 	spawn_cells(path)
 	
 	# Setup player
-	Player = BoardPlayer.instance();
-	Player.path = path
-	Player.starting_pos = starting_pos
-	Player.CELL_WIDTH = CELL_WIDTH
-	Player.MARGIN = MARGIN
-	Player.position = starting_pos * (MARGIN + CELL_WIDTH)
-	Player.connect("finished_moving", self, "_on_BoardPlayer_finished_moving")
-	add_child(Player)
+	player = BoardPlayer.instance();
+	player.path = path
+	player.starting_pos = starting_pos
+	player.CELL_WIDTH = CELL_WIDTH
+	player.MARGIN = MARGIN
+	player.position = starting_pos * (MARGIN + CELL_WIDTH)
+	player.connect("finished_moving", self, "_on_BoardPlayer_finished_moving")
+	add_child(player)
 	
 	# Setup camera
 	Cam.current = true
@@ -132,20 +131,24 @@ func spawn_cells(path):
 #		var cell_instance = cell.instance()
 		var cell_instance = random_cell_instance()
 		cell_instance.position = pos * (CELL_WIDTH + MARGIN)
+		
+		if cell_instance is RandomEffectCell:
+			cell_instance.initialize()
+		
+		path[pos].append(cell_instance)
 		Line.add_point(cell_instance.position)
 		add_child(cell_instance)
 
 func _process(delta):
-	if !can_roll or Input.is_action_just_pressed("focus_on_player"):
-		Cam.position = Player.position
+	if !player.can_roll or Input.is_action_just_pressed("focus_on_player"):
+		Cam.position = player.position
 	DieContainer.position = Cam.position
 	
-	if Input.is_action_just_pressed("ui_accept") and can_roll:
+	if Input.is_action_just_pressed("ui_accept") and player.can_roll:
 		var die_res = roll_die()
 		print(die_res)
-		can_roll = false
+		player.can_roll = false
 		dice_res = die_res
-#		Player.move_player(die_res)
 
 
 func set_die_visible():
@@ -165,10 +168,10 @@ func roll_die():
 
 func _on_DieWaitTimer_timeout():
 	set_die_not_visible()
-	Player.move_player(dice_res)
+	player.move_player(dice_res)
 
 func _on_DieContainer_both_dice_rolled():
 	$DieWaitTimer.start()
 
 func _on_BoardPlayer_finished_moving():
-	can_roll = true
+	player.can_roll = true
