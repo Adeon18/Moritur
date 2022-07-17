@@ -4,7 +4,7 @@ extends CanvasLayer
 const SIZE = 20
 
 
-onready var PlayerRef: = get_parent().get_node("Player")
+onready var PlayerRef: = get_parent()
 
 
 onready var DashDelay: = get_node("Control/DashDelay")
@@ -44,8 +44,9 @@ func _on_Player_no_pickable():
 
 
 func _process(delta):
-	DashDelay.value = (DashDelay.max_value - PlayerRef.DashCooldownTimer.time_left * DashDelay.max_value)
-	ReloadTime.max_value = Global.shot_delay_time * PlayerRef.WeaponObject.delay_decrease * 100
-	ReloadTime.value = ReloadTime.max_value - PlayerRef.ShootCooldownTimer.time_left * 100
+	if(PlayerRef):
+		DashDelay.value = (DashDelay.max_value - PlayerRef.DashCooldownTimer.time_left * DashDelay.max_value)
+		ReloadTime.max_value = Global.shot_delay_time * PlayerRef.WeaponObject.delay_decrease * 100
+		ReloadTime.value = ReloadTime.max_value - PlayerRef.ShootCooldownTimer.time_left * 100
 
 
