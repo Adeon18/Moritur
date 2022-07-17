@@ -20,7 +20,7 @@ func _input(event):
 		else:
 			dragging = false
 	if event.is_action("wheel_up"):
-		zoom += -Vector2.ONE
+		zoom -= Vector2.ONE
 		var clamped_zoom = clamp(zoom.x, MIN_ZOOM, MAX_ZOOM)
 		zoom = Vector2(clamped_zoom, clamped_zoom)
 	elif event.is_action("wheel_down"):
