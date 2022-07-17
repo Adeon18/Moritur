@@ -127,17 +127,17 @@ func _on_PoisonTimer_timeout():
 	
 
 
-func burn():
+func burn(damage):
 	print("Burn")
 	fire.visible = true
 	fire_timer.start(burn_time)
 
-func freeze():
+func freeze(damage):
 	print("Freeze")
 	ice.visible = true
 	ice_timer.start(freeze_time)
 
-func poizon():
+func poizon(damage):
 	print("poison")
 	poison.visible = true
 	poison_timer.start(poison_time)
