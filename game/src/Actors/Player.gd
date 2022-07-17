@@ -217,6 +217,8 @@ func take_damage(amount):
 		emit_signal("frame_freeze_requested")
 		if health == 0:
 			die()
+			DamageTween.interpolate_property(WeaponObject, "modulate:a", 1.0, 0.0, 0.8)
+			DamageTween.start()
 		else:
 			DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 			DamageTween.start()

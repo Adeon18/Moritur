@@ -1,15 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/Weapons/Sword.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Rooms/BaseRoom.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Actors/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://src/Weapons/Bow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Enemies/Ranged.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Enemies/Mele.tscn" type="PackedScene" id=5]
 
-[node name="Node2D" type="Node2D"]
+[node name="BaseRoom" instance=ExtResource( 1 )]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Player" parent="." index="0" instance=ExtResource( 2 )]
 
-[node name="Sword" parent="." instance=ExtResource( 1 )]
-position = Vector2( 96, 48 )
+[node name="Enemies" type="Node2D" parent="." index="4"]
 
-[node name="Bow" parent="." instance=ExtResource( 3 )]
-position = Vector2( 216, 80 )
+[node name="Mele" parent="Enemies" index="0" instance=ExtResource( 5 )]
+position = Vector2( 344, 120 )
+
+[node name="Ranged" parent="Enemies" index="1" instance=ExtResource( 4 )]
+position = Vector2( 272, 368 )
