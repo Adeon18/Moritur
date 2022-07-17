@@ -44,8 +44,9 @@ func _ready():
 	var player_instance = player.instance()
 	add_child(player_instance)
 	player_instance.position = player_spawn_pos.position
-	
-	
 
+func _process(delta):
+	if Input.is_action_just_pressed("slide"):
+		SceneChanger.change_scene("res://src/Board/Board.tscn")
 
 
