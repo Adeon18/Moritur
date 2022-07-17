@@ -22,3 +22,5 @@ collision_mask = 8
 format = 1
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemySpawnPoints" type="Node2D" parent="."]
