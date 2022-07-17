@@ -17,12 +17,12 @@ var distance: float
 var velocity: Vector2
 var direction_to_player: Vector2
 
-var burn_time: int = 3
-var freeze_time: int = 1
-var poison_time: int = 5
+var burn_time: float = 3
+var freeze_time: float = 1
+var poison_time: float = 5
 
-var bur_damage: int
-var poison_damage: int
+var _bur_damage: int
+var _poison_damage: int
 
 var path = []
 
@@ -41,7 +41,7 @@ onready var ice = get_node("./Effects/Ice")
 onready var poison = get_node("./Effects/Poison")
 
 onready var fire_timer = get_node("./Timers/BurnTimer")
-onready var ice_timer = get_node("./Timers/IceTimer")
+onready var ice_timer = get_node("./Timers/FreezeTimer")
 onready var poison_timer = get_node("./Timers/PoisonTimer")
 
 var Statemachine 
@@ -82,13 +82,10 @@ func _process(delta):
 	mirror()
 
 
-	
-		
 func update_path():
 	path = nav.get_simple_path(position, player.position, false)
 	path.remove(0)
-	#print(path)
-	
+
 
 func mirror():
 	if(movable && (direction_to_player.x < 0 && sprite.scale.x > 0)): 
@@ -116,25 +113,36 @@ func _on_Area2D_area_entered(area):
 
 func _on_BurnTimer_timeout():
 	print("OH NO ME BURN")
+	_bur_damage = 0
+	fire.visible = false
 
 func _on_FreezeTimer_timeout():
 	print("OH NO ME FREEZE")
+	ice.visible = false
 
 func _on_PoisonTimer_timeout():
 	print("OH NO ME POISONED")
+	_poison_damage = 0
+	poison.visible = false
+	
 
 
-func burn(burn_damage):
+func burn():
 	print("Burn")
 	fire.visible = true
 	fire_timer.start(burn_time)
 
-func freeze(freeze_damage):
+func freeze():
 	print("Freeze")
 	ice.visible = true
 	ice_timer.start(freeze_time)
 
-func poizon(poison_damage):
+func poizon():
 	print("poison")
 	poison.visible = true
 	poison_timer.start(poison_time)
+
+
+
+func _on_DOTticks_timeout():
+	take_damage(_poison_damage + _bur_damage)

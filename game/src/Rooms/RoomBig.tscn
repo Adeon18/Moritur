@@ -21,8 +21,8 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 0, 5, 1, 0, 
 [node name="Bow" parent="." index="4" instance=ExtResource( 4 )]
 position = Vector2( 40, 280 )
 
-[node name="Ranged" parent="Enemies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 319, 142 )
+[node name="Mele" parent="Enemies" index="0" instance=ExtResource( 3 )]
+position = Vector2( 312, 69 )
 
-[node name="Mele" parent="Enemies" index="1" instance=ExtResource( 3 )]
-position = Vector2( 121, 203 )
+[node name="Ranged" parent="Enemies" index="1" instance=ExtResource( 2 )]
+position = Vector2( 148, 229 )

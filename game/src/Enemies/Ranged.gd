@@ -25,8 +25,9 @@ func shoot():
 	var direction = position.direction_to(player.position)
 	projectile.launch(direction, projectile_speed)
 		
-	
 
 
-func _on_Timer_timeout():
-	update_path()
+
+
+
+
