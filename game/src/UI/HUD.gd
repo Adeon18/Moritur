@@ -33,5 +33,5 @@ func _on_Player_max_health_changed():
 
 func _process(delta):
 	DashDelay.value = (DashDelay.max_value - PlayerRef.DashCooldownTimer.time_left * DashDelay.max_value)
-	ReloadTime.max_value = PlayerRef.shot_delay_time * PlayerRef.WeaponObject.delay_decrease * 100
+	ReloadTime.max_value = Global.shot_delay_time * PlayerRef.WeaponObject.delay_decrease * 100
 	ReloadTime.value = ReloadTime.max_value - PlayerRef.ShootCooldownTimer.time_left * 100
