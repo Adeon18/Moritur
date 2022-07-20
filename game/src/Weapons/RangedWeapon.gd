@@ -5,7 +5,7 @@ class_name RangedWeapon
 var _type: = "default"
 
 var is_piercing: bool = false
-var damage_multiplier: = 1
+var damage_multiplier: float = 1
 var size_multiplier: float = 1.0
 
 var speed_multiplier: float = 1.0
