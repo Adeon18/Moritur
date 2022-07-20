@@ -3,8 +3,8 @@ extends "res://src/Board/Cell/Cell.gd"
 var room
 
 func _ready():
-	if Global.visited_cells[index]:
-		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
+#	if Global.visited_cells[index]:
+#		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
 	var files = list_files_in_directory("res://src/Rooms/SmallRooms/")
 	room = files[randi() % files.size()]
 

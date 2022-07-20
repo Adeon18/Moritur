@@ -31,7 +31,7 @@ onready var UIAnimPlayer = $CanvasLayer/AnimationPlayer
 onready var DiceSoundPlayer = get_node("DiceMusicPlayer")
 onready var BossCell = preload("res://src/Board/Cell/BossCell.tscn")
 
-#var cell_types: Dictionary
+var cell_instances: Array
 
 var die1_finished = true
 var die2_finished = true
@@ -55,65 +55,65 @@ var cells_weight: Dictionary =  {
 	},
 }
 
+var cell_types: Dictionary = {
+			"start": preload("res://src/Board/Cell/StartCell.tscn"),
+			"combat": preload("res://src/Board/Cell/CombatCell.tscn"),
+			"random_effect": preload("res://src/Board/Cell/RandomEffectCell.tscn"),
+	#		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
+			"item": preload("res://src/Board/Cell/ItemCell.tscn"),
+}
+
 var total_weight
 func init_probabilities():
 	total_weight = 0.0
 	for cell_type in cells_weight.values():
 		total_weight += cell_type.roll_weight
 		cell_type.acc_weight = total_weight
-	
 
-func random_cell_instance():
+
+func random_cell_type():
 	var roll: float = rand_range(0.0, total_weight)
 	for cell_type in cells_weight.keys():
 		if cells_weight[cell_type].acc_weight > roll:
-			return Global.cell_types[cell_type].instance()
-#	return cell_types.values()[randi() % cell_types.size()].instance()
+			return cell_type
 
 
 func _ready():
-	if Global.visited_cells.size() == 0:
-		for i in number_of_cells:
-			Global.visited_cells.append(false)
 	
-	seed(Global.random_seed)
 	var starting_pos = Vector2(0, 0)
 	
-	if !Global.if_generated_path:
-		Global.cell_types = {
-			"start": preload("res://src/Board/Cell/StartCell.tscn"),
-			"combat": preload("res://src/Board/Cell/CombatCell.tscn"),
-			"random_effect": preload("res://src/Board/Cell/RandomEffectCell.tscn"),
-	#		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
-			"item": preload("res://src/Board/Cell/ItemCell.tscn"),
-		}
+	if !Global.is_board_generated:
 		init_probabilities()
 
 		# Setup board
-		Global.path = generate_path(starting_pos)
-#		Global.if_generated_path = true
-	spawn_cells(Global.path)
+		generate_path(starting_pos)
+		Global.is_board_generated = true
+	spawn_cells()
 	
 	# Setup player
 	player = BoardPlayer.instance();
-	player.path = Global.path
 	player.starting_pos = starting_pos
 	player.CELL_WIDTH = CELL_WIDTH
 	player.MARGIN = MARGIN
 	player.position = starting_pos * (MARGIN + CELL_WIDTH)
+	player.cell_instances = cell_instances
 	player.connect("finished_moving", self, "_on_BoardPlayer_finished_moving")
 	player.connect("step_made", self, "_on_BoardPlayer_step_made")
 	add_child(player)
-	
+
 	Cam.position = player.position
 	
 	# Setup camera
 	Cam.current = true
 
-func generate_path(starting_pos) -> Dictionary:
-	var path: Dictionary = {}
-	var last_pos: Vector2 = starting_pos
-	path[last_pos] = [null, null]
+func generate_path(starting_pos):
+	Global.board_path.append({
+		"cell_type": "start",
+		"board_position": starting_pos,
+	})
+	var last_pos = starting_pos
+	
+	var taken_positions: Dictionary = {starting_pos: true}
 	
 	var i = 0
 	while i < number_of_cells:
@@ -123,65 +123,35 @@ func generate_path(starting_pos) -> Dictionary:
 		var tried_directions = 0
 		for direction in shuffled_directions:
 			var new_pos = last_pos + direction
-			if path.has(new_pos):
+			if taken_positions.has(new_pos):
 				tried_directions += 1
 				continue
 			else:
-				path[new_pos] = [last_pos, null]
-				path[last_pos][1] = new_pos
+				Global.board_path.append({
+					"cell_type": random_cell_type(),
+					"board_position": new_pos,
+				})
+				taken_positions[new_pos] = true
 				last_pos = new_pos
 				i += 1
 				break
 		
 		if tried_directions == shuffled_directions.size():
-			var new_last_pos = path[last_pos][0]
-			path[last_pos][0] = null
-			if new_last_pos != null:
-				path[new_last_pos][1] = null
+			var new_free_pos = Global.board_path[i+1]["board_position"]
+			taken_positions.erase(new_free_pos)
+			last_pos = Global.board_path[i]["board_position"]
 			i -= 1
-	
-	return path
 
 
-func spawn_cells(path):
-	var starting_cell_instance = Global.cell_types["start"].instance()
-	starting_cell_instance.index = 0
-	if !Global.if_generated_path:
-		Global.path[Vector2.ZERO].append(starting_cell_instance)
-	Line.add_point(starting_cell_instance.position)
-	add_child(starting_cell_instance)
-	
-	var i = 0
-	for pos in Global.path.keys().slice(1, path.size()-1):
-#		var cell_instance = cell.instance()
-		var cell_instance
-		
-		if i == path.size()-2:
-			cell_instance = BossCell.instance()
-			cell_instance.position = pos * (CELL_WIDTH + MARGIN)
-			cell_instance.index = i
-			cell_instance.connect("show_description", self, "_on_Cell_show_description")
-			Line.add_point(cell_instance.position)
-			add_child(cell_instance)
-			continue
-	
-		
-		if Global.path[pos].size() != 3:
-			cell_instance = random_cell_instance()
-			cell_instance.position = pos * (CELL_WIDTH + MARGIN)
-			
-			if cell_instance is RandomEffectCell:
-				cell_instance.initialize()
-			
-			Global.path[pos].append(cell_instance)
-		else:
-			print(Global.path[pos])
-			cell_instance = Global.path[pos][2]
-		cell_instance.index = i
-		cell_instance.connect("show_description", self, "_on_Cell_show_description")
+func spawn_cells():
+	for i in Global.board_path.size():
+		var cell_info = Global.board_path[i]
+		var cell_instance = cell_types[cell_info["cell_type"]].instance()
+		cell_instance.position = cell_info["board_position"] * (MARGIN + CELL_WIDTH)
 		Line.add_point(cell_instance.position)
+		cell_instance.cell_info = cell_info
 		add_child(cell_instance)
-		i += 1
+		cell_instances.append(cell_instance)
 
 
 func _process(delta):

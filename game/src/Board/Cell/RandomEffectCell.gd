@@ -95,6 +95,6 @@ func _on_WaitOnStepTimer_timeout():
 	call_deferred(effects_functions[effect_name], curr_player)
 
 
-func _ready():
-	if Global.visited_cells[index]:
-		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
+#func _ready():
+#	if Global.visited_cells[index]:
+#		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
