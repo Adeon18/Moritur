@@ -40,6 +40,8 @@ var is_flashing: bool = false
 
 var path = []
 
+var direction: int = 1
+
 onready var player: Player = get_node("../../Player")
 onready var Cavoon = preload("res://src/Projectiles/EnemyCavoon.tscn")
 onready var Scene = get_node("../../../")
@@ -115,11 +117,13 @@ func mirror():
 		collision.scale.x *= -1
 		area2d.scale.x *= -1
 		weapon.scale.x *= -1
+		direction *= -1
 	elif(movable && (direction_to_player.x > 0 && sprite.scale.x < 0)): 
 		sprite.scale.x *= -1
 		collision.scale.x *= -1
 		area2d.scale.x *= -1
 		weapon.scale.x *= -1
+		direction *= -1
 
 
 

@@ -32,7 +32,6 @@ func shoot():
 	projectile.position = cavoon_ceration.global_position
 	var direction = position.direction_to(player.position)
 	projectile.launch(direction, projectile_speed)
-		
 
 
 
