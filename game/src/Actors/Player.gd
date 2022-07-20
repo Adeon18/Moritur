@@ -174,6 +174,7 @@ func _input(event):
 	
 	if Input.is_action_pressed("pick_up") and WeaponPickUpCooldownTimer.time_left == 0 and is_colliding_with_weapon:
 		$PickUpSound.play()
+		emit_pick_up_object_signal()
 		if weapon_to_be_picked_up.is_in_group("Weapons"):
 			Global.weapon_name = weapon_to_be_picked_up.name
 			pick_up(weapon_to_be_picked_up)
@@ -279,6 +280,11 @@ func take_damage(amount):
 		InvisibilityCooldownTimer.start()
 
 
+func emit_pick_up_object_signal():
+	emit_signal("camera_shake_requested", camera_shake_amplitude - 2, camera_shake_duration - 0.1)
+	emit_signal("frame_freeze_requested", frame_freeze_delay + 15)
+
+
 func die():
 	HitboxCollisionShape.set_deferred("disabled", true)
 	set_physics_process(false)
@@ -286,8 +292,7 @@ func die():
 
 
 func reload_scene():
-	Global.health = Global.max_health
-	get_tree().reload_current_scene()
+	SceneChanger.restart()
 
 
 func _on_DashDuration_timeout():
