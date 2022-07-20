@@ -21,18 +21,17 @@ const effects_functions: Dictionary = {
 	EFFECTS.GO_FORWARDS: "go_forwards",
 }
 
-onready var WaitOnStepTimer = $WaitOnStepTimer
-
 var effect_name = EFFECTS.GO_BACKWARDS
 
+var backwards_step = 1
+var forwards_step = 1
 
-var backwards_step = 0
-var forwards_step = 0
+func _ready():
+	initialize()
 
 func initialize():
 	init_probabilities()
 	random_effect()
-#	print(effects_functions[effect_name])
 	match effect_name:
 		EFFECTS.GO_BACKWARDS:
 			backwards_step = randi() % 3 + 1
@@ -54,19 +53,18 @@ func random_effect():
 			return
 
 func on_step(player):
-	curr_player = player
+	.on_step(player)
+	
+	if cell_info["visited"]:
+		return
+	
 	player.can_roll = false
 	print("you stepped on mysterious cell")
-	if Global.visited_cells[index]:
-		player.can_roll = true
-		print("you already stepped on this cell")
-		return
 
 	show_description()
 	WaitOnStepTimer.start()
 
 func after_step():
-	Global.visited_cells[Global.current_index] = true
 	.after_step()
 	
 func show_description():
@@ -93,8 +91,3 @@ func go_forwards(player):
 func _on_WaitOnStepTimer_timeout():
 	after_step()
 	call_deferred(effects_functions[effect_name], curr_player)
-
-
-#func _ready():
-#	if Global.visited_cells[index]:
-#		$Sprite.modulate = $Sprite.modulate.darkened(0.5)

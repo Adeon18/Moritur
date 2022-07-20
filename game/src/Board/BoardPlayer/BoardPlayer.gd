@@ -17,7 +17,6 @@ var target_position = Vector2.ZERO
 var lerp_speed = 15
 
 var steps_to_take = 0
-var current_index = 0
 
 var going_backwards = false
 var can_roll = true
@@ -46,26 +45,25 @@ func _physics_process(delta):
 				emit_signal("finished_moving")
 				on_finish_moving()
 				current_state = STATE.IDLE
-				cell_instances[current_index].on_step(self)
+				cell_instances[Global.board_player_current_index].on_step(self)
 			else:
 				current_state = STATE.TAKING_STEP
 	elif current_state == STATE.TAKING_STEP:
-		if (current_index+1 != cell_instances.size() and !going_backwards) or (current_index-1 != -1 and going_backwards):
+		if (Global.board_player_current_index+1 != cell_instances.size() and !going_backwards) or (Global.board_player_current_index-1 != -1 and going_backwards):
 			if !going_backwards:
-				current_pos = Global.board_path[current_index+1]["board_position"]
-				current_index += 1
-				Global.board_player_current_index = current_index
+				current_pos = Global.board_path[Global.board_player_current_index+1]["board_position"]
+				Global.board_player_current_index += 1
 			else:
-				current_pos = Global.board_path[current_index-1]["board_position"]
-				current_index -= 1
-				Global.board_player_current_index = current_index
+				current_pos = Global.board_path[Global.board_player_current_index-1]["board_position"]
+				Global.board_player_current_index -= 1
 			target_position = current_pos * (CELL_WIDTH + MARGIN)
 			current_state = STATE.TRANSITIONING
 			steps_to_take -= 1
 			emit_signal("step_made")
 			WhooshSound.play()
+		elif Global.board_player_current_index+1 == cell_instances.size():
+			cell_instances[Global.board_player_current_index].on_step(self)
 		else:
-#			path[current_pos][2].on_step(self)
 			steps_to_take = 0
 			current_state = STATE.IDLE
 			emit_signal("finished_moving")

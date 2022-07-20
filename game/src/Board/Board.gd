@@ -61,6 +61,7 @@ var cell_types: Dictionary = {
 			"random_effect": preload("res://src/Board/Cell/RandomEffectCell.tscn"),
 	#		"shop": preload("res://src/Board/Cell/ShopCell.tscn"),
 			"item": preload("res://src/Board/Cell/ItemCell.tscn"),
+			"boss": preload("res://src/Board/Cell/BossCell.tscn")
 }
 
 var total_weight
@@ -95,7 +96,6 @@ func _ready():
 	player.starting_pos = starting_pos
 	player.CELL_WIDTH = CELL_WIDTH
 	player.MARGIN = MARGIN
-	player.position = starting_pos * (MARGIN + CELL_WIDTH)
 	player.cell_instances = cell_instances
 	player.connect("finished_moving", self, "_on_BoardPlayer_finished_moving")
 	player.connect("step_made", self, "_on_BoardPlayer_step_made")
@@ -110,6 +110,7 @@ func generate_path(starting_pos):
 	Global.board_path.append({
 		"cell_type": "start",
 		"board_position": starting_pos,
+		"visited": false
 	})
 	var last_pos = starting_pos
 	
@@ -128,8 +129,9 @@ func generate_path(starting_pos):
 				continue
 			else:
 				Global.board_path.append({
-					"cell_type": random_cell_type(),
+					"cell_type": "boss" if (i == number_of_cells-1) else random_cell_type(),
 					"board_position": new_pos,
+					"visited": false
 				})
 				taken_positions[new_pos] = true
 				last_pos = new_pos
@@ -150,6 +152,7 @@ func spawn_cells():
 		cell_instance.position = cell_info["board_position"] * (MARGIN + CELL_WIDTH)
 		Line.add_point(cell_instance.position)
 		cell_instance.cell_info = cell_info
+		cell_instance.connect("show_description", self, "_on_Cell_show_description")
 		add_child(cell_instance)
 		cell_instances.append(cell_instance)
 
@@ -175,7 +178,6 @@ func set_die_not_visible():
 	Die2.visible = false
 
 func roll_die():
-	randomize()
 	set_die_visible()
 	var die1_val = Die1.roll()
 	var die2_val = Die2.roll()

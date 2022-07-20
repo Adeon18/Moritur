@@ -56,7 +56,7 @@ font_data = SubResource( 3 )
 
 [node name="Board" type="Node2D"]
 script = ExtResource( 1 )
-number_of_cells = 120
+number_of_cells = 20
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 5.0
@@ -109,18 +109,13 @@ anims/RESET = SubResource( 5 )
 anims/show = SubResource( 6 )
 
 [node name="Control" type="Control" parent="CanvasLayer"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -256.0
+anchor_right = 1.0
 margin_top = -50.0
-margin_right = 256.0
+margin_bottom = -50.0
 
 [node name="EffectDescriptionLabel" type="Label" parent="CanvasLayer/Control"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -252.0
-margin_right = 252.0
-margin_bottom = 43.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_fonts/font = SubResource( 4 )
 text = "Bruh"
 align = 1
