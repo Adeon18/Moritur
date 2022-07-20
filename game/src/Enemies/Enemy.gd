@@ -2,6 +2,15 @@ extends KinematicBody2D
 
 class_name Enemy
 
+
+signal camera_shake_requested(amp, dur)
+signal frame_freeze_requested(delay)
+
+# Effects
+var camera_shake_duration: float = 0.2
+var camera_shake_amplitude: float = 2.0
+var frame_freeze_delay: int = 30
+
 #only for ranged units
 var projectile_speed = 100
 
@@ -127,6 +136,9 @@ func take_damage(damage):
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)
+	
+	emit_signal("camera_shake_requested", camera_shake_amplitude, camera_shake_duration)
+	emit_signal("frame_freeze_requested", frame_freeze_delay)
 	if(health <= 0 && !is_dead):
 		Statemachine.travel("die")
 		is_dead = true

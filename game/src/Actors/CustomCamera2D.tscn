@@ -4,6 +4,14 @@
 
 [node name="CustomCamera2D" type="Camera2D"]
 current = true
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 7.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
 script = ExtResource( 1 )
 amplitude = 3.0
 damp_easing = 2.0
