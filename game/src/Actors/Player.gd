@@ -41,7 +41,7 @@ var WeaponObject
 var weapon_to_be_picked_up
 var is_colliding_with_weapon: bool = false
 
-
+var dead: = false
 
 var shenanigans: Dictionary = {
 	"freeze": false,
@@ -289,10 +289,13 @@ func die():
 	HitboxCollisionShape.set_deferred("disabled", true)
 	set_physics_process(false)
 	StateMashine.travel("death")
+	dead = true
 
 
 func reload_scene():
-	SceneChanger.restart()
+	if dead:
+		SceneChanger.restart()
+		dead = false
 
 
 func _on_DashDuration_timeout():
