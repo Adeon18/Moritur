@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 class_name Player
 
-signal camera_shake_requested
-signal frame_freeze_requested
+signal camera_shake_requested(amp, dur)
+signal frame_freeze_requested(delay)
 
 signal health_changed
 signal max_health_changed
@@ -24,6 +24,12 @@ var is_dashing: bool = false
 var dash_speed: int = 600
 
 var mouse_position: Vector2 = Vector2()
+
+# Effects
+var camera_shake_duration: float = 0.4
+var camera_shake_amplitude: float = 3.0
+
+var frame_freeze_delay: int = 15
 
 var _velocity = Vector2()
 var _speed = default_speed
@@ -58,6 +64,7 @@ onready var WeaponPickUpCooldownTimer: Timer = get_node("WeaponPickUpCooldown")
 onready var InvisibilityCooldownTimer: Timer = get_node("InvisibilityCooldown")
 onready var Hitbox: Area2D = get_node("Hitbox")
 onready var WeaponContainer: Node2D = get_node("WeaponPosition")
+onready var CollisionShapeWall: CollisionShape2D = get_node("CollisionShape2D")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
 
 func _ready():
@@ -92,9 +99,15 @@ func _physics_process(delta):
 	if mouse_position.x > global_position.x:
 		SpriteNode.flip_h = true
 		WeaponContainer.scale.y = 1
+		Hitbox.scale.x = 1
+		if (CollisionShapeWall.position.x < 0):
+			CollisionShapeWall.position.x = abs(CollisionShapeWall.position.x)
 	elif (mouse_position.x < global_position.x):
 		SpriteNode.flip_h = false
 		WeaponContainer.scale.y = -1
+		Hitbox.scale.x = -1
+		if (CollisionShapeWall.position.x > 0):
+			CollisionShapeWall.position.x = -CollisionShapeWall.position.x
 
 	handle_weapon_rotation()
 	handle_attack()
@@ -251,8 +264,8 @@ func take_damage(amount):
 	if !is_invinsible:
 		Global.health -= amount
 		# animatons
-		emit_signal("camera_shake_requested")
-		emit_signal("frame_freeze_requested")
+		emit_signal("camera_shake_requested", camera_shake_amplitude, camera_shake_duration)
+		emit_signal("frame_freeze_requested", frame_freeze_delay)
 		emit_signal("health_changed")
 		$HitPlayer.play()
 		if Global.health == 0:

@@ -23,7 +23,6 @@
 [ext_resource path="res://art/enemies/goblin/goblin_death/goblin_death-1.png" type="Texture" id=31]
 
 [sub_resource type="ShaderMaterial" id=20]
-resource_local_to_scene = true
 shader = ExtResource( 30 )
 shader_param/flash_color = Color( 1, 0, 0, 1 )
 shader_param/flash_modifier = null
@@ -185,14 +184,14 @@ graph_offset = Vector2( -38.25, 39.375 )
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 7, 2.5 )
 
-[node name="Mele" type="KinematicBody2D"]
+[node name="Mele" type="KinematicBody2D" groups=["FrameFreezers", "Shakers"]]
 collision_layer = 2
 collision_mask = 12
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 20 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
