@@ -19,7 +19,7 @@ var effective_fighting_distance: int = 40
 export var is_hitting: bool = false
 
 var speed: int = 50
-var movable: bool = true
+export var movable: bool = true
 var can_hit: bool = true
 
 var distance: float
@@ -72,7 +72,6 @@ func _ready():
 
 
 func _process(delta):
-	
 	# if enemy is frozen he cant do ANYTHING
 	# if enemy is dead....
 	if(!is_frozen && !is_dead):
@@ -85,18 +84,20 @@ func _process(delta):
 		
 		if(raycast.is_colliding()): can_hit = false
 		else: can_hit = true
-
-		
+		print(movable)
+		print(distance, " ", effective_fighting_distance, !can_hit)
 		# stop when too close to player or if cant move (useful for freeze?)
 		if(movable && ((distance > effective_fighting_distance) || !can_hit)):
 			Statemachine.travel("run")
+			print(path.size())
 			if(path.size() > 1):
 				var d = position.distance_to(path[0])
+				print(d)
 				if (d > 1): position = position.linear_interpolate(path[0], speed*delta/d)
 				else:
 					path.remove(0)
-		
-		
+		#print(path)
+		#print(position)
 		# handle combat if possible
 		if((distance <= effective_fighting_distance) && can_hit):
 			handle_fight()
