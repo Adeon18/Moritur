@@ -1,7 +1,7 @@
 extends Enemy
 
 onready var shoot_timer = get_node("Timers/ShootTimer")
-
+onready var cavoon_ceration = get_node("CavoonCreationPoint")
 func _init():
 	speed = 80
 	effective_fighting_distance = 100
@@ -19,11 +19,17 @@ func handle_fight():
 		is_hitting = true
 		shoot_timer.start(1)
 
+func mirror():
+	if(movable && (direction_to_player.x < 0 && sprite.scale.x > 0)):
+		cavoon_ceration.position.x *=-1
+	elif(movable && (direction_to_player.x > 0 && sprite.scale.x < 0)):
+		cavoon_ceration.position.x *=-1
+	.mirror()
 
 func shoot():
 	var projectile = Cavoon.instance()
 	get_node("../../").add_child(projectile)
-	projectile.position = position
+	projectile.position = cavoon_ceration.global_position
 	var direction = position.direction_to(player.position)
 	projectile.launch(direction, projectile_speed)
 		

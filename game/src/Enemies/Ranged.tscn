@@ -249,7 +249,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 19 )
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 0 )
@@ -277,6 +277,9 @@ tree_root = SubResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 4 )
+
+[node name="CavoonCreationPoint" type="Position2D" parent="."]
+position = Vector2( 15, -10 )
 
 [node name="Sword" type="Area2D" parent="." groups=["EnemyProjectile"]]
 
