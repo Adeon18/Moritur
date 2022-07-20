@@ -58,6 +58,7 @@ onready var WeaponPickUpCooldownTimer: Timer = get_node("WeaponPickUpCooldown")
 onready var InvisibilityCooldownTimer: Timer = get_node("InvisibilityCooldown")
 onready var Hitbox: Area2D = get_node("Hitbox")
 onready var WeaponContainer: Node2D = get_node("WeaponPosition")
+onready var CollisionShapeWall: CollisionShape2D = get_node("CollisionShape2D")
 onready var HitboxCollisionShape: CollisionShape2D = get_node("Hitbox/CollisionShape2D")
 
 func _ready():
@@ -92,9 +93,15 @@ func _physics_process(delta):
 	if mouse_position.x > global_position.x:
 		SpriteNode.flip_h = true
 		WeaponContainer.scale.y = 1
+		Hitbox.scale.x = 1
+		if (CollisionShapeWall.position.x < 0):
+			CollisionShapeWall.position.x = abs(CollisionShapeWall.position.x)
 	elif (mouse_position.x < global_position.x):
 		SpriteNode.flip_h = false
 		WeaponContainer.scale.y = -1
+		Hitbox.scale.x = -1
+		if (CollisionShapeWall.position.x > 0):
+			CollisionShapeWall.position.x = -CollisionShapeWall.position.x
 
 	handle_weapon_rotation()
 	handle_attack()
