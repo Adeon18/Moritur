@@ -84,20 +84,15 @@ func _process(delta):
 		
 		if(raycast.is_colliding()): can_hit = false
 		else: can_hit = true
-		print(movable)
-		print(distance, " ", effective_fighting_distance, !can_hit)
 		# stop when too close to player or if cant move (useful for freeze?)
 		if(movable && ((distance > effective_fighting_distance) || !can_hit)):
 			Statemachine.travel("run")
-			print(path.size())
 			if(path.size() > 1):
 				var d = position.distance_to(path[0])
-				print(d)
 				if (d > 1): position = position.linear_interpolate(path[0], speed*delta/d)
 				else:
 					path.remove(0)
-		#print(path)
-		#print(position)
+
 		# handle combat if possible
 		if((distance <= effective_fighting_distance) && can_hit):
 			handle_fight()
@@ -134,6 +129,7 @@ func handle_fight():
 func take_damage(damage):
 	$HitPlayer.play()
 	health -= damage
+	print(damage)
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)

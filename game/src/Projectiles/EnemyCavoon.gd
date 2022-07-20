@@ -19,7 +19,8 @@ func launch(direction: Vector2, speed: int):
 
 
 func _on_Cavoon_area_entered(area):
-	pass
+	print(area)
+	queue_free()
 
 
 func _on_Cavoon_body_entered(body):

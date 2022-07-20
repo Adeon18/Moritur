@@ -35,6 +35,7 @@ autostart = true
 wait_time = 3.0
 autostart = true
 
+[connection signal="area_entered" from="." to="." method="_on_Cavoon_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Cavoon_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="ChasingTimer" to="." method="_on_ChasingTimer_timeout"]

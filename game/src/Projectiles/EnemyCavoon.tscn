@@ -22,4 +22,5 @@ frame = 20
 scale = Vector2( 0.8, 0.8 )
 shape = SubResource( 1 )
 
+[connection signal="area_entered" from="." to="." method="_on_Cavoon_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Cavoon_body_entered"]
