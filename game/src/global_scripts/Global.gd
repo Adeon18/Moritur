@@ -36,3 +36,23 @@ func save():
 		"freeze": freeze,
 		"poizon": poizon
 	}
+
+
+func fucking_reset_oh_my_fucking_god():
+	health = 3
+	max_health = 3
+
+	burn = false
+	freeze = false
+	poizon = false
+
+	weapon_name = "Sword"
+	projectile_speed = 300
+	projectile_damage = 20
+	projectile_scale = 2.0
+	shot_delay_time = 1
+	projectile_type = "default"
+
+	is_board_generated = false
+	board_path = []
+	board_player_current_index = 0

@@ -292,8 +292,7 @@ func die():
 
 
 func reload_scene():
-	Global.health = Global.max_health
-	get_tree().reload_current_scene()
+	SceneChanger.restart()
 
 
 func _on_DashDuration_timeout():

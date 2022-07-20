@@ -1,6 +1,9 @@
 extends Node
 
 
+var BOARD_SCENE_PATH: = "res://src/Board/Board.tscn"
+
+
 var MULTIPLIERS: Dictionary = {
 	"projectile_speed": 1.25,
 	"projectile_scale": 1.1,
