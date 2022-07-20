@@ -53,6 +53,8 @@ func random_cell_instance():
 			return mobs_dict[mob_type].instance()
 
 
+var should_change_scene = false
 func _process(delta):
-	if enemies.get_child_count() == 0:
+	if enemies.get_child_count() == 0 and !should_change_scene:
 		SceneChanger.change_scene("res://src/Board/Board.tscn")
+		should_change_scene = true

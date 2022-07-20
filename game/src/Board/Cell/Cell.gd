@@ -2,12 +2,15 @@ extends Node2D
 
 signal show_description(description)
 
-var was_stepped_on = false
+var cell_info: Dictionary
+
 var curr_player
-var index
+
+onready var WaitOnStepTimer = $WaitOnStepTimer
 
 func _ready():
-	if Global.visited_cells[index]:
+	print(cell_info)
+	if cell_info["visited"]:
 		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
 
 func on_step(player):
@@ -17,10 +20,6 @@ func on_step(player):
 	
 
 func after_step():
-	if !Global.visited_cells[index]:
+	if !cell_info["visited"]:
 		$Sprite.modulate = $Sprite.modulate.darkened(0.5)
-		Global.visited_cells[Global.current_index] = true
-
-
-func _on_WaitOnStepTimer_timeout():
-	after_step()
+		cell_info["visited"] = true
