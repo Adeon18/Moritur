@@ -14,6 +14,7 @@ func _ready():
 	randomize()
 	set_process(false)
 	set_duration(_duration)
+	yield(get_tree().create_timer(0.1),"timeout")
 	connect_to_shakers()
 
 
@@ -30,6 +31,10 @@ func set_duration(duration: float):
 	ShakeTimer.wait_time = duration
 
 
+func set_amplitude(amp):
+	amplitude = amp
+
+
 func set_shake(shake):
 	_shake = shake
 	set_process(shake)
@@ -43,9 +48,13 @@ func connect_to_shakers():
 		shaker.connect("camera_shake_requested", self, "_on_camera_shake_requested")
 
 
-func _on_camera_shake_requested():
+func _on_camera_shake_requested(amp, dur):
+	if is_processing():
+		return
 	if !enabled:
 		return
+	set_amplitude(amp)
+	set_duration(dur)
 	set_shake(true)
 
 
