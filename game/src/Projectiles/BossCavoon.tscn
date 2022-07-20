@@ -7,12 +7,12 @@
 radius = 6.08276
 
 [node name="Cavoon" type="Area2D" groups=["EnemyProjectile"]]
+scale = Vector2( 0.34, 0.34 )
 collision_layer = 16
 collision_mask = 9
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.345991, 0.345991 )
 texture = ExtResource( 1 )
 hframes = 13
 vframes = 6
