@@ -19,7 +19,7 @@ var effective_fighting_distance: int = 40
 export var is_hitting: bool = false
 
 var speed: int = 50
-var movable: bool = true
+export var movable: bool = true
 var can_hit: bool = true
 
 var distance: float
@@ -39,6 +39,8 @@ var is_dead: bool = false
 var is_flashing: bool = false
 
 var path = []
+
+var direction: int = 1
 
 onready var player: Player = get_node("../../Player")
 onready var Cavoon = preload("res://src/Projectiles/EnemyCavoon.tscn")
@@ -72,7 +74,6 @@ func _ready():
 
 
 func _process(delta):
-	
 	# if enemy is frozen he cant do ANYTHING
 	# if enemy is dead....
 	if(!is_frozen && !is_dead):
@@ -85,8 +86,6 @@ func _process(delta):
 		
 		if(raycast.is_colliding()): can_hit = false
 		else: can_hit = true
-
-		
 		# stop when too close to player or if cant move (useful for freeze?)
 		if(movable && ((distance > effective_fighting_distance) || !can_hit)):
 			Statemachine.travel("run")
@@ -95,8 +94,7 @@ func _process(delta):
 				if (d > 1): position = position.linear_interpolate(path[0], speed*delta/d)
 				else:
 					path.remove(0)
-		
-		
+
 		# handle combat if possible
 		if((distance <= effective_fighting_distance) && can_hit):
 			handle_fight()
@@ -119,11 +117,13 @@ func mirror():
 		collision.scale.x *= -1
 		area2d.scale.x *= -1
 		weapon.scale.x *= -1
+		direction *= -1
 	elif(movable && (direction_to_player.x > 0 && sprite.scale.x < 0)): 
 		sprite.scale.x *= -1
 		collision.scale.x *= -1
 		area2d.scale.x *= -1
 		weapon.scale.x *= -1
+		direction *= -1
 
 
 
@@ -133,6 +133,7 @@ func handle_fight():
 func take_damage(damage):
 	$HitPlayer.play()
 	health -= damage
+	print(damage)
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)

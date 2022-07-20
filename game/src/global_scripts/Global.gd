@@ -9,7 +9,7 @@ var poizon: bool = false
 
 var weapon_name = "Sword"
 var projectile_speed: int = 300
-var projectile_damage: int = 20
+var projectile_damage: float = 20
 var projectile_scale: float = 2.0
 var shot_delay_time: float = 1
 var projectile_type: String = "default"

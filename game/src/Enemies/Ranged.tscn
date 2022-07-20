@@ -105,7 +105,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.4, 0.5, 0.6 ),
+"times": PoolRealArray( 0, 0.755806, 0.779019, 0.875978 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ true, true, false, false ]
@@ -123,6 +123,18 @@ tracks/2/keys = {
 "args": [  ],
 "method": "shoot"
 } ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:movable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.00456161, 0.752459, 0.857583 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, true ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -176,10 +188,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.627222 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ false, false ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=16]
@@ -207,6 +219,7 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
@@ -236,7 +249,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 19 )
-texture = ExtResource( 25 )
+texture = ExtResource( 3 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 0 )
@@ -252,6 +265,7 @@ shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimationTree")
+reset_on_save = false
 anims/RESET = SubResource( 26 )
 anims/die = SubResource( 15 )
 anims/hit = SubResource( 8 )
@@ -263,6 +277,9 @@ tree_root = SubResource( 3 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 4 )
+
+[node name="CavoonCreationPoint" type="Position2D" parent="."]
+position = Vector2( 15, -10 )
 
 [node name="Sword" type="Area2D" parent="." groups=["EnemyProjectile"]]
 
@@ -317,6 +334,8 @@ autostart = true
 wait_time = 2.0
 one_shot = true
 
+[node name="ShootTimer" type="Timer" parent="Timers"]
+
 [node name="DamageTween" type="Tween" parent="."]
 
 [node name="HitPlayer" type="AudioStreamPlayer" parent="."]
@@ -331,4 +350,5 @@ pitch_scale = 2.0
 [connection signal="timeout" from="Timers/PoisonTimer" to="." method="_on_PoisonTimer_timeout"]
 [connection signal="timeout" from="Timers/DOTticks" to="." method="_on_DOTticks_timeout"]
 [connection signal="timeout" from="Timers/FlashTimer" to="." method="_on_FlashTimer_timeout"]
+[connection signal="timeout" from="Timers/ShootTimer" to="." method="_on_ShootTimer_timeout"]
 [connection signal="tween_completed" from="DamageTween" to="." method="_on_DamageTween_tween_completed"]

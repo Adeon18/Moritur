@@ -2,7 +2,7 @@ extends Area2D
 
 
 var _speed: int
-var _damage: int
+var _damage: float
 var _direction: Vector2
 
 var _is_piercing: bool = false
@@ -59,7 +59,7 @@ func _physics_process(delta):
 func launch(weapon_name: String,
 			direction: Vector2,
 			speed: int,
-			damage: int,
+			damage: float,
 			is_piercing: bool,
 			shenanigans: Dictionary,
 			type: String,

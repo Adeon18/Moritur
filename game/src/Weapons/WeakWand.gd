@@ -9,10 +9,10 @@ func _ready():
 func init_data():
 	SpriteImg.frame = Constants.WAND_SPRITES[name][_type]
 	is_piercing = false
-	damage_multiplier = 0.3
+	damage_multiplier = 0.4
 	size_multiplier = 0.4
 	delay_decrease = 0.5
-	speed_multiplier = 2
+	speed_multiplier = 3
 
 
 func disable_pick_up_collision():

@@ -25,9 +25,19 @@ var powerups = [
 	"shot_delay_time",
 	"projectile_damage"
 ]
+var weapons
+
 var total_weight
 func _ready():
-	var weapons = [wand_weak, wand_large, wand_med, sword, bow]
+	weapons = [[wand_weak, "WeakWand"], [wand_large, "StrongWand"], [wand_med, "MediumWand"], [sword, "Sword"], [bow, "Bow"]]
+	
+	spawn_item()
+
+	var player_instance = player.instance()
+	add_child(player_instance)
+	player_instance.position = player_spawn_pos.position
+
+func spawn_item():
 	var number = randi() % 14
 	if(number < 9):
 		var power = powerup.instance()
@@ -36,14 +46,13 @@ func _ready():
 		power.position = item_pos.position
 		
 	else:
-		var weap = weapons[number-9].instance()
-		add_child(weap)
-		weap.position = item_pos.position
-		
+		if(weapons[number-9][1] != Global.weapon_name):
+			var weap = weapons[number-9][0].instance()
+			add_child(weap)
+			weap.position = item_pos.position
+		else:
+			spawn_item()
 
-	var player_instance = player.instance()
-	add_child(player_instance)
-	player_instance.position = player_spawn_pos.position
 
 func _process(delta):
 	if Input.is_action_just_pressed("slide"):

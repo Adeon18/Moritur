@@ -37,13 +37,14 @@ tracks/1/keys = {
 extents = Vector2( 8.5, 3 )
 
 [node name="Sword" instance=ExtResource( 1 )]
+collision_layer = 4
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/use = SubResource( 3 )
 
 [node name="HitDetector" type="Area2D" parent="." index="4" groups=["Projectiles"]]
-collision_layer = 4
+collision_layer = 5
 collision_mask = 2
 script = ExtResource( 3 )
 
