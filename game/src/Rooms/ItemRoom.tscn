@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Rooms/ItemRoom.gd" type="Script" id=1]
 [ext_resource path="res://src/Rooms/BaseRoom.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Decorations/Candle1.tscn" type="PackedScene" id=3]
 
 [node name="BaseRoom" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
@@ -17,3 +18,36 @@ tile_data = PoolIntArray( 196615, 0, 0, 196616, 1, 0, 196617, 1, 0, 196618, 1, 0
 
 [node name="ItemPos" type="Position2D" parent="." index="6"]
 position = Vector2( 305, 132 )
+
+[node name="Candle1" parent="." index="7" instance=ExtResource( 3 )]
+position = Vector2( 276, 135 )
+
+[node name="Candle2" parent="." index="8" instance=ExtResource( 3 )]
+position = Vector2( 331, 136 )
+
+[node name="Candle3" parent="." index="9" instance=ExtResource( 3 )]
+position = Vector2( 305, 114 )
+
+[node name="Candle4" parent="." index="10" instance=ExtResource( 3 )]
+position = Vector2( 304, 154 )
+
+[node name="Candle5" parent="." index="11" instance=ExtResource( 3 )]
+position = Vector2( 140, 122 )
+
+[node name="Candle6" parent="." index="12" instance=ExtResource( 3 )]
+position = Vector2( 140, 135 )
+
+[node name="Candle7" parent="." index="13" instance=ExtResource( 3 )]
+position = Vector2( 140, 150 )
+
+[node name="Candle8" parent="." index="14" instance=ExtResource( 3 )]
+position = Vector2( 134, 68 )
+
+[node name="Candle9" parent="." index="15" instance=ExtResource( 3 )]
+position = Vector2( 411, 66 )
+
+[node name="Candle10" parent="." index="16" instance=ExtResource( 3 )]
+position = Vector2( 411, 209 )
+
+[node name="Candle11" parent="." index="17" instance=ExtResource( 3 )]
+position = Vector2( 133, 206 )
