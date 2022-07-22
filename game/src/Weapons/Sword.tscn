@@ -105,9 +105,6 @@ color_ramp = SubResource( 8 )
 collision_layer = 4
 script = ExtResource( 2 )
 
-[node name="Sprite" parent="." index="1"]
-position = Vector2( 10, 3.9375 )
-
 [node name="AnimationPlayer" parent="." index="2"]
 anims/use = SubResource( 3 )
 
