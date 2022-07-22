@@ -12,6 +12,7 @@ onready var Cavoon = preload("res://src/Projectiles/Cavoon.tscn")
 
 
 func _ready():
+	print(name)
 	$ItemParticle.material.set_shader_param("color", Constants.PROJECTILE_COLOR[Global.projectile_type])
 
 
