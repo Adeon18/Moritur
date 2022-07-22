@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://art/Weapons/bow.png" type="Texture" id=1]
+[ext_resource path="res://art/Weapons/Bow Pack.png" type="Texture" id=1]
 [ext_resource path="res://src/Weapons/Bow.gd" type="Script" id=2]
 [ext_resource path="res://src/Weapons/Weapon.tscn" type="PackedScene" id=3]
 
@@ -32,6 +32,20 @@ tracks/1/keys = {
 "values": [ 0.0, -10.0, 0.0 ]
 }
 
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec4 color: hint_color = vec4(1, 1, 0, 1);
+
+void fragment() {
+  COLOR = vec4(color.rgb, COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/color = Color( 1, 1, 0, 1 )
+
 [node name="Bow" instance=ExtResource( 3 )]
 collision_layer = 0
 collision_mask = 1
@@ -43,6 +57,11 @@ position = Vector2( 9, 0 )
 [node name="Sprite" parent="." index="1"]
 rotation = -0.785397
 texture = ExtResource( 1 )
+hframes = 6
+vframes = 6
 
 [node name="AnimationPlayer" parent="." index="2"]
 anims/use = SubResource( 1 )
+
+[node name="ItemParticle" parent="." index="3"]
+material = SubResource( 5 )

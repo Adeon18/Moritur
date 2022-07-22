@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Weapons/Sword.gd" type="Script" id=2]
@@ -32,9 +32,74 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false, false, false, true ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("SwingParticle:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec4 color: hint_color = vec4(1, 1, 0, 1);
+
+void fragment() {
+  COLOR = vec4(color.rgb, COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+resource_local_to_scene = true
+shader = SubResource( 4 )
+shader_param/color = Color( 1, 1, 0, 1 )
+
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 8.5, 3 )
+
+[sub_resource type="Shader" id=12]
+code = "shader_type canvas_item;
+
+uniform vec4 color: hint_color = vec4(1, 1, 0, 1);
+
+void fragment() {
+  COLOR = vec4(color.rgb, COLOR.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = SubResource( 12 )
+shader_param/color = Color( 1, 1, 0, 1 )
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.315789, 0.883041, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 0.654436 ), 0.0, 1.49073, 0, 0, Vector2( 0.98118, 0.290423 ), -2.48071, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+gravity = Vector3( 0, -90, 0 )
+initial_velocity = 20.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+tangential_accel = -20.34
+scale = 5.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
 
 [node name="Sword" instance=ExtResource( 1 )]
 collision_layer = 4
@@ -43,6 +108,9 @@ script = ExtResource( 2 )
 [node name="AnimationPlayer" parent="." index="2"]
 anims/use = SubResource( 3 )
 
+[node name="ItemParticle" parent="." index="3"]
+material = SubResource( 5 )
+
 [node name="HitDetector" type="Area2D" parent="." index="4" groups=["Projectiles"]]
 collision_layer = 5
 collision_mask = 2
@@ -50,5 +118,14 @@ script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetector" index="0"]
 position = Vector2( 12, 0 )
-shape = SubResource( 4 )
-disabled = true
+shape = SubResource( 6 )
+
+[node name="SwingParticle" type="Particles2D" parent="." index="5"]
+show_behind_parent = true
+material = SubResource( 13 )
+position = Vector2( 14, -1 )
+emitting = false
+amount = 100
+lifetime = 0.3
+local_coords = false
+process_material = SubResource( 11 )
