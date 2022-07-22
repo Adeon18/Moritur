@@ -24,6 +24,4 @@ func disable_pick_up_collision():
 
 func change_style(type):
 	SpriteImg = get_node("Sprite")
-	print(_type)
-	print(Constants.WAND_SPRITES[name][type])
 	SpriteImg.frame = Constants.WAND_SPRITES[name][type]

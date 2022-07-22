@@ -21,6 +21,13 @@ var PROJECTILE_COLOR: Dictionary = {
 	"default": Color.whitesmoke
 }
 
+var SWORD_SPRITES: Dictionary = {
+	"burn": "res://art/Weapons/sword/Lava-Fire Element.png",
+	"freeze": "res://art/Weapons/sword/Ice-Water Element.png",
+	"poizon": "res://art/Weapons/sword/Earth Element.png",
+	"default": "res://art/Weapons/sword/Wind Element.png"
+}
+
 
 var WAND_SPRITES: Dictionary = {
 	"WeakWand": {

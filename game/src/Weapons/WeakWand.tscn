@@ -13,3 +13,6 @@ rotation = 1.5708
 texture = ExtResource( 2 )
 hframes = 4
 vframes = 3
+
+[node name="ItemParticle" parent="." index="3"]
+material = null

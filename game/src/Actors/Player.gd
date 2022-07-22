@@ -80,7 +80,8 @@ func _ready():
 	
 	weapon.call_deferred("disable_pick_up_collision")
 	weapon.set_deferred("position", Vector2(0, 0))
-
+	
+	weapon.change_style(Global.projectile_type)
 	WeaponObject = weapon
 	###
 	DamageTween.interpolate_property(SpriteNode.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
@@ -313,7 +314,6 @@ func _on_Hitbox_area_entered(area):
 	if area.is_in_group("Weapons"):
 		weapon_to_be_picked_up = area
 		is_colliding_with_weapon = true
-		area.change_style(Global.projectile_type)
 		emit_signal("pickable_encountered", Constants.WEAPON_DESCRIPTIONS[area.name].title, Constants.WEAPON_DESCRIPTIONS[area.name].desc)
 	
 	if area.is_in_group("Powerups"):
@@ -327,7 +327,6 @@ func _on_Hitbox_area_entered(area):
 
 func _on_Hitbox_area_exited(area):
 	if area.is_in_group("Weapons"):
-		area.change_style("default")
 		weapon_to_be_picked_up = null
 		is_colliding_with_weapon = false
 		emit_signal("no_pickable")
