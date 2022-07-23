@@ -63,6 +63,8 @@ func _physics_process(delta):
 			WhooshSound.play()
 		elif Global.board_player_current_index+1 == cell_instances.size():
 			cell_instances[Global.board_player_current_index].on_step(self)
+			emit_signal("finished_moving")
+			on_finish_moving()
 		else:
 			steps_to_take = 0
 			current_state = STATE.IDLE

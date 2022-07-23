@@ -879,3 +879,18 @@ position = Vector2( 643, 524 )
 
 [node name="Candle141" parent="." index="288" instance=ExtResource( 9 )]
 position = Vector2( 685, 524 )
+
+[node name="ItemPositions" type="Node2D" parent="." index="289"]
+position = Vector2( 8.369, 0 )
+
+[node name="ItemPos1" type="Position2D" parent="ItemPositions" index="0"]
+position = Vector2( 724.631, 757 )
+
+[node name="ItemPos2" type="Position2D" parent="ItemPositions" index="1"]
+position = Vector2( 69.631, 742 )
+
+[node name="ItemPos3" type="Position2D" parent="ItemPositions" index="2"]
+position = Vector2( 722.631, 65 )
+
+[node name="ItemPos4" type="Position2D" parent="ItemPositions" index="3"]
+position = Vector2( 81.631, 60 )
