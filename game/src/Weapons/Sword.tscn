@@ -3,6 +3,7 @@
 [ext_resource path="res://src/Weapons/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Weapons/Sword.gd" type="Script" id=2]
 [ext_resource path="res://src/Weapons/HitDetector.gd" type="Script" id=3]
+[ext_resource path="res://src/Particles/ItemParticle.gdshader" type="Shader" id=4]
 
 [sub_resource type="Animation" id=3]
 resource_name = "use"
@@ -45,18 +46,8 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Shader" id=4]
-code = "shader_type canvas_item;
-
-uniform vec4 color: hint_color = vec4(1, 1, 0, 1);
-
-void fragment() {
-  COLOR = vec4(color.rgb, COLOR.a);
-}"
-
-[sub_resource type="ShaderMaterial" id=5]
-resource_local_to_scene = true
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 4 )
 shader_param/color = Color( 1, 1, 0, 1 )
 
 [sub_resource type="RectangleShape2D" id=6]
@@ -109,7 +100,7 @@ script = ExtResource( 2 )
 anims/use = SubResource( 3 )
 
 [node name="ItemParticle" parent="." index="3"]
-material = SubResource( 5 )
+material = SubResource( 14 )
 
 [node name="HitDetector" type="Area2D" parent="." index="4" groups=["Projectiles"]]
 collision_layer = 5
