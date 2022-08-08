@@ -26,10 +26,10 @@ There are different types of tiles on the board, each representing a certain roo
   * _Increase projectile_: damage ![](game/art/PowerUps/encrease_dmg.png) / speed ![](game/art/PowerUps/encrease_speed.png) / size ![](game/art/PowerUps/projectile_size.png)
   * _CD_: Decrease cool-down of the attacks ![](game/art/PowerUps/cd_reduction.png)
 
-  There are also 5 different weapons:
-  * A sword ![](game/art/Weapons/sword.png)
-  * A bow ![](game/art/Weapons/bow.png)
-  * 3 types of range-attacking wands each with different characteristics: a strong ![l0_sprite_1](https://user-images.githubusercontent.com/73172589/183401097-fc839c25-8ee2-42ae-b6ee-43e8b598d38b.png), medium ![l0_sprite_2](https://user-images.githubusercontent.com/73172589/183401101-ce722691-3595-4c9b-ae0a-58ead0c51346.png), and weak ![l0_sprite_3](https://user-images.githubusercontent.com/73172589/183401105-d615e0ca-6949-4457-bd4e-971231cfe49c.png) wands, each depending on the power-up element (fire / poison / ice / none)
+  There are also 5 different weapons, each depending on the power-up element (fire / poison / ice / none):
+  * _Swords_ dealing the AOE damage ![](game/art/Weapons/sword/Wind%20Element.png) ![](game/art/Weapons/sword.png) ![](game/art/Weapons/sword/Ice-Water%20Element.png) ![](game/art/Weapons/sword/Earth%20Element.png)
+  * _Bows_ piercing the enemies ![](https://user-images.githubusercontent.com/73172589/183414786-7e803142-4964-4096-b84a-bcdf245f42fc.png)
+  * 3 types of range-attacking _wands_ each with different characteristics: a strong ![l0_sprite_1](https://user-images.githubusercontent.com/73172589/183401097-fc839c25-8ee2-42ae-b6ee-43e8b598d38b.png), medium ![l0_sprite_2](https://user-images.githubusercontent.com/73172589/183401101-ce722691-3595-4c9b-ae0a-58ead0c51346.png), and weak ![l0_sprite_3](https://user-images.githubusercontent.com/73172589/183401105-d615e0ca-6949-4457-bd4e-971231cfe49c.png)
 
 - [x] **rollback** ![](game/art/Cells/random_effect_filled.png): you move your current position on the board randomly forwards / backwards on an arbitrary number of steps
 - [ ] **shop** ![](game/art/Cells/shop_filled.png): to buy the upgrades for the character
