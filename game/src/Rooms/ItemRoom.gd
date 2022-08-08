@@ -55,7 +55,7 @@ func spawn_item():
 
 
 func _process(delta):
-	if Input.is_action_just_pressed("slide"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		SceneChanger.change_scene("res://src/Board/Board.tscn")
 
 

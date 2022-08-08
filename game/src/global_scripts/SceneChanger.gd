@@ -17,4 +17,4 @@ func change_scene(path, delay = 0.5):
 
 func restart():
 	Global.fucking_reset_oh_my_fucking_god()
-	change_scene(Constants.BOARD_SCENE_PATH)
+	change_scene("res://src/UI/MainMenu.tscn")
