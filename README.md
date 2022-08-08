@@ -27,16 +27,16 @@ There are different types of tiles on the board, each representing a certain roo
   There are 9 different possible power-ups for your character:
 
   * _Elements_: fire ![](game/art/PowerUps/16x16_fire.png) / poison ![](game/art/PowerUps/16x16_poison.png) / ice ![](game/art/PowerUps/16x16_ice.png) attacks
-  * _Health_: heal ![](game/art/PowerUps/heal.png) / encrease max lifes ![](game/art/PowerUps/health_up.png)
-  * _Increase projectile_: damage ![](game/art/PowerUps/encrease_dmg.png) / speed ![](game/art/PowerUps/encrease_speed.png) / size ![](game/art/PowerUps/projectile_size.png)
-  * _CD_: Decrease cool-down of the attacks ![](game/art/PowerUps/cd_reduction.png)
+  * _Health_: heal / encrease max lifes
+  * _Increase projectile_: damage / speed / size
+  * _CD_: Decrease cool-down of the attacks
   
   <img src="https://user-images.githubusercontent.com/73172589/183419483-cafdaa0b-a86e-40a0-af94-8ba577b5ec30.gif" width=200 align="right">
 
   There are also 5 different weapons, each depending on the power-up element (fire / poison / ice / none):
-  * _Swords_ dealing the AOE damage ![](game/art/Weapons/sword/Wind%20Element.png) ![](game/art/Weapons/sword.png) ![](game/art/Weapons/sword/Ice-Water%20Element.png) ![](game/art/Weapons/sword/Earth%20Element.png)
-  * _Bows_ piercing the enemies ![](https://user-images.githubusercontent.com/73172589/183414786-7e803142-4964-4096-b84a-bcdf245f42fc.png)
-  * 3 types of range-attacking _wands_ each with different characteristics: a strong ![l0_sprite_1](https://user-images.githubusercontent.com/73172589/183401097-fc839c25-8ee2-42ae-b6ee-43e8b598d38b.png), medium ![l0_sprite_2](https://user-images.githubusercontent.com/73172589/183401101-ce722691-3595-4c9b-ae0a-58ead0c51346.png), and weak ![l0_sprite_3](https://user-images.githubusercontent.com/73172589/183401105-d615e0ca-6949-4457-bd4e-971231cfe49c.png)
+  * _Swords_ dealing the AOE damage
+  * _Bows_ piercing the enemies
+  * 3 types of range-attacking _wands_ each with different characteristics: a strong, medium, and weak
 
 - [x] **rollback** ![](game/art/Cells/random_effect_filled.png): you move your current position on the board randomly forwards / backwards on an arbitrary number of steps
 
