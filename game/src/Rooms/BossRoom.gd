@@ -34,3 +34,9 @@ func spawn_item(item_pos):
 	add_child(power)
 	power.set_type(powerups[number])
 	power.position = item_pos.position
+
+
+func _process(delta):
+	if enemies.get_child_count() == 0 and !should_change_scene:
+		SceneChanger.change_scene("res://src/UI/MainMenu.tscn")
+		should_change_scene = true

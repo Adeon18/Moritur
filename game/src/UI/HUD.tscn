@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://art/UI/heart_empty.png" type="Texture" id=1]
 [ext_resource path="res://src/UI/HUD.gd" type="Script" id=2]
@@ -12,8 +12,12 @@
 [ext_resource path="res://src/UI/UIWindow.tscn" type="PackedScene" id=10]
 [ext_resource path="res://art/fonts/VT323/VT323-Regular.ttf" type="DynamicFontData" id=11]
 
-[sub_resource type="DynamicFont" id=1]
-size = 20
+[sub_resource type="DynamicFont" id=6]
+size = 24
+font_data = ExtResource( 11 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 24
 font_data = ExtResource( 11 )
 
 [sub_resource type="DynamicFont" id=2]
@@ -205,7 +209,7 @@ margin_left = 8.0
 margin_top = 7.0
 margin_right = 143.0
 margin_bottom = 27.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 6 )
 text = "text"
 align = 1
 valign = 1
@@ -215,7 +219,7 @@ autowrap = true
 margin_left = 8.0
 margin_top = -20.0
 margin_right = 143.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 7 )
 text = "\"E\""
 align = 1
 valign = 1
