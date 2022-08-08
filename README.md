@@ -1,9 +1,15 @@
 <p align="center"><img src="game/art/avatar.png" width=125></p>
 <h1 align="center">Moritur</h1>
 
-**Moritur** is a _2D action top-down roguelike game_ written during the 48 hours GMTK Game Jam 2022. The jam theme was **Roll of the Dice**, so the randomness of the dice is the crucial mechanics of the game.
+<img src="https://user-images.githubusercontent.com/73172589/183405355-0a9b248e-6927-4ce8-acba-3ff291dfc6fd.gif" align="right" width=50>
 
-The game is inspired by a board games concept. You start at a game board filled with different kinds of rooms and rolling the dice decides the cell on the board. Every upgrade and game progression is random for the player. The goal is to reach the last boss level and defeat him.
+**Moritur** is a _2D action top-down roguelike game_ written during the 48 hours GMTK Game Jam 2022. The jam main theme to implement was **Roll of the Dice**, so the _randomness_ of the dice is the crucial mechanics of the game.
+
+<img src="https://user-images.githubusercontent.com/73172589/183412432-59c95f1b-56a7-4a4d-9e2e-1410bf594705.gif" width=200 align="left">
+
+The game is inspired by a board games concept. You start at a game board filled with different kinds of rooms represented as a tiles on the board, and rolling the dice decides the cell player will face. Every upgrade and game progression is random for the player. The goal is to reach the last boss level and defeat him.
+
+<img src="https://user-images.githubusercontent.com/73172589/183405355-0a9b248e-6927-4ce8-acba-3ff291dfc6fd.gif" align="right" width=100>
 
 ## Board cells
 There are different types of tiles on the board, each representing a certain room to be entered by the player:
@@ -11,6 +17,8 @@ There are different types of tiles on the board, each representing a certain roo
   
   <img src="https://user-images.githubusercontent.com/73172589/183391691-1b148ec3-0e4e-4bed-b89d-3bc0215ce7a9.gif" width=125>
 - [x] **loot** ![](game/art/Cells/loot_filled.png): a random power-up or weapon.
+
+  <img src="https://user-images.githubusercontent.com/73172589/183409180-e3218cdc-8874-443d-90cc-ff9afb930240.gif" width=256 align="right">
 
   There are 9 different possible power-ups for your character:
   * _Elements_: fire ![](game/art/PowerUps/16x16_fire.png) / poison ![](game/art/PowerUps/16x16_poison.png) / ice ![](game/art/PowerUps/16x16_ice.png) attacks
@@ -26,6 +34,7 @@ There are different types of tiles on the board, each representing a certain roo
 - [x] **rollback** ![](game/art/Cells/random_effect_filled.png): you move your current position on the board randomly forwards / backwards on an arbitrary number of steps
 - [ ] **shop** ![](game/art/Cells/shop_filled.png): to buy the upgrades for the character
 - [x] **final boss** ![](game/art/Cells/boss.png) room as the very last tile of the game.
+
 
 ## Contributors:
 * Player mechanics and power-ups / weapons: [Ostap Trush](https://github.com/Adeon18)
