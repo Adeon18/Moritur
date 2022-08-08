@@ -1,11 +1,12 @@
-<p align="center"><img src="game/art/avatar.png" width=125></p>
-<h1 align="center">Moritur</h1>
+<p align="center"><img src="https://user-images.githubusercontent.com/73172589/183433554-f4744198-092b-463a-b98f-9e9f787eaf8f.png" align="center" width=256></p>
+
+<br>
 
 <img src="https://user-images.githubusercontent.com/73172589/183405355-0a9b248e-6927-4ce8-acba-3ff291dfc6fd.gif" align="right" width=50>
 
-**Moritur** is a _2D action top-down roguelike game_ written during the 48 hours GMTK Game Jam 2022. The jam main theme to implement was **Roll of the Dice**, so the _randomness_ of the dice is the crucial mechanics of the game.
+<img src="game/art/avatar.png" width=50 align="left"> **Moritur** is a _2D action top-down roguelike game_ written during the 48 hours GMTK Game Jam 2022. The jam main theme to implement was **Roll of the Dice**, so the _randomness_ of the dice is the crucial mechanics of the game.
 
-<img src="https://user-images.githubusercontent.com/73172589/183412432-59c95f1b-56a7-4a4d-9e2e-1410bf594705.gif" width=200 align="left">
+<img src="https://user-images.githubusercontent.com/73172589/183412432-59c95f1b-56a7-4a4d-9e2e-1410bf594705.gif" width=220 align="left">
 
 The game is inspired by a board games concept. You start at a game board filled with different kinds of rooms represented as a tiles on the board, and rolling the dice decides the cell player will face. Every upgrade and game progression is random for the player. The goal is to reach the last boss level and defeat him.
 
