@@ -8,7 +8,7 @@
 
 The game is inspired by a board games concept. You start at a game board filled with different kinds of rooms represented as a tiles on the board, and rolling the dice decides the cell player will face. Every upgrade and game progression is random for the player. The goal is to reach the last boss level and defeat him.
 
-## Board cells
+<h2 align="center">Board cells</h2>
 
 There are different types of tiles on the board, each representing a certain room to be entered by the player:
 
@@ -44,8 +44,11 @@ There are different types of tiles on the board, each representing a certain roo
 
 - [x] **final boss** ![](game/art/Cells/boss.png) room as the very last tile of the game.
 
-## Contributors:
+<p align="center"> <img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/bloody_pillar.png" width=108><img src="game/art/decorations/candle.png" width=10> <img src="https://user-images.githubusercontent.com/73172589/183442512-082f836a-15b8-4508-b07a-ccc4429e7d03.gif" width=300> <img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/bloody_pillar.png" width=108><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10> </p>
+
+<h2 align="center">Contributors</h2>
+
 * Player mechanics and power-ups / weapons: [Ostap Trush](https://github.com/Adeon18)
 * Enemy design: [Oleksiy Hoyev](https://github.com/alexg-lviv)
-* Room and random board generation: [Bohdan Ruban](https://github.com/iamthewalrus67)
+* Room and board random generation: [Bohdan Ruban](https://github.com/iamthewalrus67)
 * Art and visuals: [Alina Bondarets](https://github.com/alorthius)
