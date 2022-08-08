@@ -15,12 +15,13 @@ There are different types of tiles on the board, each representing a certain roo
 
 - [x] **combat** ![](game/art/Cells/combat_filled.png): a random room full of the enemies to kill to pass it. There are two types of enemies: range and melee
 
-  <img src="game/art/decorations/bloody_pillar.png" width=100>
-  <img src="game/art/decorations/candle.png" width=10 align="top">
+  <img src="game/art/decorations/candle.png" width=10> <img src="game/art/decorations/bloody_pillar.png" width=72>
   <img src="https://user-images.githubusercontent.com/73172589/183416376-5db62d74-4e48-4fa0-b7dc-84648bbf3128.gif" width=100>
   <img src="https://user-images.githubusercontent.com/73172589/183421628-8b0f1bb6-d638-4bb0-80d2-ef3a5a4c06b8.gif" width=150>
   <img src="https://user-images.githubusercontent.com/73172589/183424014-fe643cea-be0c-4a3f-a43e-f80caeff9345.gif" width=175>
   <img src="https://user-images.githubusercontent.com/73172589/183428307-7adde6d7-73ec-419d-8663-3827d319f567.gif" height=128>
+  <img src="https://user-images.githubusercontent.com/73172589/183431488-70b61dac-d1cc-4225-b59d-9a503b7c55ec.gif" width=175>
+  <img src="game/art/decorations/bloody_pillar.png" width=72> <img src="game/art/decorations/candle.png" width=10>
 
 - [x] **loot** ![](game/art/Cells/loot_filled.png): a random power-up or weapon.
   
