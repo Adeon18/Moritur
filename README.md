@@ -1,30 +1,33 @@
 <p align="center"><img src="game/art/avatar.png" width=125></p>
 <h1 align="center">Moritur</h1>
 
-### Overview
+**Moritur** is a _2D action top-down roguelike game_ written during the 48 hours GMTK Game Jam 2022. The jam theme was **Roll of the Dice**, so the randomness of the dice is the crucial mechanics of the game.
 
-Moritur is a 2D action top-down roguelike game written during the 48 hours GMTK Game Jam 2022. The jam theme was Roll of the Dice, so it's the crucial mechanics of the game.
+The game is inspired by a board games concept. You start at a game board filled with different kinds of rooms and rolling the dice decides the cell on the board. Every upgrade and game progression is random for the player. The goal is to reach the last boss level and defeat him.
 
-The game is inspired by a board games concept. You start at a game board filled with different kinds of rooms and rolling the dice decides the cell on the board. There are different types of tiles on the board, each representing a certain room to be entered by the player:
-- [x] **combat**: a random room full of the enemies to kill to pass it. There are two types of enemies: range and melee
-- [x] **loot**: a random power-up or weapon.
+## Board cells
+There are different types of tiles on the board, each representing a certain room to be entered by the player:
+- [x] **combat** ![](game/art/Cells/combat_filled.png): a random room full of the enemies to kill to pass it. There are two types of enemies: range and melee
+  
+  <img src="https://user-images.githubusercontent.com/73172589/183391691-1b148ec3-0e4e-4bed-b89d-3bc0215ce7a9.gif" width=125>
+- [x] **loot** ![](game/art/Cells/loot_filled.png): a random power-up or weapon.
 
   There are 9 different possible power-ups for your character:
-  * Poison / fire / ice attacks
-  * Heal current health / add additional life to max quantity
-  * Increase projectile size / speed / damage
-  * Decrease cool-down of the attacks 
+  * _Elements_: fire ![](game/art/PowerUps/16x16_fire.png) / poison ![](game/art/PowerUps/16x16_poison.png) / ice ![](game/art/PowerUps/16x16_ice.png) attacks
+  * _Health_: heal ![](game/art/PowerUps/heal.png) / encrease max lifes ![](game/art/PowerUps/health_up.png)
+  * _Increase projectile_: damage ![](game/art/PowerUps/encrease_dmg.png) / speed ![](game/art/PowerUps/encrease_speed.png) / size ![](game/art/PowerUps/projectile_size.png)
+  * _CD_: Decrease cool-down of the attacks ![](game/art/PowerUps/cd_reduction.png)
 
   There are also 5 different weapons:
-  * A sword
-  * A bow
-  * 3 types of range-attacking wands each with different characteristics: a weak, medium and strong wand
+  * A sword ![](game/art/Weapons/sword.png)
+  * A bow ![](game/art/Weapons/bow.png)
+  * 3 types of range-attacking wands each with different characteristics: a strong ![l0_sprite_1](https://user-images.githubusercontent.com/73172589/183401097-fc839c25-8ee2-42ae-b6ee-43e8b598d38b.png), medium ![l0_sprite_2](https://user-images.githubusercontent.com/73172589/183401101-ce722691-3595-4c9b-ae0a-58ead0c51346.png), and weak ![l0_sprite_3](https://user-images.githubusercontent.com/73172589/183401105-d615e0ca-6949-4457-bd4e-971231cfe49c.png) wands, each depending on the power-up element (fire / poison / ice / none)
 
-- [x] **rollback**: you move your current position on the board randomly forwards / backwards on an arbitrary number of steps
-- [ ] **shop**: to buy the upgrades for the character
-- [x] **final boss** room as the very last tile of the game.
+- [x] **rollback** ![](game/art/Cells/random_effect_filled.png): you move your current position on the board randomly forwards / backwards on an arbitrary number of steps
+- [ ] **shop** ![](game/art/Cells/shop_filled.png): to buy the upgrades for the character
+- [x] **final boss** ![](game/art/Cells/boss.png) room as the very last tile of the game.
 
-### Contributors:
+## Contributors:
 * Player mechanics and power-ups / weapons: [Ostap Trush](https://github.com/Adeon18)
 * Enemy design: [Oleksiy Hoyev](https://github.com/alexg-lviv)
 * Room and random board generation: [Bohdan Ruban](https://github.com/iamthewalrus67)
