@@ -8,7 +8,7 @@
 
 The game is inspired by a board games concept. You start at a game board filled with different kinds of rooms represented as a tiles on the board, and rolling the dice decides the cell player will face. Every upgrade and game progression is random for the player. The goal is to reach the last boss level and defeat him.
 
-<h2 align="center">Board cells</h2>
+<h2 align="center">Overview</h2>
 
 There are different types of tiles on the board, each representing a certain room to be entered by the player:
 
