@@ -80,7 +80,7 @@ func _ready():
 	
 	weapon.call_deferred("disable_pick_up_collision")
 	weapon.set_deferred("position", Vector2(0, 0))
-	
+	print(Global.projectile_type)
 	weapon.change_style(Global.projectile_type)
 	WeaponObject = weapon
 	###
@@ -168,7 +168,7 @@ func handle_attack():
 
 
 func _input(event):
-	if Input.is_action_just_pressed("slide") && _velocity != Vector2.ZERO:
+	if Input.is_action_just_pressed("slide") && _velocity.length() > 1:
 		if DashCooldownTimer.is_stopped() and !is_dashing:
 			$DashSound.play()
 			start_dash()
@@ -209,7 +209,8 @@ func instance_dash_ghost():
 func pick_up(object):
 	unparent()
 	reparent(object)
-	ShootCooldownTimer.wait_time = Global.shot_delay_time * object.delay_decrease
+	Global.shot_delay_time = object.delay_decrease
+	ShootCooldownTimer.wait_time = Global.shot_delay_time
 
 
 func power_up(object):

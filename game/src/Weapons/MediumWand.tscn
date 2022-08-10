@@ -3,11 +3,8 @@
 [ext_resource path="res://src/Weapons/MediumWand.gd" type="Script" id=1]
 [ext_resource path="res://src/Weapons/WeakWand.tscn" type="PackedScene" id=2]
 
-[node name="MediumWand" groups=["Weapons"] instance=ExtResource( 2 )]
+[node name="MediumWand" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-
-[node name="Sprite" parent="." index="1"]
-position = Vector2( 10, 0 )
 
 [node name="ItemParticle" parent="." index="3"]
 position = Vector2( 7, 2 )

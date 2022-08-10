@@ -6,6 +6,9 @@ class_name WeakWand
 func _ready():
 	init_data()
 
+func get_name():
+	return "WeakWand"
+
 func init_data():
 	SpriteImg.frame = Constants.WAND_SPRITES[name][Global.projectile_type]
 	is_piercing = false
@@ -24,4 +27,4 @@ func disable_pick_up_collision():
 
 func change_style(type):
 	SpriteImg = get_node("Sprite")
-	SpriteImg.frame = Constants.WAND_SPRITES[name][type]
+	SpriteImg.frame = Constants.WAND_SPRITES[get_name()][Global.projectile_type]

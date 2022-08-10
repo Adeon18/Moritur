@@ -3,6 +3,11 @@ extends RangedWeapon
 class_name Bow
 
 
+func get_name():
+	return "Bow"
+
+
+
 func _ready():
 	SpriteImg.frame = Constants.BOW_SPRITES[Global.projectile_type]
 	is_piercing = true
