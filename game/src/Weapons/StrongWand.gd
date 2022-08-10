@@ -3,6 +3,9 @@ extends RangedWeapon
 class_name StrongWand
 
 
+func get_name():
+	return "StrongWand"
+
 func _ready():
 	init_data()
 
@@ -24,4 +27,4 @@ func disable_pick_up_collision():
 
 func change_style(type):
 	SpriteImg = get_node("Sprite")
-	SpriteImg.frame = Constants.WAND_SPRITES[name][type]
+	SpriteImg.frame = Constants.WAND_SPRITES[get_name()][Global.projectile_type]

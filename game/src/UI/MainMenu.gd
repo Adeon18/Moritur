@@ -17,6 +17,7 @@ func _ready():
 	AnimPlayer.play("appear")
 	yield(AnimPlayer, "animation_finished")
 	AnimPlayer.play("float")
+	$AudioStreamPlayer.play()
 
 
 func request_shake_big():

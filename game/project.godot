@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Moritur"
-run/main_scene="res://src/UI/MainMenu.tscn"
+run/main_scene="res://src/UI/IntroScreen.tscn"
 config/icon="res://art/avatar.png"
 config/macos_native_icon="res://art/avatar.png"
 config/windows_native_icon="res://art/avatar.png"
