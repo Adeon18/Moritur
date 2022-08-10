@@ -47,8 +47,12 @@ There are different types of tiles on the board, each representing a certain roo
 <p align="center"> <img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/bloody_pillar.png" width=108><img src="game/art/decorations/candle.png" width=10> <img src="https://user-images.githubusercontent.com/73172589/183442512-082f836a-15b8-4508-b07a-ccc4429e7d03.gif" width=300> <img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/bloody_pillar.png" width=108><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10><img src="game/art/decorations/candle.png" width=10> </p>
 
 <h2 align="center">Contributors</h2>
-
+Team **"Hoydalka"**:
 * Player mechanics and power-ups / weapons: [Ostap Trush](https://github.com/Adeon18)
 * Enemy design: [Oleksiy Hoyev](https://github.com/alexg-lviv)
 * Room and board random generation: [Bohdan Ruban](https://github.com/iamthewalrus67)
 * Art and visuals: [Alina Bondarets](https://github.com/alorthius)
+
+<h2 align="center">Play the Game</h2>
+
+[itch.io](https://ade0n.itch.io/moritur)
