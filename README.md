@@ -56,4 +56,4 @@ Team **"Hoydalka"**:
 
 <h2 align="center">Play the Game</h2>
 
-[itch.io](https://ade0n.itch.io/moritur)
+- [itch.io](https://ade0n.itch.io/moritur)
