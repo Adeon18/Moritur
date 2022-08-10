@@ -457,4 +457,3 @@ text = "Exit"
 [connection signal="mouse_entered" from="ExitButton" to="." method="_on_ExitButton_mouse_entered"]
 [connection signal="mouse_exited" from="ExitButton" to="." method="_on_ExitButton_mouse_exited"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
