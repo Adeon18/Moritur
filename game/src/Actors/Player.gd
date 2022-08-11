@@ -80,7 +80,7 @@ func _ready():
 	
 	weapon.call_deferred("disable_pick_up_collision")
 	weapon.set_deferred("position", Vector2(0, 0))
-	print(Global.projectile_type)
+	# print(Global.projectile_type)
 	weapon.change_style(Global.projectile_type)
 	WeaponObject = weapon
 	###

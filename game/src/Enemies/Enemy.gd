@@ -133,7 +133,7 @@ func handle_fight():
 func take_damage(damage):
 	$HitPlayer.play()
 	health -= damage
-	print(damage)
+	#print(damage)
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)
@@ -149,7 +149,7 @@ func take_damage(damage):
 func _on_Area2D_area_entered(area):
 	if(area.is_in_group("Projectiles")):
 		area.hit(self)
-		print(Global.poizon, Global.freeze, Global.burn)
+		#print(Global.poizon, Global.freeze, Global.burn)
 		if(Global.poizon): poizon()
 		if(Global.freeze): freeze()
 		if(Global.burn): burn()

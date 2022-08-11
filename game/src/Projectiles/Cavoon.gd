@@ -94,7 +94,7 @@ func die():
 	$Sprite.visible = false
 	yield(get_tree().create_timer(0.1), "timeout")
 	$CollisionShape2D.set_deferred("disabled", true)
-	yield(get_tree().create_timer(0.9), "timeout")
+	yield(get_tree().create_timer(0.4), "timeout")
 	queue_free()
 
 
