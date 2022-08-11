@@ -6,7 +6,7 @@
 [ext_resource path="res://art/Particles/float.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3.41096
+radius = 4.54795
 
 [sub_resource type="ShaderMaterial" id=6]
 resource_local_to_scene = true
@@ -48,7 +48,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 hframes = 13
 vframes = 6
-frame = 39
+frame = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 0.879518, 1 )
