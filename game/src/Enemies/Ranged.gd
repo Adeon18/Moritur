@@ -13,7 +13,7 @@ func _ready():
 
 func handle_fight():
 	if(!is_hitting):
-		print("I HIT")
+		# print("I HIT")
 		Statemachine.travel("hit")
 		movable = false
 		is_hitting = true

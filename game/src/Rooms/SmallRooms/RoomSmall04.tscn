@@ -42,462 +42,616 @@ position = Vector2( 41, 88 )
 
 [node name="Area2D" parent="." index="6" instance=ExtResource( 6 )]
 position = Vector2( 72, 209 )
+collision_layer = 11
 
 [node name="Area2D" parent="Area2D" index="2" instance=ExtResource( 6 )]
 position = Vector2( 0, 126 )
+collision_layer = 11
 
 [node name="Skull1" parent="." index="7" instance=ExtResource( 5 )]
 position = Vector2( 24, 20 )
+collision_layer = 11
 
 [node name="Area2D4" parent="." index="8" instance=ExtResource( 2 )]
 position = Vector2( 89, 276 )
+collision_layer = 11
 
 [node name="Area2D5" parent="." index="9" instance=ExtResource( 6 )]
 position = Vector2( 72, 80 )
+collision_layer = 11
 
 [node name="Area2D6" parent="." index="10" instance=ExtResource( 6 )]
 position = Vector2( 72, 144 )
+collision_layer = 11
 
 [node name="Area2D7" parent="." index="11" instance=ExtResource( 6 )]
 position = Vector2( 152, 239 )
+collision_layer = 11
 
 [node name="Area2D8" parent="." index="12" instance=ExtResource( 6 )]
 position = Vector2( 152, 175 )
+collision_layer = 11
 
 [node name="Area2D9" parent="." index="13" instance=ExtResource( 6 )]
 position = Vector2( 153, 110 )
+collision_layer = 11
 
 [node name="Area2D10" parent="." index="14" instance=ExtResource( 6 )]
 position = Vector2( 232, 207 )
+collision_layer = 11
 
 [node name="Area2D11" parent="." index="15" instance=ExtResource( 6 )]
 position = Vector2( 232, 271 )
+collision_layer = 11
 
 [node name="Area2D12" parent="." index="16" instance=ExtResource( 6 )]
 position = Vector2( 232, 143 )
+collision_layer = 11
 
 [node name="Area2D13" parent="." index="17" instance=ExtResource( 6 )]
 position = Vector2( 231, 77 )
+collision_layer = 11
 
 [node name="Area2D14" parent="." index="18" instance=ExtResource( 6 )]
 position = Vector2( 313, 111 )
+collision_layer = 11
 
 [node name="Area2D15" parent="." index="19" instance=ExtResource( 6 )]
 position = Vector2( 312, 174 )
+collision_layer = 11
 
 [node name="Area2D16" parent="." index="20" instance=ExtResource( 6 )]
 position = Vector2( 313, 238 )
+collision_layer = 11
 
 [node name="Area2D17" parent="." index="21" instance=ExtResource( 6 )]
 position = Vector2( 392, 271 )
+collision_layer = 11
 
 [node name="Area2D18" parent="." index="22" instance=ExtResource( 6 )]
 position = Vector2( 392, 206 )
+collision_layer = 11
 
 [node name="Area2D19" parent="." index="23" instance=ExtResource( 6 )]
 position = Vector2( 393, 143 )
+collision_layer = 11
 
 [node name="Area2D20" parent="." index="24" instance=ExtResource( 6 )]
 position = Vector2( 392, 80 )
+collision_layer = 11
 
 [node name="Area2D21" parent="." index="25" instance=ExtResource( 6 )]
 position = Vector2( 457, 111 )
+collision_layer = 11
 
 [node name="Area2D22" parent="." index="26" instance=ExtResource( 6 )]
 position = Vector2( 456, 176 )
+collision_layer = 11
 
 [node name="Area2D23" parent="." index="27" instance=ExtResource( 6 )]
 position = Vector2( 457, 239 )
+collision_layer = 11
 
 [node name="Pillar" parent="." index="28" instance=ExtResource( 9 )]
 position = Vector2( 38, 17 )
+collision_layer = 11
 
 [node name="Pillar2" parent="." index="29" instance=ExtResource( 9 )]
 position = Vector2( 53, 17 )
+collision_layer = 11
 
 [node name="Pillar3" parent="." index="30" instance=ExtResource( 9 )]
 position = Vector2( 69, 17 )
+collision_layer = 11
 
 [node name="Pillar4" parent="." index="31" instance=ExtResource( 9 )]
 position = Vector2( 84, 17 )
+collision_layer = 11
 
 [node name="Pillar5" parent="." index="32" instance=ExtResource( 9 )]
 position = Vector2( 101, 17 )
+collision_layer = 11
 
 [node name="Pillar6" parent="." index="33" instance=ExtResource( 9 )]
 position = Vector2( 116, 17 )
+collision_layer = 11
 
 [node name="Pillar7" parent="." index="34" instance=ExtResource( 9 )]
 position = Vector2( 131, 17 )
+collision_layer = 11
 
 [node name="Pillar8" parent="." index="35" instance=ExtResource( 9 )]
 position = Vector2( 146, 17 )
+collision_layer = 11
 
 [node name="Pillar9" parent="." index="36" instance=ExtResource( 9 )]
 position = Vector2( 161, 17 )
+collision_layer = 11
 
 [node name="Pillar10" parent="." index="37" instance=ExtResource( 9 )]
 position = Vector2( 176, 17 )
+collision_layer = 11
 
 [node name="Pillar11" parent="." index="38" instance=ExtResource( 9 )]
 position = Vector2( 191, 17 )
+collision_layer = 11
 
 [node name="Pillar12" parent="." index="39" instance=ExtResource( 9 )]
 position = Vector2( 206, 17 )
+collision_layer = 11
 
 [node name="Pillar13" parent="." index="40" instance=ExtResource( 9 )]
 position = Vector2( 221, 17 )
+collision_layer = 11
 
 [node name="Pillar19" parent="." index="41" instance=ExtResource( 9 )]
 position = Vector2( 311, 17 )
+collision_layer = 11
 
 [node name="Pillar20" parent="." index="42" instance=ExtResource( 9 )]
 position = Vector2( 326, 17 )
+collision_layer = 11
 
 [node name="Pillar21" parent="." index="43" instance=ExtResource( 9 )]
 position = Vector2( 341, 17 )
+collision_layer = 11
 
 [node name="Pillar22" parent="." index="44" instance=ExtResource( 9 )]
 position = Vector2( 356, 17 )
+collision_layer = 11
 
 [node name="Pillar23" parent="." index="45" instance=ExtResource( 9 )]
 position = Vector2( 371, 17 )
+collision_layer = 11
 
 [node name="Pillar24" parent="." index="46" instance=ExtResource( 9 )]
 position = Vector2( 386, 17 )
+collision_layer = 11
 
 [node name="Pillar25" parent="." index="47" instance=ExtResource( 9 )]
 position = Vector2( 401, 17 )
+collision_layer = 11
 
 [node name="Pillar26" parent="." index="48" instance=ExtResource( 9 )]
 position = Vector2( 416, 17 )
+collision_layer = 11
 
 [node name="Pillar27" parent="." index="49" instance=ExtResource( 9 )]
 position = Vector2( 431, 17 )
+collision_layer = 11
 
 [node name="Pillar28" parent="." index="50" instance=ExtResource( 9 )]
 position = Vector2( 446, 17 )
+collision_layer = 11
 
 [node name="Pillar29" parent="." index="51" instance=ExtResource( 9 )]
 position = Vector2( 461, 17 )
+collision_layer = 11
 
 [node name="Pillar30" parent="." index="52" instance=ExtResource( 9 )]
 position = Vector2( 476, 17 )
+collision_layer = 11
 
 [node name="Pillar31" parent="." index="53" instance=ExtResource( 9 )]
 position = Vector2( 491, 17 )
+collision_layer = 11
 
 [node name="Skull2" parent="." index="54" instance=ExtResource( 10 )]
 position = Vector2( 507, 20 )
+collision_layer = 11
 
 [node name="BloodySkull" parent="." index="55" instance=ExtResource( 8 )]
 position = Vector2( 263, 21 )
+collision_layer = 11
 
 [node name="Area2D2" parent="." index="56" instance=ExtResource( 6 )]
 position = Vector2( 248, 21 )
+collision_layer = 11
 
 [node name="Area2D3" parent="." index="57" instance=ExtResource( 6 )]
 position = Vector2( 278, 22 )
+collision_layer = 11
 
 [node name="BlodyRock" parent="." index="58" instance=ExtResource( 7 )]
 position = Vector2( 239, 30 )
+collision_layer = 11
 
 [node name="BlodyRock2" parent="." index="59" instance=ExtResource( 7 )]
 position = Vector2( 288, 30 )
+collision_layer = 11
 
 [node name="BloodyPillar" parent="." index="60" instance=ExtResource( 3 )]
 position = Vector2( 234, 17 )
+collision_layer = 11
 
 [node name="BloodyPillar2" parent="." index="61" instance=ExtResource( 3 )]
 position = Vector2( 297, 17 )
+collision_layer = 11
 
 [node name="Skull3" parent="." index="62" instance=ExtResource( 5 )]
 position = Vector2( 21, 334 )
+collision_layer = 11
 
 [node name="Pillar14" parent="." index="63" instance=ExtResource( 9 )]
 position = Vector2( 35, 331 )
+collision_layer = 11
 
 [node name="Pillar15" parent="." index="64" instance=ExtResource( 9 )]
 position = Vector2( 50, 331 )
+collision_layer = 11
 
 [node name="Pillar16" parent="." index="65" instance=ExtResource( 9 )]
 position = Vector2( 66, 331 )
+collision_layer = 11
 
 [node name="Pillar17" parent="." index="66" instance=ExtResource( 9 )]
 position = Vector2( 81, 331 )
+collision_layer = 11
 
 [node name="Pillar18" parent="." index="67" instance=ExtResource( 9 )]
 position = Vector2( 98, 331 )
+collision_layer = 11
 
 [node name="Pillar32" parent="." index="68" instance=ExtResource( 9 )]
 position = Vector2( 113, 331 )
+collision_layer = 11
 
 [node name="Pillar33" parent="." index="69" instance=ExtResource( 9 )]
 position = Vector2( 128, 331 )
+collision_layer = 11
 
 [node name="Pillar34" parent="." index="70" instance=ExtResource( 9 )]
 position = Vector2( 143, 331 )
+collision_layer = 11
 
 [node name="Pillar35" parent="." index="71" instance=ExtResource( 9 )]
 position = Vector2( 158, 331 )
+collision_layer = 11
 
 [node name="Pillar36" parent="." index="72" instance=ExtResource( 9 )]
 position = Vector2( 173, 331 )
+collision_layer = 11
 
 [node name="Pillar37" parent="." index="73" instance=ExtResource( 9 )]
 position = Vector2( 188, 331 )
+collision_layer = 11
 
 [node name="Pillar38" parent="." index="74" instance=ExtResource( 9 )]
 position = Vector2( 203, 331 )
+collision_layer = 11
 
 [node name="Pillar39" parent="." index="75" instance=ExtResource( 9 )]
 position = Vector2( 218, 331 )
+collision_layer = 11
 
 [node name="Pillar40" parent="." index="76" instance=ExtResource( 9 )]
 position = Vector2( 308, 331 )
+collision_layer = 11
 
 [node name="Pillar41" parent="." index="77" instance=ExtResource( 9 )]
 position = Vector2( 323, 331 )
+collision_layer = 11
 
 [node name="Pillar42" parent="." index="78" instance=ExtResource( 9 )]
 position = Vector2( 338, 331 )
+collision_layer = 11
 
 [node name="Pillar43" parent="." index="79" instance=ExtResource( 9 )]
 position = Vector2( 353, 331 )
+collision_layer = 11
 
 [node name="Pillar44" parent="." index="80" instance=ExtResource( 9 )]
 position = Vector2( 368, 331 )
+collision_layer = 11
 
 [node name="Pillar45" parent="." index="81" instance=ExtResource( 9 )]
 position = Vector2( 383, 331 )
+collision_layer = 11
 
 [node name="Pillar46" parent="." index="82" instance=ExtResource( 9 )]
 position = Vector2( 398, 331 )
+collision_layer = 11
 
 [node name="Pillar47" parent="." index="83" instance=ExtResource( 9 )]
 position = Vector2( 413, 331 )
+collision_layer = 11
 
 [node name="Pillar48" parent="." index="84" instance=ExtResource( 9 )]
 position = Vector2( 428, 331 )
+collision_layer = 11
 
 [node name="Pillar49" parent="." index="85" instance=ExtResource( 9 )]
 position = Vector2( 443, 331 )
+collision_layer = 11
 
 [node name="Pillar50" parent="." index="86" instance=ExtResource( 9 )]
 position = Vector2( 458, 331 )
+collision_layer = 11
 
 [node name="Pillar51" parent="." index="87" instance=ExtResource( 9 )]
 position = Vector2( 473, 331 )
+collision_layer = 11
 
 [node name="Pillar52" parent="." index="88" instance=ExtResource( 9 )]
 position = Vector2( 488, 331 )
+collision_layer = 11
 
 [node name="Skull4" parent="." index="89" instance=ExtResource( 10 )]
 position = Vector2( 504, 334 )
+collision_layer = 11
 
 [node name="BloodySkull2" parent="." index="90" instance=ExtResource( 8 )]
 position = Vector2( 260, 335 )
+collision_layer = 11
 
 [node name="Area2D28" parent="." index="91" instance=ExtResource( 6 )]
 position = Vector2( 245, 335 )
+collision_layer = 11
 
 [node name="Area2D29" parent="." index="92" instance=ExtResource( 6 )]
 position = Vector2( 275, 336 )
+collision_layer = 11
 
 [node name="BloodyPillar3" parent="." index="93" instance=ExtResource( 3 )]
 position = Vector2( 231, 331 )
+collision_layer = 11
 
 [node name="BloodyPillar4" parent="." index="94" instance=ExtResource( 3 )]
 position = Vector2( 294, 331 )
+collision_layer = 11
 
 [node name="Candle1" parent="." index="95" instance=ExtResource( 4 )]
 position = Vector2( 31, 28 )
+collision_layer = 11
 
 [node name="Candle2" parent="." index="96" instance=ExtResource( 4 )]
 position = Vector2( 47, 29 )
+collision_layer = 11
 
 [node name="Candle3" parent="." index="97" instance=ExtResource( 4 )]
 position = Vector2( 63, 29 )
+collision_layer = 11
 
 [node name="Candle4" parent="." index="98" instance=ExtResource( 4 )]
 position = Vector2( 78, 29 )
+collision_layer = 11
 
 [node name="Candle5" parent="." index="99" instance=ExtResource( 4 )]
 position = Vector2( 93, 29 )
+collision_layer = 11
 
 [node name="Candle6" parent="." index="100" instance=ExtResource( 4 )]
 position = Vector2( 109, 30 )
+collision_layer = 11
 
 [node name="Candle7" parent="." index="101" instance=ExtResource( 4 )]
 position = Vector2( 124, 30 )
+collision_layer = 11
 
 [node name="Candle8" parent="." index="102" instance=ExtResource( 4 )]
 position = Vector2( 139, 30 )
+collision_layer = 11
 
 [node name="Candle9" parent="." index="103" instance=ExtResource( 4 )]
 position = Vector2( 155, 30 )
+collision_layer = 11
 
 [node name="Candle10" parent="." index="104" instance=ExtResource( 4 )]
 position = Vector2( 170, 29 )
+collision_layer = 11
 
 [node name="Candle11" parent="." index="105" instance=ExtResource( 4 )]
 position = Vector2( 183, 29 )
+collision_layer = 11
 
 [node name="Candle12" parent="." index="106" instance=ExtResource( 4 )]
 position = Vector2( 199, 30 )
+collision_layer = 11
 
 [node name="Candle13" parent="." index="107" instance=ExtResource( 4 )]
 position = Vector2( 214, 30 )
+collision_layer = 11
 
 [node name="Candle14" parent="." index="108" instance=ExtResource( 4 )]
 position = Vector2( 227, 30 )
+collision_layer = 11
 
 [node name="Area2D24" parent="." index="109" instance=ExtResource( 6 )]
 position = Vector2( 254, 32 )
+collision_layer = 11
 
 [node name="Area2D25" parent="." index="110" instance=ExtResource( 6 )]
 position = Vector2( 272, 32 )
+collision_layer = 11
 
 [node name="Candle15" parent="." index="111" instance=ExtResource( 4 )]
 position = Vector2( 263, 37 )
+collision_layer = 11
 
 [node name="Candle16" parent="." index="112" instance=ExtResource( 4 )]
 position = Vector2( 305, 30 )
+collision_layer = 11
 
 [node name="Candle17" parent="." index="113" instance=ExtResource( 4 )]
 position = Vector2( 319, 30 )
+collision_layer = 11
 
 [node name="Candle18" parent="." index="114" instance=ExtResource( 4 )]
 position = Vector2( 334, 30 )
+collision_layer = 11
 
 [node name="Candle19" parent="." index="115" instance=ExtResource( 4 )]
 position = Vector2( 349, 30 )
+collision_layer = 11
 
 [node name="Candle20" parent="." index="116" instance=ExtResource( 4 )]
 position = Vector2( 363, 30 )
+collision_layer = 11
 
 [node name="Candle21" parent="." index="117" instance=ExtResource( 4 )]
 position = Vector2( 378, 30 )
+collision_layer = 11
 
 [node name="Candle22" parent="." index="118" instance=ExtResource( 4 )]
 position = Vector2( 394, 30 )
+collision_layer = 11
 
 [node name="Candle23" parent="." index="119" instance=ExtResource( 4 )]
 position = Vector2( 408, 30 )
+collision_layer = 11
 
 [node name="Candle24" parent="." index="120" instance=ExtResource( 4 )]
 position = Vector2( 424, 31 )
+collision_layer = 11
 
 [node name="Candle25" parent="." index="121" instance=ExtResource( 4 )]
 position = Vector2( 438, 31 )
+collision_layer = 11
 
 [node name="Candle26" parent="." index="122" instance=ExtResource( 4 )]
 position = Vector2( 453, 30 )
+collision_layer = 11
 
 [node name="Candle27" parent="." index="123" instance=ExtResource( 4 )]
 position = Vector2( 469, 30 )
+collision_layer = 11
 
 [node name="Candle28" parent="." index="124" instance=ExtResource( 4 )]
 position = Vector2( 483, 30 )
+collision_layer = 11
 
 [node name="Candle29" parent="." index="125" instance=ExtResource( 4 )]
 position = Vector2( 498, 30 )
+collision_layer = 11
 
 [node name="BlodyRock3" parent="." index="126" instance=ExtResource( 7 )]
 position = Vector2( 234, 325 )
+collision_layer = 11
 
 [node name="BlodyRock4" parent="." index="127" instance=ExtResource( 7 )]
 position = Vector2( 283, 325 )
+collision_layer = 11
 
 [node name="Candle30" parent="." index="128" instance=ExtResource( 4 )]
 position = Vector2( 26, 323 )
+collision_layer = 11
 
 [node name="Candle31" parent="." index="129" instance=ExtResource( 4 )]
 position = Vector2( 42, 324 )
+collision_layer = 11
 
 [node name="Candle32" parent="." index="130" instance=ExtResource( 4 )]
 position = Vector2( 58, 324 )
+collision_layer = 11
 
 [node name="Candle33" parent="." index="131" instance=ExtResource( 4 )]
 position = Vector2( 73, 324 )
+collision_layer = 11
 
 [node name="Candle34" parent="." index="132" instance=ExtResource( 4 )]
 position = Vector2( 88, 324 )
+collision_layer = 11
 
 [node name="Candle35" parent="." index="133" instance=ExtResource( 4 )]
 position = Vector2( 104, 325 )
+collision_layer = 11
 
 [node name="Candle36" parent="." index="134" instance=ExtResource( 4 )]
 position = Vector2( 119, 325 )
+collision_layer = 11
 
 [node name="Candle37" parent="." index="135" instance=ExtResource( 4 )]
 position = Vector2( 134, 325 )
+collision_layer = 11
 
 [node name="Candle38" parent="." index="136" instance=ExtResource( 4 )]
 position = Vector2( 150, 325 )
+collision_layer = 11
 
 [node name="Candle39" parent="." index="137" instance=ExtResource( 4 )]
 position = Vector2( 165, 324 )
+collision_layer = 11
 
 [node name="Candle40" parent="." index="138" instance=ExtResource( 4 )]
 position = Vector2( 178, 324 )
+collision_layer = 11
 
 [node name="Candle41" parent="." index="139" instance=ExtResource( 4 )]
 position = Vector2( 194, 325 )
+collision_layer = 11
 
 [node name="Candle42" parent="." index="140" instance=ExtResource( 4 )]
 position = Vector2( 209, 325 )
+collision_layer = 11
 
 [node name="Candle43" parent="." index="141" instance=ExtResource( 4 )]
 position = Vector2( 222, 325 )
+collision_layer = 11
 
 [node name="Area2D26" parent="." index="142" instance=ExtResource( 6 )]
 position = Vector2( 249, 327 )
+collision_layer = 11
 
 [node name="Area2D27" parent="." index="143" instance=ExtResource( 6 )]
 position = Vector2( 267, 327 )
+collision_layer = 11
 
 [node name="Candle44" parent="." index="144" instance=ExtResource( 4 )]
 position = Vector2( 258, 332 )
+collision_layer = 11
 
 [node name="Candle45" parent="." index="145" instance=ExtResource( 4 )]
 position = Vector2( 300, 325 )
+collision_layer = 11
 
 [node name="Candle46" parent="." index="146" instance=ExtResource( 4 )]
 position = Vector2( 314, 325 )
+collision_layer = 11
 
 [node name="Candle47" parent="." index="147" instance=ExtResource( 4 )]
 position = Vector2( 329, 325 )
+collision_layer = 11
 
 [node name="Candle48" parent="." index="148" instance=ExtResource( 4 )]
 position = Vector2( 344, 325 )
+collision_layer = 11
 
 [node name="Candle49" parent="." index="149" instance=ExtResource( 4 )]
 position = Vector2( 358, 325 )
+collision_layer = 11
 
 [node name="Candle50" parent="." index="150" instance=ExtResource( 4 )]
 position = Vector2( 373, 325 )
+collision_layer = 11
 
 [node name="Candle51" parent="." index="151" instance=ExtResource( 4 )]
 position = Vector2( 389, 325 )
+collision_layer = 11
 
 [node name="Candle52" parent="." index="152" instance=ExtResource( 4 )]
 position = Vector2( 403, 325 )
+collision_layer = 11
 
 [node name="Candle53" parent="." index="153" instance=ExtResource( 4 )]
 position = Vector2( 419, 326 )
+collision_layer = 11
 
 [node name="Candle54" parent="." index="154" instance=ExtResource( 4 )]
 position = Vector2( 433, 326 )
+collision_layer = 11
 
 [node name="Candle55" parent="." index="155" instance=ExtResource( 4 )]
 position = Vector2( 448, 325 )
+collision_layer = 11
 
 [node name="Candle56" parent="." index="156" instance=ExtResource( 4 )]
 position = Vector2( 464, 325 )
+collision_layer = 11
 
 [node name="Candle57" parent="." index="157" instance=ExtResource( 4 )]
 position = Vector2( 478, 325 )
+collision_layer = 11
 
 [node name="Candle58" parent="." index="158" instance=ExtResource( 4 )]
 position = Vector2( 493, 325 )
+collision_layer = 11

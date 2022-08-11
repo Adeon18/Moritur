@@ -30,10 +30,14 @@ func _ready():
 
 func spawn_item(item_pos):
 	var number = randi() % 9
-	var power = powerup.instance()
-	add_child(power)
-	power.set_type(powerups[number])
-	power.position = item_pos.position
+	if number == 0 && Global.burn: spawn_item(item_pos)
+	elif number == 1 && Global.freeze: spawn_item(item_pos)
+	elif number == 2 && Global.poizon: spawn_item(item_pos)
+	else:
+		var power = powerup.instance()
+		add_child(power)
+		power.set_type(powerups[number])
+		power.position = item_pos.position
 
 
 func _process(delta):

@@ -192,7 +192,7 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 20 )
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( -2, 4 )
@@ -240,6 +240,7 @@ position = Vector2( 2, -9 )
 [node name="Poison" parent="Effects" instance=ExtResource( 22 )]
 visible = false
 position = Vector2( -10, -7 )
+z_index = 2
 
 [node name="Fire" parent="Effects" instance=ExtResource( 20 )]
 visible = false

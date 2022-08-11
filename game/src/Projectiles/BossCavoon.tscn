@@ -1,10 +1,42 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://art/projectiles/projectiles.png" type="Texture" id=1]
 [ext_resource path="res://src/Projectiles/BossCavoon.gd" type="Script" id=2]
+[ext_resource path="res://art/Particles/float.png" type="Texture" id=3]
+[ext_resource path="res://src/Particles/ItemParticle.gdshader" type="Shader" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.08276
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = ExtResource( 4 )
+shader_param/color = Color( 1, 1, 0, 1 )
+
+[sub_resource type="Gradient" id=11]
+offsets = PoolRealArray( 0, 0.0147059, 0.392157, 1 )
+colors = PoolColorArray( 0.929412, 0.878431, 0.0392157, 0, 0.828969, 0.877832, 0.0785249, 1, 0.916895, 0.868288, 0.0497846, 1, 0.894118, 0.905882, 0.0588235, 0 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 11 )
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -3.00682, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=13]
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale_curve = SubResource( 9 )
+color_ramp = SubResource( 8 )
 
 [node name="Cavoon" type="Area2D" groups=["EnemyProjectile"]]
 scale = Vector2( 0.34, 0.34 )
@@ -34,6 +66,18 @@ autostart = true
 [node name="ChasingLifetime" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="Hit" type="Particles2D" parent="."]
+show_behind_parent = true
+material = SubResource( 10 )
+scale = Vector2( 2, 2 )
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 13 )
+texture = ExtResource( 3 )
 
 [connection signal="area_entered" from="." to="." method="_on_Cavoon_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_Cavoon_body_entered"]

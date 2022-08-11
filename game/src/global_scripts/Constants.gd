@@ -21,6 +21,14 @@ var PROJECTILE_COLOR: Dictionary = {
 	"default": Color.whitesmoke
 }
 
+var ENEMY_PROJ_COLOR: Dictionary = {
+	"range_enemy": Color.orangered,
+	"boss_big": Color.orange,
+	"boss_spiral": Color.orange,
+	"boss_chasing": Color.violet,
+	"boss_kill": Color.orangered
+}
+
 var BOW_SPRITES: Dictionary = {
 	"default": 1,
 	"poizon": 4,

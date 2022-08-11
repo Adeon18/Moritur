@@ -133,13 +133,14 @@ func handle_fight():
 func take_damage(damage):
 	$HitPlayer.play()
 	health -= damage
-	print(damage)
+	#print(damage)
 	damage_tween.interpolate_property(sprite.material, "shader_param/flash_modifier", 0.0, 1.0, 0.1)
 	damage_tween.start()
 	flash_timer.start(1)
 	
 	emit_signal("camera_shake_requested", camera_shake_amplitude, camera_shake_duration)
 	emit_signal("frame_freeze_requested", frame_freeze_delay)
+	
 	if(health <= 0 && !is_dead):
 		Statemachine.travel("die")
 		is_dead = true
@@ -148,6 +149,10 @@ func take_damage(damage):
 func _on_Area2D_area_entered(area):
 	if(area.is_in_group("Projectiles")):
 		area.hit(self)
+		#print(Global.poizon, Global.freeze, Global.burn)
+		if(Global.poizon): poizon()
+		if(Global.freeze): freeze()
+		if(Global.burn): burn()
 
 
 func _on_BurnTimer_timeout():
@@ -164,20 +169,20 @@ func _on_PoisonTimer_timeout():
 	
 
 
-func burn(damage):
+func burn():
 	fire.visible = true
 	fire_timer.start(burn_time)
-	_burn_damage = damage/2
+	_burn_damage = Global.projectile_damage/2
 
-func freeze(damage):
+func freeze():
 	ice.visible = true
 	ice_timer.start(freeze_time)
 	is_frozen = true
 
-func poizon(damage):
+func poizon():
 	poison.visible = true
 	poison_timer.start(poison_time)
-	_poison_damage = damage/4
+	_poison_damage = Global.projectile_damage/4
 
 
 

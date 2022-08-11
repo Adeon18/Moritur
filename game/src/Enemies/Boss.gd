@@ -10,9 +10,9 @@ var CAVOON_MARGIN = Vector2(15, 0)
 var CAVOON_SPAWN_RADIUS = 15
 
 func _init():
-	speed = 30
+	speed = 50
 	effective_fighting_distance = 60
-	health = 300
+	health = 1000
 
 func _ready():
 	Statemachine = get_node("AnimationTree").get("parameters/playback")

@@ -42,16 +42,16 @@ var player
 
 var cells_weight: Dictionary =  {
 	"combat": {
-		"roll_weight": 2
+		"roll_weight": 4
 	},
 	"random_effect": {
-		"roll_weight": 2
+		"roll_weight": 1
 	},
 #	"shop": {
 #		"roll_weight": 1
 #	},
 	"item": {
-		"roll_weight": 2
+		"roll_weight": 3
 	},
 }
 

@@ -40,11 +40,14 @@ func _ready():
 func spawn_item():
 	var number = randi() % 14
 	if(number < 9):
-		var power = powerup.instance()
-		add_child(power)
-		power.set_type(powerups[number])
-		power.position = item_pos.position
-		
+		if number == 0 && Global.burn: spawn_item()
+		elif number == 1 && Global.freeze: spawn_item()
+		elif number == 2 && Global.poizon: spawn_item()
+		else:
+			var power = powerup.instance()
+			add_child(power)
+			power.set_type(powerups[number])
+			power.position = item_pos.position
 	else:
 		if(weapons[number-9][1] != Global.weapon_name):
 			var weap = weapons[number-9][0].instance()
