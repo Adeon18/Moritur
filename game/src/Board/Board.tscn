@@ -131,4 +131,3 @@ stream = ExtResource( 6 )
 [connection signal="both_dice_rolled" from="DieContainer" to="." method="_on_DieContainer_both_dice_rolled"]
 [connection signal="finish_roll" from="DieContainer/Die1" to="DieContainer" method="_on_Die1_finish_roll"]
 [connection signal="finish_roll" from="DieContainer/Die2" to="DieContainer" method="_on_Die2_finish_roll"]
-[connection signal="finished" from="DiceMusicPlayer" to="." method="_on_DiceMusicPlayer_finished"]
