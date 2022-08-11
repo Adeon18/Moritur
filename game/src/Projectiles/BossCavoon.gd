@@ -61,7 +61,8 @@ func launch(direction: Vector2, speed: int, type, size_mul):
 
 
 func _on_Cavoon_body_entered(body):
-	queue_free()
+	if !body.is_in_group("Decoration"):
+		queue_free()
 
 
 
@@ -79,4 +80,5 @@ func _on_ChasingLifetime_timeout():
 
 
 func _on_Cavoon_area_entered(area):
-	queue_free()
+	if area.is_in_group("Swords"):
+		queue_free()
