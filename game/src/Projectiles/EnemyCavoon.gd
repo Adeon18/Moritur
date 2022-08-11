@@ -20,10 +20,22 @@ func launch(direction: Vector2, speed: int):
 
 func _on_Cavoon_area_entered(area):
 	if area.is_in_group("Swords"):
-		queue_free()
+		die()
 
 
 func _on_Cavoon_body_entered(body):
 	if !body.is_in_group("Decoration"):
-		queue_free()
+		die()
+
+
+func die():
+	$Hit.material.set_shader_param("color", Constants.ENEMY_PROJ_COLOR["range_enemy"])
+	$Hit.emitting = true
+	set_physics_process(false)
+	$Sprite.visible = false
+	yield(get_tree().create_timer(0.1), "timeout")
+	$CollisionShape2D.set_deferred("disabled", true)
+	yield(get_tree().create_timer(0.9), "timeout")
+	queue_free()
+
 

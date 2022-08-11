@@ -11,6 +11,7 @@ var big_straight: bool = false
 var chasing: bool = false
 var chaseee: bool = false
 
+var _type
 
 var ang
 onready var sprite = get_node("./Sprite")
@@ -46,28 +47,32 @@ func launch(direction: Vector2, speed: int, type, size_mul):
 	if(type == "spiral"): 
 		spiral = true
 		sprite.frame = 19
+		_type = "boss_spiral"
 	elif(type == "kill"): 
 		kill_mode = true
 		sprite.frame = 20
+		_type = "boss_kill"
 	elif(type == "big_straight"):
 		big_straight = true
 		sprite.frame = 33
 		sprite.rotation = direction.angle() + 1.57
+		_type = "boss_big"
 	elif(type == "chasing"):
 		chasing = true
 		sprite.frame = 31
+		_type = "boss_chasing"
 	_direction = direction
 	_speed = speed
 
 
 func _on_Cavoon_body_entered(body):
 	if !body.is_in_group("Decoration"):
-		queue_free()
+		die()
 
 
 
 func _on_Timer_timeout():
-	queue_free()
+	die()
 
 
 func _on_ChasingTimer_timeout():
@@ -76,9 +81,21 @@ func _on_ChasingTimer_timeout():
 
 func _on_ChasingLifetime_timeout():
 	if(chasing):
-		queue_free()
+		die()
 
 
 func _on_Cavoon_area_entered(area):
 	if area.is_in_group("Swords"):
-		queue_free()
+		die()
+
+
+func die():
+	$Hit.material.set_shader_param("color", Constants.ENEMY_PROJ_COLOR[_type])
+	$Hit.emitting = true
+	set_physics_process(false)
+	$Sprite.visible = false
+	yield(get_tree().create_timer(0.1), "timeout")
+	$CollisionShape2D.set_deferred("disabled", true)
+	yield(get_tree().create_timer(0.9), "timeout")
+	queue_free()
+
