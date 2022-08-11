@@ -217,6 +217,9 @@ func power_up(object):
 	var key = object.get_type()
 	if key in Constants.EFFECTS:
 		shenanigans[key] = true
+		if key == "burn": Global.burn = true
+		if key == "freeze": Global.freeze = true
+		if key == "poizon": Global.poizon = true
 		Global.projectile_type = key
 		WeaponObject.change_style(Global.projectile_type)
 	elif key in ["heal_up", "health_up"]:
