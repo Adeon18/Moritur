@@ -51,7 +51,7 @@ var cells_weight: Dictionary =  {
 #		"roll_weight": 1
 #	},
 	"item": {
-		"roll_weight": 2
+		"roll_weight": 3
 	},
 }
 
